@@ -81,12 +81,15 @@ pub fn categories_dropdown() -> Html {
         s.change_category(category);
     });
 
+    let current_category = use_selector::<FullState,_,_>(|x|x.category);
+    
     let options =PunCategory::iter()
     
         .map(|category| {
             let text: &'static str = category.into();
+            let selected = category == *current_category;
 
-            html!(  <option value={text}>{text}</option>
+            html!(  <option value={text} {selected}>{text}</option>
             )
         })
         .collect_vec();
