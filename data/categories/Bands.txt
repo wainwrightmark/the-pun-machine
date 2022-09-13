@@ -61,7 +61,7 @@ Al Green
 Steely Dan
 John Coltrane
 P J Harvey
-Björk
+Bjork
 Massive Attack
 The Jam
 Chuck Berry
@@ -100,7 +100,7 @@ The Temptations
 Pet Shop Boys
 Franz Ferdinand
 T. Rex
-Hüsker Dü
+Husker Du
 Thelonious Monk
 Wilco
 The Smashing Pumpkins
@@ -188,7 +188,7 @@ Happy Mondays
 Iggy Pop
 N.W.A.
 Elliott Smith
-Motörhead
+Motorhead
 The Isley Brothers
 Daft Punk
 Bo Diddley
@@ -206,7 +206,7 @@ Dexy's Midnight Runners
 The Human League
 Buffalo Springfield
 Dire Straits
-Sinéad O'Connor
+Sinead O'Connor
 TLC
 Green Day
 Nico
@@ -535,7 +535,7 @@ The Sparks
 Buena Vista Social Club
 Living Colour
 Fela Kuti
-King Sunny Adé
+King Sunny Ade
 The Carpenters
 Neneh Cherry
 The Sugarcubes
@@ -570,7 +570,7 @@ Faust
 Spencer Davis Group
 Whitney Houston
 Chubby Checker
-…And You Will Know Us by the Trail of Dead
+And You Will Know Us by the Trail of Dead
 The Troggs
 Salt 'n' Pepa
 The Birthday Party
@@ -643,7 +643,7 @@ Harry Belafonte
 Badly Drawn Boy
 Justin Timberlake
 Joe Henderson
-Ruben Bladés
+Ruben Blades
 Jimmy Smith
 Lenny Kravitz
 Dexter Gordon
@@ -684,7 +684,7 @@ The Beta Band
 Glenn Miller
 Maximo Park
 Lester Young
-Röyksopp
+Royksopp
 The Associates
 Gloria Gaynor
 Screamin' Jay Hawkins
@@ -763,7 +763,7 @@ Cliff Richard
 The Raincoats
 Korn
 Palace Brothers
-Le Mystère des Voix Bulgares
+Le Mystere des Voix Bulgares
 M/A/R/R/S
 John Zorn
 Junior Wells' Chicago Blues Band
@@ -874,7 +874,7 @@ Dismemberment Plan
 Fennesz
 Junior Murvin
 Lyle Lovett
-Toné Loc
+Tone Loc
 Jerry Butler
 Orange Juice
 En Vogue
@@ -885,7 +885,7 @@ Dr. Octagon
 George Clinton
 Bill Doggett
 Jill Scott
-Peter Brötzmann
+Peter Brotzmann
 Les Paul & Mary Ford
 Ween
 Mary Margaret O'Hara

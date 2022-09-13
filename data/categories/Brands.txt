@@ -152,10 +152,10 @@ Vanke
 CRCC
 JR
 Optum
-Hermès
+Hermes
 EDF
 Enel
-L'Oréal
+L'Oreal
 CBS
 Panasonic
 Greenland
@@ -267,7 +267,7 @@ KEPCO
 Northrop Grumman
 NIVEA
 Enterprise
-Société Générale
+Societe Generale
 Honeywell
 TIM
 Aviva
@@ -297,7 +297,7 @@ Hikvision
 Dior
 Suning
 Emirates
-Itaú
+Itau
 Valero
 COACH
 Saint-Gobain
@@ -330,12 +330,12 @@ Daiwa House
 Asda
 O2
 L&M
-Estée Lauder
+Estee Lauder
 Telenor
 Fresenius
 Clinique
 Kroger
-Nescafé
+Nescafe
 PTT
 Claro
 Sprint
@@ -369,7 +369,7 @@ Guerlain
 Shiseido
 Domino's Pizza
 ctrip.com
-Crédit Agricole
+Credit Agricole
 Micron Technology
 Carmax
 Schlumberger
@@ -400,7 +400,7 @@ Raytheon
 Dunkin'
 Rakuten
 Coles
-El Corte Inglés
+El Corte Ingles
 CCCC
 Bayer
 Swisscom
@@ -424,7 +424,7 @@ Burberry
 Western Digital
 HCL
 Canadian National Railway
-Crédit Mutuel
+Credit Mutuel
 Dow
 OCBC Bank
 Caixa

@@ -64,7 +64,7 @@ Django Unchained
 The Dark Knight Rises
 3 Idiots
 Taare Zameen Par
-WALL·E
+WALL-E
 The Lives of Others
 Oldboy
 Memento
@@ -95,7 +95,7 @@ My Father and My Son
 Toy Story 3
 Inglourious Basterds
 Eternal Sunshine of the Spotless Mind
-Amélie
+Amelie
 Snatch
 Requiem for a Dream
 American Beauty
@@ -266,7 +266,7 @@ The Princess Bride
 Stand by Me
 Platoon
 Paris, Texas
-Nausicaä of the Valley of the Wind
+Nausicaa of the Valley of the Wind
 The Thing
 Pink Floyd: The Wall
 Fitzcarraldo
@@ -283,7 +283,7 @@ Chinatown
 Paper Moon
 Cries and Whispers
 Solaris
-Le samouraï
+Le samourai
 Cool Hand Luke
 Persona
 Andrei Rublev
@@ -430,7 +430,7 @@ Who's Afraid of Virginia Woolf?
 The Sound of Music
 Doctor Zhivago
 A Fistful of Dollars
-Federico Fellini's 8½
+Federico Fellini's Eight and a Half
 Vivre Sa Vie
 The Hustler
 La Dolce Vita
@@ -456,7 +456,7 @@ Arsenic and Old Lace
 The Maltese Falcon
 The Grapes of Wrath
 The Wizard of Oz
-La Règle du Jeu
+La Regle du Jeu
 The Thin Man
 All Quiet on the Western Front
 Battleship Potemkin
@@ -625,7 +625,7 @@ Veer-Zaara
 Adam's Apples
 Pride & Prejudice
 The World's Fastest Indian
-Tôkyô goddofâzâzu
+Tokyo Godfathers
 Serenity
 Walk the Line
 Evil
@@ -660,7 +660,7 @@ A Bronx Tale
 Batman: Mask of the Phantasm
 Hard Boiled
 Night on Earth
-The Double Life of Véronique
+The Double Life of Veronique
 Boyz n the Hood
 Misery
 Awakenings
@@ -797,7 +797,7 @@ Open Your Eyes
 Being John Malkovich
 As Good as It Gets
 The Fifth Element
-Le Dîner de Cons
+Le Diner de Cons
 Donnie Brasco
 Shine
 Primal Fear
@@ -934,7 +934,7 @@ The Butterfly Effect
 28 Days Later
 Battle Royale
 The Royal Tenenbaums
-Y Tu Mamá También
+Y Tu Mama Tambien
 Harry Potter and the Philosopher's Stone
 The Others
 Blow
