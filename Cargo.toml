@@ -1,0 +1,62 @@
+[package]
+name = "the-pun-machine"
+version = "0.1.0"
+authors = ["Mark Wainwright <wainwrightml@gmail.com>"]
+license = "MIT"
+keywords = ["pun", "language", "english"]
+edition= "2021"
+default-run = "the-pun-machine"
+
+
+[dependencies]
+itertools = "0.10.3"
+serde = { version = "1.0", features = ["derive", "rc"] }
+strum = {version = "0.24", features = ["derive"]}
+
+array-const-fn-init = "0.1"
+enumflags2 = {version= "0.7", features= ["serde"]}
+smallvec = {version = "1.9.0", features=["serde", "union","const_generics", "const_new" ]}
+lazy_static = "1.0"
+auto_enums = {version = "0.7", features=["std"]}
+include-flate = "0.1.4"
+
+log = "0.4"
+yew = { git = "https://github.com/yewstack/yew.git", features = ["csr",] }
+yewdux = { git = "https://github.com/intendednull/yewdux.git" }
+
+
+regex= {version="1.6", features=["std", "perf",  ]}
+wasm-logger = "0.2"
+wasm-bindgen-futures = "0.4"
+wasm-bindgen= { version = "0.2", features = ["serde"] }
+js-sys = "0.3"
+quick-xml = { version = "0.24", features = [ "serialize" ] }
+instant = { version = "0.1", features = [ "wasm-bindgen", "inaccurate" ] }
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "HtmlInputElement","HtmlSelectElement", "HtmlTextAreaElement"
+]
+
+[[bench]]
+name = "bench"
+harness = false
+
+
+[profile.release]
+#panic = 'abort'
+codegen-units = 1
+lto = true
+opt-level = 3
+
+
+[dev-dependencies]
+criterion = "0.3"
+ntest = "0.8"
+insta = "1.15.0"
+
+
+
+[[bin]]
+name="dict-generator"

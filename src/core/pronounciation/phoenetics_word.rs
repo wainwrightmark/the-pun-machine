@@ -1,0 +1,118 @@
+use itertools::Itertools;
+use regex::Regex;
+
+use crate::core::prelude::*;
+use std::{collections::BTreeMap, str::FromStr, convert::TryFrom};
+
+
+
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize)]
+pub struct PhoeneticsWord {
+    pub text: String,
+    pub variant: u8,
+    pub is_compound: bool,
+    pub syllables: Vec<Syllable>,
+}
+
+impl TryFrom<String> for PhoeneticsWord {
+    type Error = &'static str;
+
+    fn try_from(text: String) -> Result<Self, Self::Error> {
+        let splits = text
+            .split('-')
+            .map(|x| x.trim())
+            .filter(|x| !x.is_empty())
+            .collect_vec();
+
+        if splits.len() == 1 {
+            Self::try_get_single(splits[0].to_string())
+        } else {
+            let words: Vec<_> = splits
+                .into_iter()
+                .map(|x| Self::try_get_single(x.to_string()))
+                .try_collect()?;
+            let syllables = words.into_iter().flat_map(|z| z.syllables).collect_vec();
+
+            Ok(PhoeneticsWord {
+                syllables,
+                is_compound: true,
+                text,
+                variant: 1,
+            })
+        }
+    }
+}
+
+include_flate::flate!(pub static PRONOUNCIATIONS: str from "data/syllables/pronounciation.txt");
+
+impl PhoeneticsWord {
+    fn try_get_single(text: String) -> Result<Self, &'static str> {
+        lazy_static::lazy_static! {
+            static ref PRONOUNCIATIONS_MAP: BTreeMap<String, PhoeneticsWord> = PhoeneticsWord::create_words_map();
+        }
+
+        if let Some(w) = PRONOUNCIATIONS_MAP.get(&text.to_ascii_lowercase()) {
+            Ok(PhoeneticsWord { text, variant: w.variant, is_compound: w.is_compound, syllables: w.syllables.clone()})
+        } else {
+            Err("Word not found")
+        }
+    }
+
+    fn create_words_map() -> BTreeMap<String, PhoeneticsWord> {
+        PRONOUNCIATIONS
+            .lines()
+            .map(|l| {
+                let terms = l
+                    .split_ascii_whitespace()
+                    .map(|x| x.trim())
+                    .filter(|x| !x.is_empty())
+                    .collect_vec();
+
+                assert!(terms.len() > 1);
+                let t1 = terms[0];
+                
+
+                lazy_static::lazy_static! {
+                    static ref RE: Regex = Regex::new(r"^(.+?)\((\d+)\)$").unwrap();
+                }
+
+                let (text, variant) = if let Some(captures) = RE.captures(t1) {
+                    (
+                        captures.get(1).unwrap().as_str(),
+                        u8::from_str_radix(captures.get(2).unwrap().as_str(), 10).unwrap(),
+                    )
+                } else {
+                    (t1, 1)
+                };
+
+                let mut syllables = Vec::<Syllable>::new();
+                let mut symbols = Vec::<Symbol>::new();
+
+                for symbol_string in terms.into_iter().skip(1) {
+                    if symbol_string == "-" {
+                        if !symbols.is_empty() {
+                            syllables.push(Syllable::new(symbols));
+                            symbols = Vec::new();
+                        }
+                    } else if let Ok(symbol) = Symbol::from_str(symbol_string) {
+                        symbols.push(symbol);
+                    } else {
+                        panic!("'{}' was not a valid symbol", symbol_string);
+                    }
+                }
+                if !symbols.is_empty() {
+                    syllables.push(Syllable::new(symbols))
+                }
+                let pw = PhoeneticsWord {
+                    text: text.to_string(),
+                    variant,
+                    is_compound: false,
+                    syllables,
+                };
+
+
+                (text.to_ascii_lowercase(), pw)
+            })
+            .collect()
+    }
+}
