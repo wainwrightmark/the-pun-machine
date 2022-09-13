@@ -51,8 +51,14 @@ pub fn error_box() -> Html {
     let err = use_selector(|s: &FullState| s.warning.clone())
         .as_ref()
         .clone()
-        .unwrap_or_else(|| "‎".to_string());
-    html!(<code> {err} </code>)
+        .unwrap_or_else(|| "".to_string());
+
+    if err == ""{
+        html!(<> </>)
+    }
+    else {
+        html!(<code> {err} </code>)
+    }
 }
 
 #[function_component(DisplayBox)]

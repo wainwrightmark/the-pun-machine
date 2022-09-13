@@ -54,7 +54,7 @@ impl FullState {
             }
             Err(err) => {
                 self.data = Default::default();
-                self.warning = Some(format!("{} {}", err.to_string(), self.text));
+                self.warning = Some(format!("{}: '{}'", err.to_string(), self.text));
                 return;
             }
         }
