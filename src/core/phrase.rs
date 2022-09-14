@@ -27,8 +27,8 @@ impl TryFrom<String> for Phrase {
     }
 }
 
-impl Phrase{
-    pub fn full_text(&self)-> String{
-        self.words.iter().map(|z|z.text.clone()).join(" ")
+impl Phrase {
+    pub fn full_text(&self) -> String {
+        self.words.iter().map(|z| z.text.clone()).join(" ")
     }
 }

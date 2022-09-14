@@ -1,7 +1,4 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use std::rc::Rc;
-use itertools::Itertools;
-use the_pun_machine::{core::prelude::*, };
 
 criterion_group!(
     name = benches;
@@ -23,4 +20,3 @@ fn bench_solver(c: &mut Criterion) {
     // });
     group.finish()
 }
-

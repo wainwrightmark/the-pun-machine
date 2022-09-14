@@ -1,9 +1,8 @@
+use super::prelude::*;
 use itertools::Itertools;
+use lazy_static::*;
 use std::collections::{HashMap, HashSet};
 use strum::IntoEnumIterator;
-use lazy_static::*;
-use super::prelude::*;
-
 
 #[derive(Debug)]
 pub struct PunFactory {
@@ -11,9 +10,8 @@ pub struct PunFactory {
     pub dict: HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
 }
 
-
 lazy_static! {
-    static ref STOPWORDS: HashSet< &'static str> = {
+    static ref STOPWORDS: HashSet<&'static str> = {
         let mut m = HashSet::new();
         m.insert("the");
         m.insert("and");
@@ -34,8 +32,6 @@ impl PunFactory {
             .map(|strategy| PunFactory::create(strategy, words))
             .collect_vec()
     }
-
-    
 
     pub fn solve(factories: &Vec<PunFactory>, phrase: &Phrase) -> Vec<PunPhrase> {
         phrase
@@ -65,7 +61,12 @@ impl PunFactory {
         let dict: HashMap<_, _> = words
             .iter()
             .cloned()
-            .flat_map(|word| strategy.get_relevant_syllables(&word).into_iter().map(move |u| (u, word.clone())))
+            .flat_map(|word| {
+                strategy
+                    .get_relevant_syllables(&word)
+                    .into_iter()
+                    .map(move |u| (u, word.clone()))
+            })
             .into_group_map();
 
         Self { strategy, dict }

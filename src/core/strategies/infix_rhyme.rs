@@ -8,12 +8,11 @@ pub struct InfixRhyme {}
 impl PunStrategy for InfixRhyme {
     fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
         if word.syllables.len() == 1 {
-            return vec!(
-                word.syllables
-                    .iter()
-                    .map(|x| x.get_rhymes_syllable())
-                    .collect_vec(),
-            );
+            return vec![word
+                .syllables
+                .iter()
+                .map(|x| x.get_rhymes_syllable())
+                .collect_vec()];
         }
 
         return vec![];

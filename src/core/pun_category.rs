@@ -1,7 +1,21 @@
 use include_flate::flate;
 use strum::*;
 
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy, EnumString, EnumIter,IntoStaticStr, serde::Serialize, serde::Deserialize)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    Clone,
+    Copy,
+    EnumString,
+    EnumIter,
+    IntoStaticStr,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 pub enum PunCategory {
     Artists,
     Idiom,
@@ -22,7 +36,6 @@ pub enum PunCategory {
 
     CountrySongs,
     ChristmasSongs,
-
     //TODO
     //Historical figures
     //Historical events

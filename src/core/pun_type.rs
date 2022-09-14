@@ -1,6 +1,18 @@
-use strum::{EnumString};
+use strum::EnumString;
 
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy, EnumString, serde::Serialize, serde::Deserialize)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    Clone,
+    Copy,
+    EnumString,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 pub enum PunType {
     /// The exact same word - not really a pun
     SameWord,

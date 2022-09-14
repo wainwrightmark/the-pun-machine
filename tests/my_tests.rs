@@ -35,7 +35,6 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
 #[test_case("cinema", "sin", "Prefix", "sinnama")]
 #[test_case("butterscotch", "butterfield", "SharedPrefix", "butterscotch")]
 #[test_case("butterfield", "butterscotch", "SharedPrefix", "butterfield")]
-
 #[test_case("pisces", "pieces", "SameConsonants", "pisces")]
 #[test_case("pieces", "pisces", "SameConsonants", "pieces")]
 fn test_pun_classification(
@@ -57,7 +56,10 @@ fn test_pun_classification(
         assert!(!solution.is_empty());
         assert_eq!(solution[0].replacement.pun_type, expected);
 
-        assert_eq!(solution[0].replacement_text().to_ascii_lowercase(), rep.to_ascii_lowercase());
+        assert_eq!(
+            solution[0].replacement_text().to_ascii_lowercase(),
+            rep.to_ascii_lowercase()
+        );
     } else {
         assert!(solution.is_empty());
     }
@@ -73,7 +75,7 @@ fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), S
         .filter_map(|t| Phrase::try_from(t.to_string()).ok())
         .collect_vec();
 
-    let expected_phrase =  Phrase::try_from(expected_text.to_string()).unwrap();
+    let expected_phrase = Phrase::try_from(expected_text.to_string()).unwrap();
 
     assert!(category_phrases.contains(&expected_phrase));
 
@@ -109,4 +111,3 @@ fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
     // }
     Ok(())
 }
-

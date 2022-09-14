@@ -3,18 +3,26 @@ use std::{collections::BTreeMap, str::FromStr};
 use crate::core::prelude::*;
 use itertools::Itertools;
 
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+)]
 pub struct Syllable {
     onset_len: usize,
     pub symbols: Vec<Symbol>,
 }
 
-
 impl Syllable {
-
     ///Add this syllable to the offset of the next syllable
-    pub fn add_next_offset(&self, other: &Self)-> Self{
-        Self { onset_len:self.onset_len, symbols: self.symbols.iter().chain(other.onset()).cloned().collect_vec() }
+    pub fn add_next_offset(&self, other: &Self) -> Self {
+        Self {
+            onset_len: self.onset_len,
+            symbols: self
+                .symbols
+                .iter()
+                .chain(other.onset())
+                .cloned()
+                .collect_vec(),
+        }
     }
 
     pub fn new<T: IntoIterator<Item = Symbol>>(collection: T) -> Self {

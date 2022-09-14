@@ -2,11 +2,11 @@ use itertools::Itertools;
 use regex::Regex;
 
 use crate::core::prelude::*;
-use std::{collections::BTreeMap, str::FromStr, convert::TryFrom};
+use std::{collections::BTreeMap, convert::TryFrom, str::FromStr};
 
-
-
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+)]
 pub struct PhoeneticsWord {
     pub text: String,
     pub variant: u8,
@@ -52,7 +52,12 @@ impl PhoeneticsWord {
         }
 
         if let Some(w) = PRONOUNCIATIONS_MAP.get(&text.to_ascii_lowercase()) {
-            Ok(PhoeneticsWord { text, variant: w.variant, is_compound: w.is_compound, syllables: w.syllables.clone()})
+            Ok(PhoeneticsWord {
+                text,
+                variant: w.variant,
+                is_compound: w.is_compound,
+                syllables: w.syllables.clone(),
+            })
         } else {
             Err("Word not found")
         }
@@ -70,7 +75,6 @@ impl PhoeneticsWord {
 
                 assert!(terms.len() > 1);
                 let t1 = terms[0];
-                
 
                 lazy_static::lazy_static! {
                     static ref RE: Regex = Regex::new(r"^(.+?)\((\d+)\)$").unwrap();
@@ -109,7 +113,6 @@ impl PhoeneticsWord {
                     is_compound: false,
                     syllables,
                 };
-
 
                 (text.to_ascii_lowercase(), pw)
             })

@@ -6,10 +6,9 @@
 // pub fn main(){
 //     let reader = quick_xml::Reader::from_file("src\\bin\\dict-generator\\english-wordnet-2021.xml")
 //     .expect("Could not read English Wordnet file. You may need to download this");
-//     let resource: LexicalResource = from_reader(reader.into_inner()).unwrap();    
-    
-//     let synset_dic: HashMap<_,_> = resource.lexicon.synsets.iter().map(|s| (s.id.clone(), s) ).collect();
+//     let resource: LexicalResource = from_reader(reader.into_inner()).unwrap();
 
+//     let synset_dic: HashMap<_,_> = resource.lexicon.synsets.iter().map(|s| (s.id.clone(), s) ).collect();
 
 //     let words_path = "src/core/WordData.tsv";
 
@@ -17,8 +16,8 @@
 
 //     let words = resource.lexicon.lexical_entries.into_iter()
 //     .filter(|x|x.lemma.is_dictionary_word())
-//     .map(|e| (e.lemma.part_of_speech, e.lemma.written_form, 
-//      e.senses.iter().filter_map(|s| synset_dic[&s.synset].definition.clone()).next().unwrap_or("".to_string())   
+//     .map(|e| (e.lemma.part_of_speech, e.lemma.written_form,
+//      e.senses.iter().filter_map(|s| synset_dic[&s.synset].definition.clone()).next().unwrap_or("".to_string())
 //     ));
 
 //     for (pos, text, definition,) in words{
@@ -42,21 +41,17 @@
 //         write!(words_output, "{}\t{}\t{}\n", "f", name, "").expect("Could not write line");
 //     }
 
-
 //     let last_names = include_str!("last-names.txt").split_ascii_whitespace().take(2500);
 
 //     for name in last_names{
 //         write!(words_output, "{}\t{}\t{}\n", "l", name, "").expect("Could not write line");
 //     }
-    
+
 // }
 
-pub fn main(){
+pub fn main() {
     todo!()
 }
-
-
-
 
 // #[derive(Clone, Debug, Default, PartialEq, Deserialize)]
 // pub struct LexicalResource {
@@ -86,7 +81,6 @@ pub fn main(){
 //     pub synsets: Vec<Synset>,
 //     #[serde(rename = "SyntacticBehaviour", default)]
 //     pub behaviours: Vec<SyntacticBehaviour>
-
 
 // }
 // #[derive(Clone, Debug,  PartialEq, Deserialize)]
@@ -162,10 +156,8 @@ pub fn main(){
 
 // }
 
-
 // #[derive(Clone, Debug, Default, PartialEq, Deserialize)]
 // pub struct SyntacticBehaviour{}
-
 
 // #[derive(Clone, Debug,  PartialEq, Deserialize)]
 // pub enum PartOfSpeech {
@@ -180,7 +172,7 @@ pub fn main(){
 
 //     #[serde(rename = "s")]
 //     AdjectiveSatellite,
-    
+
 //     #[serde(rename = "f")]
 //     FirstName,
 //     #[serde(rename = "l")]

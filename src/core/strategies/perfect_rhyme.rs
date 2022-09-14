@@ -5,44 +5,43 @@ use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
 pub struct PerfectRhyme {}
 
-impl PerfectRhyme{
+impl PerfectRhyme {
     fn get_rhyme_syllables(&self, word: &PhoeneticsWord) -> Option<Vec<Syllable>> {
         if let Some(last_index_position) = word
-                    .syllables
-                    .iter()
-                    .rev()
-                    .find_position(|x| x.nucleus().is_stressed_vowel())
-                    .map(|x| (word.syllables.len() - 1) - x.0)
-                {
-                    let vec = word
-                        .syllables
-                        .iter()
-                        .skip(last_index_position)
-                        .enumerate()
-                        .map(|(i, x)| {
-                            if i == 0 {
-                                x.get_rhymes_syllable()
-                            } else {
-                                x.clone()
-                            }
-                        })
-                        .collect_vec();
-                    if vec.is_empty() {
-                        return None;
+            .syllables
+            .iter()
+            .rev()
+            .find_position(|x| x.nucleus().is_stressed_vowel())
+            .map(|x| (word.syllables.len() - 1) - x.0)
+        {
+            let vec = word
+                .syllables
+                .iter()
+                .skip(last_index_position)
+                .enumerate()
+                .map(|(i, x)| {
+                    if i == 0 {
+                        x.get_rhymes_syllable()
+                    } else {
+                        x.clone()
                     }
-                    return Some(vec);
-                } else {
-                    None
-                }
+                })
+                .collect_vec();
+            if vec.is_empty() {
+                return None;
+            }
+            return Some(vec);
+        } else {
+            None
+        }
     }
 }
 
 impl PunStrategy for PerfectRhyme {
     fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
-        if let Some(s) = PerfectRhyme::get_rhyme_syllables(&self, word){
+        if let Some(s) = PerfectRhyme::get_rhyme_syllables(&self, word) {
             vec![s]
-        }
-        else{
+        } else {
             vec![]
         }
     }

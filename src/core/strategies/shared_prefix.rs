@@ -34,7 +34,7 @@ impl PunStrategy for SharedPrefix {
                         pun_type: PunType::SharedPrefix,
                         is_amalgam: false,
                         pun_word: theme_word.text.clone(),
-                        replacement_string: theme_word.text.clone()
+                        replacement_string: theme_word.text.clone(),
                     })
                     .collect_vec();
             }

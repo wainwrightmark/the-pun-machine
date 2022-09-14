@@ -20,7 +20,7 @@ pub fn app() -> Html {
             </div>
             <ErrorBox />
         </div>
-        
+
         <DisplayBox/>
         </div>
     }
@@ -53,10 +53,9 @@ pub fn error_box() -> Html {
         .clone()
         .unwrap_or_else(|| "".to_string());
 
-    if err == ""{
+    if err == "" {
         html!(<> </>)
-    }
-    else {
+    } else {
         html!(<code> {err} </code>)
     }
 }
@@ -87,10 +86,9 @@ pub fn categories_dropdown() -> Html {
         s.change_category(category);
     });
 
-    let current_category = use_selector::<FullState,_,_>(|x|x.category);
-    
-    let options =PunCategory::iter()
-    
+    let current_category = use_selector::<FullState, _, _>(|x| x.category);
+
+    let options = PunCategory::iter()
         .map(|category| {
             let text: &'static str = category.into();
             let selected = category == *current_category;
@@ -108,7 +106,6 @@ pub fn categories_dropdown() -> Html {
 }
 
 pub fn row(pun: &PunPhrase) -> Html {
-    
     html!(<tr data-tooltip={pun.phrase.full_text()}>
         <td >
         {

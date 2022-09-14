@@ -2,7 +2,20 @@ use strum::{Display, EnumString};
 
 use super::prelude::SymbolType;
 
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy, EnumString, Display, serde::Serialize, serde::Deserialize)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    Clone,
+    Copy,
+    EnumString,
+    Display,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 pub enum Symbol {
     AA,
     AA0,
@@ -91,12 +104,11 @@ pub enum Symbol {
 }
 
 impl Symbol {
-
-    pub fn is_vowel(self)->bool{
+    pub fn is_vowel(self) -> bool {
         self.symbol_type().is_vowel()
     }
-    
-    pub fn is_stressed_vowel(self)->bool{
+
+    pub fn is_stressed_vowel(self) -> bool {
         self.symbol_type() == SymbolType::StressedVowel
     }
 
