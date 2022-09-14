@@ -53,7 +53,7 @@ pub fn error_box() -> Html {
         .clone()
         .unwrap_or_else(|| "".to_string());
 
-    if err == "" {
+    if err.is_empty() {
         html!(<> </>)
     } else {
         html!(<code> {err} </code>)

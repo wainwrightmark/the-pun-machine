@@ -17,7 +17,7 @@ impl PunStrategy for Homophone {
     ) -> Vec<PunReplacement> {
         if let Some(theme_words) = dict.get(&original_word.syllables) {
             return theme_words
-                .into_iter()
+                .iter()
                 .map(|theme_word| {
                     let pun_type = if original_word.text.eq_ignore_ascii_case(&theme_word.text) {
                         PunType::Identity
@@ -35,6 +35,6 @@ impl PunStrategy for Homophone {
                 .collect_vec();
         }
 
-        return Vec::<PunReplacement>::default();
+        Vec::<PunReplacement>::default()
     }
 }

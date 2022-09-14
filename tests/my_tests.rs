@@ -52,7 +52,7 @@ fn test_pun_classification(
 
     let solution = PunFactory::solve(&factories, &phrase);
 
-    if let Some(expected) = PunType::from_str(pun_type_str).ok() {
+    if let Ok(expected) = PunType::from_str(pun_type_str) {
         assert!(!solution.is_empty());
         assert_eq!(solution[0].replacement.pun_type, expected);
 
@@ -104,7 +104,7 @@ fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
 
     //println!("Solution Count: {:?}", solutions.len());
 
-    assert!(solutions.len() > 0);
+    assert!(!solutions.is_empty());
 
     // for s in solutions {
     //     println!("{:?}", s.replacement_text());

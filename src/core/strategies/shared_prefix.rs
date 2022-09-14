@@ -10,7 +10,7 @@ impl PunStrategy for SharedPrefix {
         if word.syllables.len() > 2 {
             return vec![word.syllables.iter().take(2).cloned().collect_vec()];
         }
-        return vec![];
+        vec![]
     }
 
     fn get_possible_replacements(
@@ -40,6 +40,6 @@ impl PunStrategy for SharedPrefix {
             }
         }
 
-        return vec![];
+        vec![]
     }
 }

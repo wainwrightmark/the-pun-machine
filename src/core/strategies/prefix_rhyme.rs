@@ -16,7 +16,7 @@ impl PunStrategy for PrefixRhyme {
             }
         }
 
-        return vec![];
+        vec![]
     }
 
     fn get_possible_replacements(
@@ -58,6 +58,6 @@ impl PunStrategy for PrefixRhyme {
             }
         }
 
-        return vec![];
+        vec![]
     }
 }

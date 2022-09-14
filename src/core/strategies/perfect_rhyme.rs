@@ -30,7 +30,7 @@ impl PerfectRhyme {
             if vec.is_empty() {
                 return None;
             }
-            return Some(vec);
+            Some(vec)
         } else {
             None
         }
@@ -39,7 +39,7 @@ impl PerfectRhyme {
 
 impl PunStrategy for PerfectRhyme {
     fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
-        if let Some(s) = PerfectRhyme::get_rhyme_syllables(&self, word) {
+        if let Some(s) = PerfectRhyme::get_rhyme_syllables(self, word) {
             vec![s]
         } else {
             vec![]
@@ -84,6 +84,6 @@ impl PunStrategy for PerfectRhyme {
             }
         };
 
-        return Vec::<PunReplacement>::default();
+        Vec::<PunReplacement>::default()
     }
 }

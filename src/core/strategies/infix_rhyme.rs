@@ -15,7 +15,7 @@ impl PunStrategy for InfixRhyme {
                 .collect_vec()];
         }
 
-        return vec![];
+        vec![]
     }
 
     fn get_possible_replacements(
@@ -35,7 +35,7 @@ impl PunStrategy for InfixRhyme {
             })
             .flat_map(|(index, syllable, theme_words)| {
                 theme_words
-                    .into_iter()
+                    .iter()
                     .map(move |theme_word| (index, syllable, theme_word))
             })
             .filter(|(_, syllable, theme_word)| {

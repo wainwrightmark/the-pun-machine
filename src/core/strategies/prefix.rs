@@ -11,7 +11,7 @@ impl PunStrategy for Prefix {
             return vec![];
         }
 
-        return (1..word.syllables.len() - 1)
+        (1..word.syllables.len() - 1)
             .map(|l| word.syllables.iter().take(l).cloned().collect_vec())
             .chain((1..word.syllables.len() - 1).map(|l| {
                 word.syllables
@@ -23,7 +23,7 @@ impl PunStrategy for Prefix {
                     ))
                     .collect_vec()
             }))
-            .collect_vec();
+            .collect_vec()
     }
 
     fn get_possible_replacements(
@@ -33,7 +33,7 @@ impl PunStrategy for Prefix {
     ) -> Vec<PunReplacement> {
         if let Some(words) = dict.get(&original_word.syllables) {
             words
-                .into_iter()
+                .iter()
                 .map(|word| {
                     if word.text.starts_with(original_word.text.as_str()) {
                         PunReplacement {
@@ -61,7 +61,7 @@ impl PunStrategy for Prefix {
                 })
                 .collect_vec()
         } else {
-            return vec![];
+            vec![]
         }
     }
 }

@@ -6,7 +6,7 @@ use serde::*;
 
 use yewdux::prelude::*;
 
-#[derive(PartialEq, Store, Clone, Serialize, Deserialize)]
+#[derive(PartialEq, Eq, Store, Clone, Serialize, Deserialize)]
 #[store(storage = "local")] // can also be "session"
 pub struct FullState {
     pub text: String,
@@ -54,8 +54,8 @@ impl FullState {
             }
             Err(err) => {
                 self.data = Default::default();
-                self.warning = Some(format!("{}: '{}'", err.to_string(), self.text));
-                return;
+                self.warning = Some(format!("{}: '{}'", err, self.text));
+                
             }
         }
     }

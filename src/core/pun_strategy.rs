@@ -46,7 +46,7 @@ impl PunFactory {
                     .map(move |replacement| PunPhrase {
                         phrase: phrase.clone(),
                         replacement,
-                        index: index.clone(),
+                        index,
                     })
             })
             .collect_vec()

@@ -90,9 +90,9 @@ impl Syllable {
                 .iter()
                 .map(|x| {
                     x.to_string()
-                        .replace("0", "")
-                        .replace("1", "")
-                        .replace("2", "")
+                        .replace('0', "")
+                        .replace('1', "")
+                        .replace('2', "")
                         .to_ascii_lowercase()
                 })
                 .join("")
