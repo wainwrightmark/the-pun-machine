@@ -23,6 +23,11 @@ impl PunStrategy for InfixRhyme {
         original_word: &PhoeneticsWord,
         dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
     ) -> Vec<PunReplacement> {
+
+        if original_word.syllables.len() <= 1{
+            return vec![]
+        }
+
         return original_word
             .syllables
             .iter()
