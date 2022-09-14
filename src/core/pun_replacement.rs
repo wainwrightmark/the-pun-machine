@@ -24,10 +24,4 @@ impl PunPhrase{
         .map(|(i,w)| if i == self.index{self.replacement.replacement_string.clone()} else {w.text.clone()})
         .join(" ")
     }
-    
-    pub fn emphasized_replacement_text(&self)-> String{
-        self.phrase.words.iter().enumerate()
-        .map(|(i,w)| if i == self.index{format!("<em> {}</em>", self.replacement.replacement_string.clone())} else {w.text.clone()})
-        .join(" ")
-    }
 }

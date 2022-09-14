@@ -31,6 +31,8 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
 #[test_case("knight", "night", "SameWord", "knight")]
 #[test_case("night", "night", "Identity", "night")]
 #[test_case("ray", "amazed", "InfixRhyme", "arayzed")]
+#[test_case("artichoke", "art", "Prefix", "artichoke")]
+#[test_case("cinema", "sin", "Prefix", "sinnama")]
 fn test_pun_classification(
     theme_word_str: &str,
     original_word_str: &str,
@@ -50,9 +52,7 @@ fn test_pun_classification(
         assert!(!solution.is_empty());
         assert_eq!(solution[0].replacement.pun_type, expected);
 
-        if !solution[0].replacement.replacement_string.eq_ignore_ascii_case(rep) {
-            panic!("{} != {}", solution[0].replacement_text(), rep);
-        }
+        assert_eq!(solution[0].replacement_text().to_ascii_lowercase(), rep.to_ascii_lowercase());
     } else {
         assert!(solution.is_empty());
     }
@@ -63,15 +63,14 @@ fn test_pun_classification(
 fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), String> {
     let category = PunCategory::from_str(category_text).map_err(|e| e.to_string())?;
 
-    let category_words: Vec<PhoeneticsWord> = category
+    let category_phrases: Vec<Phrase> = category
         .get_words()
-        .filter_map(|t| PhoeneticsWord::try_from(t.to_string()).ok())
-        //.map(|x|x)
+        .filter_map(|t| Phrase::try_from(t.to_string()).ok())
         .collect_vec();
 
-    let expected_word =  PhoeneticsWord::try_from(expected_text.to_string()).unwrap();
+    let expected_phrase =  Phrase::try_from(expected_text.to_string()).unwrap();
 
-    assert!(category_words.contains(&expected_word));
+    assert!(category_phrases.contains(&expected_phrase));
 
     Ok(())
 }
@@ -96,13 +95,13 @@ fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
         .flat_map(|x| PunFactory::solve(&factories, &x))
         .collect_vec();
 
-    println!("Solution Count: {:?}", solutions.len());
+    //println!("Solution Count: {:?}", solutions.len());
 
     assert!(solutions.len() > 0);
 
-    for s in solutions {
-        println!("{:?}", s.replacement_text());
-    }
+    // for s in solutions {
+    //     println!("{:?}", s.replacement_text());
+    // }
     Ok(())
 }
 

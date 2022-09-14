@@ -7,6 +7,7 @@ mod pun_type;
 mod related_word;
 mod theme_suggestion;
 mod pronounciation;
+mod strategies;
 mod phrase;
 
 pub mod prelude {
@@ -21,6 +22,7 @@ pub mod prelude {
     pub use crate::core::theme_suggestion::*;
     pub use crate::core::phrase::*;
     pub use crate::core::pronounciation::prelude::*;
+    pub use crate::core::strategies::prelude::*;
 }
 
 

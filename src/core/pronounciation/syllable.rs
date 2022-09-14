@@ -9,7 +9,14 @@ pub struct Syllable {
     pub symbols: Vec<Symbol>,
 }
 
+
 impl Syllable {
+
+    ///Add this syllable to the offset of the next syllable
+    pub fn add_next_offset(&self, other: &Self)-> Self{
+        Self { onset_len:self.onset_len, symbols: self.symbols.iter().chain(other.onset()).cloned().collect_vec() }
+    }
+
     pub fn new<T: IntoIterator<Item = Symbol>>(collection: T) -> Self {
         let symbols = collection.into_iter().collect_vec();
         let onset_len = symbols.iter().take_while(|&x| !x.is_vowel()).count();
