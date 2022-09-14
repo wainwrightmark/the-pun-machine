@@ -72,11 +72,11 @@ impl Syllable {
         //TODO improve perf of this
 
         lazy_static::lazy_static! {
-            static ref SPELLINGS_MAP: BTreeMap<Syllable, &'static str> = Syllable::create_spellings_map();
+            static ref SPELLINGS_MAP: BTreeMap<Syllable, String> = Syllable::create_spellings_map();
         }
 
-        if let Some(&string) = SPELLINGS_MAP.get(self) {
-            string.to_string()
+        if let Some(string) = SPELLINGS_MAP.get(self) {
+            string.clone()
         } else {
             self.symbols
                 .iter()
@@ -85,17 +85,18 @@ impl Syllable {
                         .replace("0", "")
                         .replace("1", "")
                         .replace("2", "")
+                        .to_ascii_lowercase()
                 })
                 .join("")
         }
     }
 
-    fn create_spellings_map() -> BTreeMap<Syllable, &'static str> {
+    fn create_spellings_map() -> BTreeMap<Syllable, String> {
         SPELLINGS
             .lines()
             .map(|l| {
                 let symbols = l.split_ascii_whitespace().collect_vec();
-                let spelling = *symbols.last().unwrap();
+                let spelling = symbols.last().unwrap().to_ascii_lowercase();
 
                 let syllable = Syllable::new(
                     symbols

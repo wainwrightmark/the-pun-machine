@@ -4,6 +4,12 @@ use enum_dispatch::enum_dispatch;
 use strum::EnumIter;
 
 use crate::core::prelude::*;
+use crate::core::prelude::*;
+use crate::core::prelude::*;
+use crate::core::prelude::*;
+use crate::core::strategies::prelude::*;
+use crate::core::strategies::prelude::*;
+use crate::core::strategies::prelude::*;
 use crate::core::strategies::prelude::*;
 
 #[enum_dispatch]
@@ -12,10 +18,10 @@ pub enum PunStrategyEnum {
     Homophone,
      PerfectRhyme,
     Prefix,
-    // PrefixRhyme,
-    // SameConsonants,
+    PrefixRhyme,
+    SameConsonants,
     InfixRhyme,
-    // SharedPrefix,
+    SharedPrefix,
 }
 
 #[enum_dispatch(PunStrategyEnum)]

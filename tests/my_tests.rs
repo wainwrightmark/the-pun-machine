@@ -33,6 +33,11 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
 #[test_case("ray", "amazed", "InfixRhyme", "arayzed")]
 #[test_case("artichoke", "art", "Prefix", "artichoke")]
 #[test_case("cinema", "sin", "Prefix", "sinnama")]
+#[test_case("butterscotch", "butterfield", "SharedPrefix", "butterscotch")]
+#[test_case("butterfield", "butterscotch", "SharedPrefix", "butterfield")]
+
+#[test_case("pisces", "pieces", "SameConsonants", "pisces")]
+#[test_case("pieces", "pisces", "SameConsonants", "pieces")]
 fn test_pun_classification(
     theme_word_str: &str,
     original_word_str: &str,
