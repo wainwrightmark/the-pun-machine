@@ -82,7 +82,8 @@ pub fn categories_dropdown() -> Html {
     let onchange = Dispatch::<FullState>::new().reduce_mut_callback_with(|s, e: Event| {
         let input: HtmlSelectElement = e.target_unchecked_into();
         let value = input.value();
-        let category = PunCategory::from_str(value.as_str()).unwrap();
+
+        let category = PunCategory::from_str(value.as_str()).ok();
         s.change_category(category);
     });
 
@@ -91,7 +92,7 @@ pub fn categories_dropdown() -> Html {
     let options = PunCategory::iter()
         .map(|category| {
             let text: &'static str = category.into();
-            let selected = category == *current_category;
+            let selected = Some(category) == *current_category;
 
             html!(  <option value={text} {selected}>{category}</option>
             )
@@ -100,6 +101,7 @@ pub fn categories_dropdown() -> Html {
 
     html!(
         <select {onchange}>
+        <option value={""} selected={current_category.is_none()}>{"Any"}</option>
             {options}
         </select>
     )

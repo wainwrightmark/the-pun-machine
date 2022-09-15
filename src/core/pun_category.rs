@@ -74,6 +74,11 @@ pub enum PunCategory {
 }
 
 impl PunCategory {
+
+    pub fn get_all_words() -> impl Iterator<Item = &'static str> {
+        PunCategory::iter().flat_map(|x|x.get_words())
+    }
+
     pub fn get_words(self) -> impl Iterator<Item = &'static str> {
         match self {
             PunCategory::Artists => ARTISTS.lines(),
