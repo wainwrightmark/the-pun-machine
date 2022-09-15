@@ -93,7 +93,7 @@ pub fn categories_dropdown() -> Html {
             let text: &'static str = category.into();
             let selected = category == *current_category;
 
-            html!(  <option value={text} {selected}>{text}</option>
+            html!(  <option value={text} {selected}>{category}</option>
             )
         })
         .collect_vec();
@@ -114,6 +114,9 @@ pub fn row(pun: &PunPhrase) -> Html {
         .collect::<Html>()
         }
 
+        </td>
+        <td>
+        {pun.replacement.pun_type}
         </td>
     </tr>)
 }

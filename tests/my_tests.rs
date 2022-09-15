@@ -67,6 +67,7 @@ fn test_pun_classification(
 }
 
 #[test_case("Idiom", "a bed of roses")]
+#[test_case("TVShows", "Doctor Who")]
 fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), String> {
     let category = PunCategory::from_str(category_text).map_err(|e| e.to_string())?;
 
@@ -83,6 +84,7 @@ fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), S
 }
 
 #[test_case("Idiom", "cake")]
+#[test_case("TVShows", "meat")]
 fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
     let category = PunCategory::from_str(category_text).map_err(|e| e.to_string())?;
 
@@ -102,7 +104,7 @@ fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
         .flat_map(|x| PunFactory::solve(&factories, &x))
         .collect_vec();
 
-    //println!("Solution Count: {:?}", solutions.len());
+    // println!("Solution Count: {:?}", solutions.len());
 
     assert!(!solutions.is_empty());
 

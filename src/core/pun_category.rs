@@ -1,6 +1,30 @@
 use include_flate::flate;
 use strum::*;
 
+impl core::fmt::Display for PunCategory {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let text : &'static str = match self {
+            PunCategory::Artists => "Artists",
+            PunCategory::Idiom => "Idiom",
+            PunCategory::Books => "Books",
+            PunCategory::Movies => "Movies",
+            PunCategory::Musicals => "Musicals",
+            PunCategory::Songs => "Songs",
+            PunCategory::Bands => "Bands",
+            PunCategory::Wedding => "Wedding",
+            PunCategory::MovieQuotes => "Movie Quotes",
+            PunCategory::Brands => "Artists",
+            PunCategory::Celebs => "Celebs",
+            PunCategory::Countries => "Countries",
+            PunCategory::TVShows => "TV Shows",
+            PunCategory::CountrySongs => "Country Songs",
+            PunCategory::ChristmasSongs => "Christmas Songs",
+        };
+
+        write!(f, "{}",text)
+    }
+}
+
 #[derive(
     Debug,
     PartialEq,

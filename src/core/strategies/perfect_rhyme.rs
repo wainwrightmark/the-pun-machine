@@ -58,6 +58,7 @@ impl PunStrategy for PerfectRhyme {
                     .filter(|theme_word| {
                         theme_word.syllables.len() <= original_word.syllables.len()
                             && !theme_word.text.eq_ignore_ascii_case(&original_word.text)
+                            && !theme_word.syllables.eq(&original_word.syllables)
                     })
                     .map(|theme_word| {
                         let replacement_string =

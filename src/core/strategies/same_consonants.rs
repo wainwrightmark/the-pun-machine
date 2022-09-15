@@ -29,7 +29,7 @@ impl PunStrategy for SameConsonants {
         if let Some(theme_words) = dict.get(&sw) {
             return theme_words
                 .iter()
-                .filter(|theme_word| !theme_word.text.eq_ignore_ascii_case(&original_word.text))
+                .filter(|theme_word| !theme_word.text.eq_ignore_ascii_case(&original_word.text)&& !theme_word.syllables.eq(&original_word.syllables))
                 .map(|theme_word| PunReplacement {
                     pun_type: PunType::SameConsonants,
                     is_amalgam: false,

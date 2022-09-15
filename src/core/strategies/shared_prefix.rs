@@ -30,6 +30,7 @@ impl PunStrategy for SharedPrefix {
                 return theme_words
                     .iter()
                     .filter(|theme_word| !theme_word.text.eq_ignore_ascii_case(&original_word.text))
+                    .filter(|theme_word| !theme_word.syllables.is_empty())
                     .map(|theme_word| PunReplacement {
                         pun_type: PunType::SharedPrefix,
                         is_amalgam: false,

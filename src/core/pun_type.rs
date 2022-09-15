@@ -41,3 +41,22 @@ pub enum PunType {
     SharedPrefix,
     SameConsonants,
 }
+
+impl std::fmt::Display for PunType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let text: &'static str = match self {
+            PunType::SameWord => "Same Word",
+            PunType::Identity => "Identity",
+            PunType::RichRhyme => "Rich Rhyme",
+            PunType::PerfectRhyme => "Perfect Rhyme",
+            PunType::ImperfectRhyme => "Imperfect Rhyme",
+            PunType::Prefix => "Prefix",
+            PunType::PrefixRhyme => "Prefix Rhyme",
+            PunType::Infix => "Infix",
+            PunType::SharedPrefix => "Shared Prefix",
+            PunType::SameConsonants => "Same Consonants",
+        };
+
+        write!(f, "{}", text)
+    }
+}

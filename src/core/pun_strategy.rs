@@ -38,7 +38,7 @@ impl PunFactory {
             .words
             .iter()
             .enumerate()
-            .filter(|x| !STOPWORDS.contains(&x.1.text.to_ascii_lowercase().as_str()))
+            .filter(|x| !STOPWORDS.contains(&x.1.text.to_ascii_lowercase().as_str()) && !x.1.syllables.is_empty())
             .flat_map(|(index, word)| {
                 factories
                     .iter()

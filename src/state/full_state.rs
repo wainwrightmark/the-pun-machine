@@ -11,6 +11,7 @@ use yewdux::prelude::*;
 pub struct FullState {
     pub text: String,
     pub category: PunCategory,
+    #[serde(skip)]
     pub data: Rc<Vec<PunPhrase>>,
     pub warning: Option<String>,
 }

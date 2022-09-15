@@ -20,7 +20,12 @@ impl TryFrom<String> for PhoeneticsWord {
     fn try_from(text: String) -> Result<Self, Self::Error> {
         let splits = text
             .split('-')
-            .map(|x| x.trim())
+            // .map(|x|{
+            //     let mut s = x.to_string();
+            //     s.retain(|c|c.is_ascii_alphabetic());
+            //     s
+            // })
+
             .filter(|x| !x.is_empty())
             .collect_vec();
 
@@ -51,7 +56,10 @@ impl PhoeneticsWord {
             static ref PRONOUNCIATIONS_MAP: BTreeMap<String, PhoeneticsWord> = PhoeneticsWord::create_words_map();
         }
 
-        if let Some(w) = PRONOUNCIATIONS_MAP.get(&text.to_ascii_lowercase()) {
+        let mut key = text.to_ascii_lowercase();
+        key.retain(|c|c.is_ascii_alphabetic());
+
+        if let Some(w) = PRONOUNCIATIONS_MAP.get(&key) {
             Ok(PhoeneticsWord {
                 text,
                 variant: w.variant,
