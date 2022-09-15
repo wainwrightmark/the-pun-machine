@@ -112,6 +112,71 @@ impl Symbol {
         self.symbol_type() == SymbolType::StressedVowel
     }
 
+    pub fn normalize_vowel(self) -> Self {
+        match self {
+            Symbol::AA0 => Symbol::AA,
+            Symbol::AA1 => Symbol::AA,
+            Symbol::AA2 => Symbol::AA,
+
+            Symbol::AE0 => Symbol::AE,
+            Symbol::AE1 => Symbol::AE,
+            Symbol::AE2 => Symbol::AE,
+
+            Symbol::AH0 => Symbol::AH,
+            Symbol::AH1 => Symbol::AH,
+            Symbol::AH2 => Symbol::AH,
+
+            Symbol::AO0 => Symbol::AO,
+            Symbol::AO1 => Symbol::AO,
+            Symbol::AO2 => Symbol::AO,
+
+            Symbol::AW0 => Symbol::AW,
+            Symbol::AW1 => Symbol::AW,
+            Symbol::AW2 => Symbol::AW,
+
+            Symbol::AY0 => Symbol::AY,
+            Symbol::AY1 => Symbol::AY,
+            Symbol::AY2 => Symbol::AY,
+
+            Symbol::EH0 => Symbol::EH,
+            Symbol::EH1 => Symbol::EH,
+            Symbol::EH2 => Symbol::EH,
+
+            Symbol::ER0 => Symbol::ER,
+            Symbol::ER1 => Symbol::ER,
+            Symbol::ER2 => Symbol::ER,
+
+            Symbol::EY0 => Symbol::EY,
+            Symbol::EY1 => Symbol::EY,
+            Symbol::EY2 => Symbol::EY,
+
+            Symbol::IH0 => Symbol::IH,
+            Symbol::IH1 => Symbol::IH,
+            Symbol::IH2 => Symbol::IH,
+
+            Symbol::IY0 => Symbol::IY,
+            Symbol::IY1 => Symbol::IY,
+            Symbol::IY2 => Symbol::IY,
+
+            Symbol::OW0 => Symbol::OW,
+            Symbol::OW1 => Symbol::OW,
+            Symbol::OW2 => Symbol::OW,
+
+            Symbol::OY0 => Symbol::OY,
+            Symbol::OY1 => Symbol::OY,
+            Symbol::OY2 => Symbol::OY,
+
+            Symbol::UH0 => Symbol::UH,
+            Symbol::UH1 => Symbol::UH,
+            Symbol::UH2 => Symbol::UH,
+
+            Symbol::UW0 => Symbol::UW,
+            Symbol::UW1 => Symbol::UW,
+            Symbol::UW2 => Symbol::UW,
+            _ => self,
+        }
+    }
+
     pub fn symbol_type(self) -> SymbolType {
         match self {
             Symbol::AA => SymbolType::UnstressedVowel,

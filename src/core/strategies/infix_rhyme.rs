@@ -31,11 +31,12 @@ impl PunStrategy for InfixRhyme {
         return original_word
             .syllables
             .iter()
-            .take(original_word.syllables.len() - 1)
+            .skip(1)
+            .take(original_word.syllables.len() - 2)
             .enumerate()
             .filter(|(_, syllable)| syllable.nucleus().is_stressed_vowel())
             .filter_map(|(index, syllable)| {
-                dict.get(&vec![syllable.clone()])
+                dict.get(&vec![syllable.get_rhymes_syllable()])
                     .map(|theme_words| (index, syllable, theme_words))
             })
             .flat_map(|(index, syllable, theme_words)| {

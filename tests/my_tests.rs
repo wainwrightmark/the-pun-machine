@@ -7,6 +7,7 @@ use ntest::test_case;
 
 #[test_case("Lichtenstein", "L IH1 K T AH0 N S T AY2 N")]
 #[test_case("Picasso", "P IH0 K AA1 S OW0")]
+#[test_case("Pick", "P IH1 K")]
 #[test_case("FISH", "F IH1 SH")]
 #[test_case("fish", "F IH1 SH")]
 #[test_case("HAPPY", "HH AE1 P IY0")]
@@ -30,6 +31,7 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
 }
 
 #[test_case("pick", "Lichtenstein", "PrefixRhyme", "Picktonstein")]
+#[test_case("pick", "Picasso", "PrefixRhyme", "Pickcoso")]
 #[test_case("far", "carnage", "PrefixRhyme", "farnage")]
 #[test_case("colt", "bolt", "PerfectRhyme", "colt")]
 #[test_case("here", "appear", "PerfectRhyme", "ahere")]

@@ -57,7 +57,8 @@ impl Syllable {
                 .symbols
                 .iter()
                 .skip(self.onset_len)
-                .cloned()
+                .map(|x| x.normalize_vowel())
+                //.cloned()
                 .collect_vec();
             Self {
                 onset_len: 0,
