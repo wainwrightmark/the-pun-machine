@@ -103,7 +103,6 @@ Be-Bop-A-Lula
 Hot Stuff
 Living for the City
 The Boxer
-Mr. Tambourine Man
 Not Fade Away
 Little Red Corvette
 Brown Eyed Girl
@@ -333,7 +332,6 @@ Subterranean Homesick Blues
 Spirit in the Sky
 Wild Horses
 Sweet Jane
-Walk This Way
 Beat It
 Maybe I'm Amazed
 You Keep Me Hanging On
@@ -420,7 +418,6 @@ Nuthin' but a 'G' Thang
 It's Your Thing
 Piano Man
 Lola
-Blue Suede Shoes
 Tumbling Dice
 William, It Was Really Nothing
 Smoke on the Water
@@ -498,108 +495,39 @@ Buddy Holly
 Rainy Night in Georgia
 The Boys Are Back in Town
 More Than a Feeling
-Imagine
-Hey Jude
-Let It Be
-One
 Angels
-Bohemian Rhapsody
-Stairway to Heaven
-Every Breath You Take
-Hotel California
 You're Beautiful
-Satisfaction
-Yesterday
-Losing My Religion
-Sweet Child O' Mine
-With or Without You
-Maggie May
-No Woman No Cry
 Wonderwall
-God Only Knows
-Waterloo Sunset
-Like a Rolling Stone
-Heart of Glass
-Born to Run
-Light My Fire
 Yellow
-Strawberry Fields Forever
-Another Brick in the Wall
-Brown Eyed Girl
-My Sweet Lord
-Roxanne
-A Whiter Shade of Pale
 Babylon
-Wish You Were Here
-Paint It Black
-Mr. Tambourine Man
 Under the Bridge
-Penny Lane
-Lola
-Sweet Dreams
-Heroes
-Good Vibrations
-My Generation
-She Loves You
 Don't Look Back in Anger
 Town Called Malice
-Bridge Over Troubled Water
-Jumpin' Jack Flash
-I Still Haven't Found What I'm Looking For
-Bitter Sweet Symphony
 Don't You Want Me?
 Bat Out of Hell
 Everybody Hurts
-We Will Rock You
 All Right Now
 Live Forever
-Help!
 Space Oddity
-Layla
-Fast Car
 It Must Be Love
 Livin' on a Prayer
-House of the Rising Sun
-That's Entertainment
-A Hard Day's Night
-Brown Sugar
 Pride
-Hey Joe
 Substitute
 Champagne Supernova
 Tainted Love
-A Day in the Life
-London Calling
 American Pie
-Boys of Summer
-Rocket Man
-All You Need Is Love
-The Boys Are Back in Town
-The Boxer
 Brass in Pocket
 Under Pressure
 November Rain
-You Really Got Me
-All Along the Watchtower
 Vertigo
-Go Your Own Way
 Take Me Out
-Love Will Tear Us Apart
-Free Bird
 Mr Blue Sky
 Make Me Smile (Come Up And See Me)
-Ticket to Ride
 Life on Mars
-When Doves Cry
 Killer Queen
-Your Song
 Ghost Town
 Don't Speak
-Eleanor Rigby
 Going Underground
-All the Young Dudes
-Should I Stay or Should I Go?
-Sympathy for the Devil
 Blue Monday
 Wonderful Tonight
 Where the Streets Have No Name
@@ -609,17 +537,12 @@ Wuthering Heights
 Golden Brown
 Teenage Kicks
 A Kind of Magic
-Gimme Shelter
-Free Fallin'
-I Want to Hold Your Hand
 Starman
 Half the World Away
 Wake Me Up When September Ends
-Won't Get Fooled Again
 By the Way
 Start Me Up
 Common People
-Born in the U.S.A.
 Take Your Mama
 Relax
 Mrs. Robinson
@@ -628,24 +551,16 @@ Sunday Girl
 Jean Genie
 Iris
 Come on Eileen
-Paradise City
 Olivers Army
-Honky Tonk Woman
 Run
 We Are the Champions
 Bang a Gong (Get It On)
 All These Things That I've Done
-Sunday Bloody Sunday
-Sweet Home Alabama
 Do They Know It's Christmas?
-More Than a Feeling
-Call Me
 Somewhere Only We Know
 Drugs Don't Work
 How You Remind Me
-Something
 Don't Stop Me Now
-You Can't Always Get What You Want
 Vienna
 Trouble
 Fields of Gold
@@ -655,19 +570,13 @@ Creep
 Love and Affection
 Summer of '69
 Everybody Wants to Rule the World
-In My Life
-Miss You
 You Oughta Know
 Don't Stop
 Sit Own
 Sledgehammer
 I Don't Want to Talk About
-Changes
 This Charming Man
-New Year's Day
-(Don't Fear) the Reaper
 Take It Easy
-My Girl
 Two Out of Three Ain't Bad
 She Will Be Loved
 Kiss From a Rose
@@ -676,15 +585,12 @@ I Don't Like Mondays
 This is the Last Time
 Wild Wood
 Need You Tonight
-The Sounds of Silence
 The Power of Love
 The Long And Winding Road
 Enola Gay
 Every Little Thing She Does Is Magic
 Kirsty Maccoll
 Breakfast in America
-I Shot the Sheriff
-While My Guitar Gently Weeps
 Clocks
 Too Much Too Young
 Californication
@@ -703,33 +609,22 @@ Cars
 Don't You (Forget About Me)
 Addicted to Love
 House of Fun
-Comfortably Numb
 Denis
-Can't Buy Me Love
 Jamming
 I Predict a Riot
 I Want to Break Free
-Young Americans
-Tumbling Dice
 Band on the Run
 Dreams
 A Horse With No Name
 Rio
-Whole Lotta Love
 Time of Your Life (Good Riddance)
 Up the Junction
 Saturday Night's Alright for Fighting
 Brothers in Arms
 All Day And All of the Night
-Ruby Tuesday
-Walk on the Wild Side
 In My Place
-I Want to Know What Love Is
 Lady Madonna
-Nothing Compares 2 U
 Embarrassment
-Born to Be Wild
-Tears in Heaven
 Money
 Sombody to Love
 I Don't Want to Miss a Thing
@@ -737,19 +632,12 @@ Can't Stop
 Are You Gonna Go My Way
 There She Goes
 Walking on the Moon
-Love Shack
-Come Together
-Voodoo Child
-I Love Rock 'N Roll
 Smooth
 I'm a Believer
-Purple Rain
-One Way or Another
 Who Are You
 Fix You
 Design for Life
 Rock the Casbah
-Sail Away
 Revolution
 Start
 Let's Spend the Night Together
@@ -761,7 +649,6 @@ So Lonely
 Laura
 Alive And Kicking
 No More Heroes
-Walk This Way
 Bad Day
 Fool's Gold
 Luka
@@ -791,14 +678,12 @@ Get Back
 Rebel Rebel
 Atomic
 Could You Be Loved
-Dreams
 Fall at Your Feet
 You Do Something to Me
 Sultans of Swing
 Happy Hour
 Goodbye My Lover
 Itchyco Park
-Desperado
 Sometimes You Can't Make It on Your Own
 You're My Best Friend
 Lucky Man
@@ -880,11 +765,8 @@ Drops of Jupiter (Tell Me)
 Bright Side of the Road
 Pinball Wizard
 The Importance of Being Idle
-Wild Thing
 Baby Can I Hold You
-Knockin' on Heaven's Door
 Dreadlock Holiday
-Norwegian Wood (This Bird Has Flown)
 Suddenly I See
 There Must Be an Angel (Playing With My Heart)
 Take It to the Limit
@@ -922,13 +804,10 @@ First Cut is the Deepest
 Love Is the Drug
 Secret Smile
 The Joker
-Shout
 It's My Life
 I'm on Fire
-Wild Horses
 West End Girls
 Sgt. Pepper's Lonely Hearts Club Band
-Watching the Detective
 China Girl
 Dude (Looks Like a Lady)
 One Love - People Get Ready
@@ -951,8 +830,6 @@ Love Me Do
 Let's Stick Together
 Do It Again
 Somebody Told Me
-California Dreamin'
-Lust for Life
 Have I Told You Lately?
 Evil Woman
 White Wedding
@@ -970,7 +847,6 @@ The Reflex
 Rat Trap
 Jealous Guy
 I'm Not in Love
-Crazy
 Baker Street
 Jet
 Lazy Sunday
@@ -985,40 +861,30 @@ Riders on the Storm
 My Best Friend's Girl
 High
 One Vision
-I Fought the Law
 Lay Lady Lay
 Day Tripper
-Bad Moon Rising
 Are Friends Electric
 Pick a Part That's New
 Instant Karma!
 Some Might Say
 Mr. Brightside
-School's Out
 Girls & Boys
 Don't Let Me Down
 Even Better Than the Real Thing
 Macarena
-Tainted Love
-Come on Eileen
 I'm Too Sexy
 Mickey
 Who Let the Dogs Out?
 Ice Ice Baby
-Take on Me
 Rico Suave
 99 Luftballoons
 You Light Up My Life
 Baby Got Back
 The Hustle
 Groove Is in the Heart
-96 Tears
-Rapper's Delight
 We're Not Gonna Take It
-Nothing Compares 2 U
 In-A-Gadda-Da-Vida
 She Blinded Me With Science
-Cars
 Play That Funky Music
 All My Life
 Whip It
@@ -1036,9 +902,7 @@ Bitch
 Turning Japanese
 I Melt With You
 Me And Mrs. Jones
-Bitter Sweet Symphony
 In a Big Country
-Relax
 Hot Child in the City
 How Do You Talk to an Angel?
 Rock Me Amedeus
@@ -1082,7 +946,6 @@ Just a Friend
 I Know What Boys Like
 Safety Dance
 You Gotta Be
-Spirit in the Sky
 Bust a Move
 Don't Leave Me This Way
 Barbie Girl
@@ -1091,126 +954,76 @@ Don't Wanna Fall in Love
 Electric Avenue
 Heart And Soul
 Don't Give Up on Us
-What's Up
 Harper Valley Pta
 I Want Candy
 Whoomp! (There It Is)
 Two of Hearts
 No Rain
 Kung Fu Fighting
-Billie Jean
 Bombs Over Baghdad
-Sweet Child O' Mine
-One
-Smells Like Teen Spirit
-Like a Prayer
-Love Will Tear Us Apart
 Sucker Mc
 Baby One More Time
 In Da Club
-The Message
 Fight for Your Right
 My Name Is
 I'm Coming Out
 You Shook Me All Night Long
-Hey Ya!
 I Want It That Way
-Super Freak
 Hypnotize
 The Show
-Fight the Power
 I Could Never Take the Place of Your Man
 Pour Some Sugar on Me
 It's Like That
-Nuthin' but a 'G' Thang
-Just Like Heaven
-Just a Friend
-Cars
 Get Your Freak On
 99 Problems
 I'll Be There for You - You're All I Need to Get By
-Livin' on a Prayer
 No Diggity
 MyBabyDaddy
 Crosseyed And Painless
-It Takes Two
-I Love Rock 'N Roll
 Bootylicious
 Mind Playing Tricks on Me
-Push It
-In the Air Tonight
 Got Your Money
 Hungry Like the Wolf
 White Lines
 Hurt
-Fuck Tha Police
-I Want to Know What Love Is
-Monkey Gone to Heaven
-Lose Yourself
-Sexual Healing
 Yeah
-Wonderwall
-Beat It
 Middle of the Road
-The Scientist
 Poison
-West End Girls
 Karma Police
 The Humpty Dance
 Missing You
 Ignition
-Just Can't Get Enough
-Beautiful Day
 Say My Name
-Enter Sandman
 Doo Wop (That Thing)
-Boys of Summer
 That's the Joint
 You're Still the One
-Summer of '69
 Criminal
-How Soon Is Now?
 Losing My Edge
-Take Me Out
 Head Like a Hole
 You Dropped a Bomb on Me
 Girls, Girls, Girls
 Hellraiser
-Losing My Religion
 Hot in Herre
 Galang
-Come as You Are
 To Hell With Poverty
 Borderline
 Drop It Like It's Hot
 Work It
-That's Entertainment
 Pull Up to the Bumper
-Rockin' in the Free World
 Into the Groove
 Feel Good Hit
 Heartbeat
 Cut Your Hair
 Set Adrift on Memory Bliss
 Unsatisfied
-True Faith
 Since U Been Gone
 When You Were Mine
-All Apologies
-Bring the Noise
 I Got a Man
 House of Jealous Lovers
-Sabotage
-Welcome to the Jungle
 Fascinated
-Little Red Corvette
 Fell in Love With a Girl
 Still Not a Player
-Creep
 Toxic
-Planet Rock
-Round And Round
-Nothing Compares 2 U
 Crazy in Love
 Gin & Juice
 Violet
@@ -1236,7 +1049,6 @@ Daughter
 Word Up
 Brimful of Asha
 Up the Bracket
-All I Wanna Do
 Shook Ones (Part 2)
 Freedom 90
 The Breaks
@@ -1246,28 +1058,20 @@ Stay
 Goodies
 Everybody Knows
 My Lovin' (You're Never Gonna Get It)
-You Oughta Know
-Run
-Don't You Want Me?
 I Feel for You
 Ordinary World
 Beautiful
 Not Dark Yet
 Double Dutch Bus
-Girls & Boys
 Hard Knock Life (Ghetto Anthem)
 Birth School Work Death
-Temptation
 Danger! High Voltage
 Sister Christian
 Ms. Jackson
 The Look of Love
 Bye Bye Bye
-Start Me Up
 Breathe
 Juicy
-When Doves Cry
-Jump
 Flava in Ya Ear
 Around the World
 Ready or Not
@@ -1289,22 +1093,18 @@ Shake Your Rump
 Crush
 Bastards of Young
 1 Thing
-Walk This Way
 If You Leave
 Love Removal Machine
 More Than This
 U Can't Touch This
 Complicated
-Macarena
 Debaser
 The Seed
 Building a Mystery
 Deep Cover
 Let's Kill Saturday Night
-Take Your Mama
 Rid of Me
 Friends in Low Places
-This Love
 Work for Love
 It Wasn't Me
 Oh Sherrie
@@ -1320,25 +1120,16 @@ Get Busy
 Semi-Charmed Life
 Academy Fight Song
 Beware of the Boys
-Two of Hearts
-Once in a Lifetime
-Fast Car
-Alright
 Where's Your Head At?
 Hate to Say I Told You So
 Edge of Seventeen
-Wild Thing
 Sour Times
 They Want Efx
 Black and White
-Here I Go Again
-We Don't Have to Take Our Clothes Off
 Where is My Mind
 Set It Off
-Everybody Hurts
 Do You Miss Me
 All the Small Things
-Bitter Sweet Symphony
 I Can't Live Without My Radio
 Being Boring
 Institutionalized
@@ -1349,27 +1140,19 @@ Careless Whisper
 For Lovers
 Move Your Body
 Don't Believe the Hype
-Born in the U.S.A.
 La Di Da Di
 Big Pimpin'
 A Pretty Girl is Like
 Down By the Water
 C'Mon 'N Ride It (The Train)
-Genius of Love
-Kiss
 Going Back to Cali
 Islands in the Stream
 Ace of Spades
-Stan
 Malibu
-Call Me
 I Want Your (Hands on Me)
-Free Fallin'
-With or Without You
 Take Your Time (Do It Right)
 Flex
 Don't Stop Believin'
-Rock the Casbah
 Keep Me in Your Heart
 Brilliant Disguise
 I Wanna Dance With Somebody (Who Loves Me)
@@ -1394,12 +1177,9 @@ Connection
 Black
 Owner of a Lonely Heart
 Save Me
-November Rain
 I Need to Know
 Smooth Criminal
 Everything Zen
-In Between Days
-Loser
 Kissing the Lipless
 Hot for Teacher
 Pretty in Pink
@@ -1412,7 +1192,6 @@ Come Pick Me Up
 Smooth Operator
 Bawitdaba
 Love Vigilantes
-Every Breath You Take
 Army of Me
 White Flag
 Ha
@@ -1422,7 +1201,6 @@ Jane Says
 Constant Craving
 Black Steel
 Slack Motherfucker
-Jump Around
 Battery
 Slow Jamz
 Damn It Feels Good to Be a Gangsta
@@ -1430,7 +1208,6 @@ Potholes in My Lawn
 Can't Deny It
 Waiting for the Sun
 I Wonder If I Take You Home
-Cannonball
 Teen Age Riot
 Everybody Everybody
 Time After Time
@@ -1450,7 +1227,6 @@ Roxanne Roxanne
 Stacy's Mom
 Buffalo Gals
 Heart Shaped Box
-Games Without Frontiers
 California Stars
 Save It for Later
 Atomic Dog
@@ -1460,19 +1236,13 @@ I Wish
 Help You Ann
 Show Me Love
 Fix Up Look Sharp
-Tainted Love
-Buddy Holly
 Rock Box
-I Touch Myself
-Paranoid Android
 Seven Year Ache
 Teenage Dirtbag
 Voices Carry
 Roam
 Party Up
-Jump
 Rosa Parks
-Purple Rain
 Portions for Foxes
 Black Hole Sun
 Devil's Right Hand
@@ -1480,7 +1250,6 @@ Hero Takes a Fall
 Rebellion (Lies)
 Portland Oregon
 Let's Get Serious
-Torn
 Straight Outta Compton
 Message of Love
 Total Eclipse of the Heart
@@ -1490,17 +1259,14 @@ Shake Ya Ass
 Never Say Never
 Underneath Your Clothes
 Interstate Love Song
-Whip It
 Celebrated Summer
 Doin' It
 Touch Me I'M Sick
-Summer Babe
 Harvest Moon
 C'Mon C'Mon
 I Wanna Go Back
 Ray of Light
 South Bronx
-Back in Black
 Bad Boys
 Stupid Girl
 Last Night a DJ Saved My Life
@@ -1517,7 +1283,6 @@ Waterfalls
 Chop Suey
 Situation
 Rumors
-I'm on Fire
 Let Me Go
 Sex Style
 Last Goodbye
@@ -1529,25 +1294,19 @@ Bad Reputation
 Cry Me a River
 Closing Time
 There Is a Light That Never Goes Out
-There She Goes
 Cornflake Girl
 Walking on Thin Ice
 Murder She Wrote
 Grindin'
-Running Up That Hill
 Pretend We'Re Dead
 Feel So Good
-You Get What You Give
-Don't You (Forget About Me)
 Square Biz
-I Still Haven't Found What I'm Looking For
 Tell Me Why
 Rebel Girl
 Just an Illusion
 Do You Realize??
 Player's Anthem
 People Are Still Having Sex
-Smooth
 Country Grammar
 All the Things She Said
 Don't Wanna Know Why
@@ -1563,7 +1322,6 @@ Judy and the Dream of Horses
 Hate It or Love It
 Trapped in the Closet
 Let the Music Play
-Baby Got Back
 Brick
 Papa Don't Preach
 Radiation Vibe
@@ -1579,7 +1337,6 @@ Put Your Hands Where My Eyes Could See
 Santa Monica
 Guilty Conscience
 Lake of Fire
-Man on the Moon
 Passing Me By
 I Wanna Be Adored
 We Are All on Drugs
@@ -1588,14 +1345,9 @@ Regulate
 Murderer
 Da'Butt
 History Lesson Part 2
-Common People
 Here Comes the Hotstepper
 Born Slippy
 I'll Be You
-Don't Speak
 1979
 I Believe in a Thing Called Love
 Somebody's Baby
-I Don't Want to Miss a Thing
-Yellow
-

@@ -248,7 +248,6 @@ knowledges
 approach
 approaches
 series
-series
 love
 top
 news
@@ -366,8 +365,6 @@ advice
 event
 picture
 commission
-fish
-fish
 college
 oil
 doctor
@@ -401,7 +398,6 @@ site
 mark
 importance
 title
-species
 species
 increase
 return
@@ -465,7 +461,6 @@ teacher
 show
 shows
 speaker
-baby
 babies
 arm
 base
@@ -491,7 +486,6 @@ brother
 brothers
 league
 condition
-machine
 argument
 sex
 sexes
@@ -678,7 +672,6 @@ battle
 prison
 grant
 aircraft
-aircraft
 tree
 trees
 bridge
@@ -712,7 +705,6 @@ agencies
 seat
 manner
 favour
-fig.
 fig.
 pair
 pairs
@@ -1172,7 +1164,6 @@ extension
 convention
 partnership
 skill
-furniture
 furnitures
 round
 regime
