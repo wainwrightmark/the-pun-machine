@@ -108,6 +108,6 @@ flate!(pub static MOVIEQUOTES: str from "data/categories/MovieQuotes.txt");
 flate!(pub static MOVIES: str from "data/categories/Movies.txt");
 flate!(pub static MUSICALS: str from "data/categories/Musicals.txt");
 flate!(pub static SONGS: str from "data/categories/Songs.txt");
-flate!(pub static THEMESUGGESTIONS: str from "data/categories/ThemeSuggestions.txt");
+//flate!(pub static THEMESUGGESTIONS: str from "data/categories/ThemeSuggestions.txt");
 flate!(pub static TVSHOWS: str from "data/categories/TVShows.txt");
 flate!(pub static WEDDING: str from "data/categories/Wedding.txt");

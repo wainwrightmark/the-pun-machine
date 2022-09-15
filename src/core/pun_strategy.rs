@@ -10,19 +10,12 @@ pub struct PunFactory {
     pub dict: HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
 }
 
+include_flate::flate!(pub static COMMONWORDSTEXT: str from "data/other/CommonWords.txt");
+
 lazy_static! {
     static ref STOPWORDS: HashSet<&'static str> = {
-        let mut m = HashSet::new();
-        m.insert("the");
-        m.insert("and");
-        m.insert("in");
-        m.insert("on");
-        m.insert("by");
-        m.insert("a");
-        m.insert("an");
-        m.insert("it");
-        m.insert("to");
-        m
+        let set : HashSet<_> = COMMONWORDSTEXT.lines().collect();
+        set
     };
 }
 
