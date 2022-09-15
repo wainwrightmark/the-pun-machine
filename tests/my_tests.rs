@@ -5,14 +5,17 @@ use the_pun_machine::core::prelude::*;
 
 use ntest::test_case;
 
+#[test_case("Lichtenstein", "L IH1 K T AH0 N S T AY2 N")]
+#[test_case("Picasso", "P IH0 K AA1 S OW0")]
 #[test_case("FISH", "F IH1 SH")]
 #[test_case("fish", "F IH1 SH")]
 #[test_case("HAPPY", "HH AE1 P IY0")]
+
 fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
     let word = PhoeneticsWord::try_from(input.to_string())?;
 
     assert_eq!(word.text.to_ascii_lowercase(), input.to_ascii_lowercase());
-    assert_eq!(word.variant, 1);
+    //assert_eq!(word.variant, 1);
     assert_eq!(word.is_compound, false);
 
     let s_text = word
@@ -26,6 +29,8 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
     Ok(())
 }
 
+#[test_case("pick", "Lichtenstein", "PrefixRhyme", "Picktonstein")]
+#[test_case("far", "carnage", "PrefixRhyme", "farnage")]
 #[test_case("colt", "bolt", "PerfectRhyme", "colt")]
 #[test_case("here", "appear", "PerfectRhyme", "ahere")]
 #[test_case("knight", "night", "SameWord", "knight")]
@@ -37,6 +42,7 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
 #[test_case("butterfield", "butterscotch", "SharedPrefix", "butterfield")]
 #[test_case("pisces", "pieces", "SameConsonants", "pisces")]
 #[test_case("pieces", "pisces", "SameConsonants", "pieces")]
+
 fn test_pun_classification(
     theme_word_str: &str,
     original_word_str: &str,
@@ -82,6 +88,21 @@ fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), S
 
     Ok(())
 }
+
+#[test_case("idiom", "idium")]
+#[test_case("amazed", "amazed")]
+#[test_case("fantastic", "fantastic")]
+#[test_case("deplorable", "deplaurable")]
+fn test_spelling(word: &str, expected: &str) -> Result<(), String>{
+    let word = PhoeneticsWord::try_from(word.to_string())?;
+
+    let spelling = word.syllables.into_iter().map(|x|x.get_spelling()).join("");
+
+    assert_eq!(spelling, expected);
+
+    Ok(())
+}
+
 
 #[test_case("Idiom", "cake")]
 #[test_case("TVShows", "meat")]
