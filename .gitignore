@@ -78,3 +78,4 @@ src/test/rustdoc-gui/src/**.lock
 
 # Before adding new lines, see the comment at the top.
 **/english-wordnet-2021.xml
+data.yaml

@@ -9,6 +9,7 @@ mod pun_type;
 mod related_word;
 mod strategies;
 mod theme_suggestion;
+mod word_dictionary;
 
 pub mod prelude {
 
@@ -23,4 +24,5 @@ pub mod prelude {
     pub use crate::core::related_word::*;
     pub use crate::core::strategies::prelude::*;
     pub use crate::core::theme_suggestion::*;
+    pub use crate::core::word_dictionary::*;
 }
