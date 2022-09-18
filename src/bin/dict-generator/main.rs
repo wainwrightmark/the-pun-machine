@@ -1,15 +1,13 @@
 use itertools::Itertools;
 use quick_xml::de::from_reader;
-use quick_xml::se;
-use regex::Regex;
+
 use serde::Deserialize;
 use serde::Serialize;
+use std::collections::BTreeMap;
 use std::collections::HashSet;
-use std::collections::{BTreeMap, HashMap};
 use std::convert::TryFrom;
 use std::fs::File;
-use std::io::Write;
-use std::process::Output;
+
 use the_pun_machine::core::prelude::*;
 
 pub fn main() {
@@ -129,21 +127,25 @@ pub fn main() {
 
     let mut mp_file = &File::create("data.mp").unwrap();
 
-    word_dictionary.serialize(&mut rmp_serde::Serializer::new(&mut mp_file)).unwrap();
+    word_dictionary
+        .serialize(&mut rmp_serde::Serializer::new(&mut mp_file))
+        .unwrap();
 
     let mut yaml_file = &File::create("data.yaml").unwrap();
 
-    word_dictionary.serialize(&mut serde_yaml::Serializer::new(&mut yaml_file
-    )).unwrap();
+    word_dictionary
+        .serialize(&mut serde_yaml::Serializer::new(&mut yaml_file))
+        .unwrap();
 }
 
 fn synset_to_id(synset: &String) -> u32 {
-    
-    if let Ok(r) = u32::from_str_radix(&synset[5..13], 10){
+    if let Ok(r) = u32::from_str_radix(&synset[5..13], 10) {
         return r;
-    }
-    else{
-        panic!("Could not read '{synset}' ({}) as synset id", &synset[5..13])
+    } else {
+        panic!(
+            "Could not read '{synset}' ({}) as synset id",
+            &synset[5..13]
+        )
     }
 }
 
@@ -160,8 +162,6 @@ lazy_static::lazy_static! {
 }
 
 include_flate::flate!(pub static PRONOUNCIATIONS: str from "data/syllables/pronounciation.txt");
-
-
 
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct OutputWord {

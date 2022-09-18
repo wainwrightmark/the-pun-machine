@@ -3,7 +3,7 @@ use strum::*;
 
 impl core::fmt::Display for PunCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let text : &'static str = match self {
+        let text: &'static str = match self {
             PunCategory::Artists => "Artists",
             PunCategory::Idiom => "Idiom",
             PunCategory::Books => "Books",
@@ -21,7 +21,7 @@ impl core::fmt::Display for PunCategory {
             PunCategory::ChristmasSongs => "Christmas Songs",
         };
 
-        write!(f, "{}",text)
+        write!(f, "{}", text)
     }
 }
 
@@ -74,9 +74,8 @@ pub enum PunCategory {
 }
 
 impl PunCategory {
-
     pub fn get_all_words() -> impl Iterator<Item = &'static str> {
-        PunCategory::iter().flat_map(|x|x.get_words())
+        PunCategory::iter().flat_map(|x| x.get_words())
     }
 
     pub fn get_words(self) -> impl Iterator<Item = &'static str> {

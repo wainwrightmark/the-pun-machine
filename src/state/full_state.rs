@@ -2,11 +2,10 @@ use std::{convert::TryFrom, rc::Rc};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
-use quick_xml::se;
+
 use serde::*;
 
 use yewdux::prelude::*;
-
 
 #[derive(PartialEq, Eq, Store, Clone, Serialize, Deserialize)]
 #[store(storage = "local")] // can also be "session"
@@ -35,19 +34,16 @@ impl FullState {
     }
 
     fn update(&mut self) {
-        let phrases: Vec<Phrase> =
-        if let Some(category) = self.category{
-            category.get_words()                        
-            .filter_map(|text| Phrase::try_from(text.to_string()).ok())
-            .collect_vec()
-        }
-        else{
+        let phrases: Vec<Phrase> = if let Some(category) = self.category {
+            category
+                .get_words()
+                .filter_map(|text| Phrase::try_from(text.to_string()).ok())
+                .collect_vec()
+        } else {
             PunCategory::get_all_words()
-            .filter_map(|text| Phrase::try_from(text.to_string()).ok())
-            .collect_vec()
+                .filter_map(|text| Phrase::try_from(text.to_string()).ok())
+                .collect_vec()
         };
-        
-        
 
         match PhoeneticsWord::try_from(self.text.clone()) {
             Ok(p_word) => {
@@ -66,7 +62,6 @@ impl FullState {
             Err(err) => {
                 self.data = Default::default();
                 self.warning = Some(format!("{}: '{}'", err, self.text));
-                
             }
         }
     }

@@ -25,7 +25,6 @@ impl TryFrom<String> for PhoeneticsWord {
             //     s.retain(|c|c.is_ascii_alphabetic());
             //     s
             // })
-
             .filter(|x| !x.is_empty())
             .collect_vec();
 
@@ -57,7 +56,7 @@ impl PhoeneticsWord {
         }
 
         let mut key = text.to_ascii_lowercase();
-        key.retain(|c|c.is_ascii_alphabetic());
+        key.retain(|c| c.is_ascii_alphabetic());
 
         if let Some(w) = PRONOUNCIATIONS_MAP.get(&key) {
             Ok(PhoeneticsWord {

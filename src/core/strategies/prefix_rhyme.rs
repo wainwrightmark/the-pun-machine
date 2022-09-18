@@ -25,9 +25,10 @@ impl PunStrategy for PrefixRhyme {
         dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(first_syllable) = original_word.syllables.first() {
-            if original_word.syllables.len() > 1 {// && first_syllable.nucleus().is_stressed_vowel() {
+            if original_word.syllables.len() > 1 {
+                // && first_syllable.nucleus().is_stressed_vowel() {
                 let mut rhyme_syllable = first_syllable.get_rhymes_syllable();
-                if rhyme_syllable.coda().next().is_none(){
+                if rhyme_syllable.coda().next().is_none() {
                     rhyme_syllable = rhyme_syllable.add_next_offset(&original_word.syllables[1]);
                 }
                 let rhyme_word = vec![rhyme_syllable];

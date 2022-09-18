@@ -1,10 +1,7 @@
-use itertools::Itertools;
-use regex::Regex;
-
 use crate::core::prelude::*;
-use std::{collections::BTreeMap, convert::TryFrom, str::FromStr};
+use std::collections::BTreeMap;
 
-#[derive(Clone, Debug, Default, PartialEq,serde:: Deserialize, serde::Serialize)]
+#[derive(Clone, Debug, Default, PartialEq, serde:: Deserialize, serde::Serialize)]
 pub struct WordDictionary {
     pub words: BTreeMap<String, (Vec<Syllable>, Vec<u32>)>,
     pub meanings: BTreeMap<u32, Vec<u32>>,

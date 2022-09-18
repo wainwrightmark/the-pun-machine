@@ -95,16 +95,19 @@ fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), S
 #[test_case("amazed", "amazed")]
 #[test_case("fantastic", "fantastic")]
 #[test_case("deplorable", "deplaurable")]
-fn test_spelling(word: &str, expected: &str) -> Result<(), String>{
+fn test_spelling(word: &str, expected: &str) -> Result<(), String> {
     let word = PhoeneticsWord::try_from(word.to_string())?;
 
-    let spelling = word.syllables.into_iter().map(|x|x.get_spelling()).join("");
+    let spelling = word
+        .syllables
+        .into_iter()
+        .map(|x| x.get_spelling())
+        .join("");
 
     assert_eq!(spelling, expected);
 
     Ok(())
 }
-
 
 #[test_case("Idiom", "cake")]
 #[test_case("TVShows", "meat")]
