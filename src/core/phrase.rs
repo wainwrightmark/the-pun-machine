@@ -1,13 +1,13 @@
 use itertools::Itertools;
 
 use crate::core::prelude::*;
-use std::convert::TryFrom;
+use std::{convert::TryFrom, str::FromStr};
 
 #[derive(
     Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
 )]
 pub struct Phrase {
-    pub words: Vec<PhoeneticsWord>,
+    pub words: Vec<DictionaryWord>,
 }
 
 impl TryFrom<String> for Phrase {
@@ -18,7 +18,7 @@ impl TryFrom<String> for Phrase {
             .split(' ')
             .map(|x| x.trim())
             .filter(|x| !x.is_empty())
-            .map(|x| PhoeneticsWord::try_from(x.to_string()))
+            .map(|x| DictionaryWord::from_str(x))
             .collect();
 
         let words = words_result?;

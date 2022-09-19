@@ -1,8 +1,8 @@
 use itertools::Itertools;
 use regex::Regex;
 
-use crate::core::prelude::*;
 use std::{collections::BTreeMap, convert::TryFrom, str::FromStr};
+use the_pun_machine::core::prelude::*;
 
 #[derive(
     Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,

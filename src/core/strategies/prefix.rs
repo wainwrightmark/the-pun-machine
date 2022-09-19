@@ -6,7 +6,7 @@ use crate::core::prelude::*;
 pub struct Prefix {}
 
 impl PunStrategy for Prefix {
-    fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
         if word.syllables.len() <= 1 {
             return vec![];
         }
@@ -28,8 +28,8 @@ impl PunStrategy for Prefix {
 
     fn get_possible_replacements(
         &self,
-        original_word: &PhoeneticsWord,
-        dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
+        original_word: &DictionaryWord,
+        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(words) = dict.get(&original_word.syllables) {
             words

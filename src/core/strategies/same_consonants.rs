@@ -6,7 +6,7 @@ use crate::core::prelude::*;
 pub struct SameConsonants {}
 
 impl SameConsonants {
-    fn get_consonant_syllables(&self, word: &PhoeneticsWord) -> Vec<Syllable> {
+    fn get_consonant_syllables(&self, word: &DictionaryWord) -> Vec<Syllable> {
         word.syllables
             .iter()
             .map(|x| x.clone().with_no_consonant())
@@ -15,14 +15,14 @@ impl SameConsonants {
 }
 
 impl PunStrategy for SameConsonants {
-    fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
         vec![self.get_consonant_syllables(word)]
     }
 
     fn get_possible_replacements(
         &self,
-        original_word: &PhoeneticsWord,
-        dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
+        original_word: &DictionaryWord,
+        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         let sw = self.get_consonant_syllables(original_word);
 

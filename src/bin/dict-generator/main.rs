@@ -1,3 +1,5 @@
+mod phoenetics_word;
+
 use itertools::Itertools;
 use quick_xml::de::from_reader;
 
@@ -179,7 +181,7 @@ impl TryFrom<String> for OutputWord {
     type Error = &'static str;
 
     fn try_from(spelling: String) -> Result<Self, Self::Error> {
-        let pw = PhoeneticsWord::try_from(spelling.clone())?;
+        let pw = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())?;
 
         Ok(OutputWord {
             spelling: spelling.clone(),
@@ -241,11 +243,9 @@ impl Lemma {
             return false;
         }
 
-        if self
-            .written_form
-            .chars()
-            .all(|c| c.is_ascii_alphabetic() && c.is_ascii_lowercase())
-        {
+        if self.written_form.chars().all(
+            |c| c.is_ascii_alphabetic(), //&& c.is_ascii_lowercase()
+        ) {
             return true;
         }
         return false;

@@ -6,7 +6,7 @@ use crate::core::prelude::*;
 pub struct SharedPrefix {}
 
 impl PunStrategy for SharedPrefix {
-    fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
         if word.syllables.len() > 2 {
             return vec![word.syllables.iter().take(2).cloned().collect_vec()];
         }
@@ -15,8 +15,8 @@ impl PunStrategy for SharedPrefix {
 
     fn get_possible_replacements(
         &self,
-        original_word: &PhoeneticsWord,
-        dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
+        original_word: &DictionaryWord,
+        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if original_word.syllables.len() > 2 {
             let first_two_syllables = original_word

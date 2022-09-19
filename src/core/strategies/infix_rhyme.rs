@@ -6,7 +6,7 @@ use crate::core::prelude::*;
 pub struct InfixRhyme {}
 
 impl PunStrategy for InfixRhyme {
-    fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
         if word.syllables.len() == 1 {
             return vec![word
                 .syllables
@@ -20,8 +20,8 @@ impl PunStrategy for InfixRhyme {
 
     fn get_possible_replacements(
         &self,
-        original_word: &PhoeneticsWord,
-        dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
+        original_word: &DictionaryWord,
+        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if original_word.syllables.len() <= 1 {
             return vec![];
@@ -63,7 +63,7 @@ impl PunStrategy for InfixRhyme {
                 PunReplacement {
                     pun_type: PunType::Infix,
                     is_amalgam: true,
-                    pun_word: theme_word.text.clone(),
+                    pun_word: theme_word.text.clone().into(),
                     replacement_string,
                 }
             })

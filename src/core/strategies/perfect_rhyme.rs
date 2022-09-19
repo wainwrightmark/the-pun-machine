@@ -6,7 +6,7 @@ use crate::core::prelude::*;
 pub struct PerfectRhyme {}
 
 impl PerfectRhyme {
-    fn get_rhyme_syllables(&self, word: &PhoeneticsWord) -> Option<Vec<Syllable>> {
+    fn get_rhyme_syllables(&self, word: &DictionaryWord) -> Option<Vec<Syllable>> {
         if let Some(last_index_position) = word
             .syllables
             .iter()
@@ -38,7 +38,7 @@ impl PerfectRhyme {
 }
 
 impl PunStrategy for PerfectRhyme {
-    fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
         if let Some(s) = PerfectRhyme::get_rhyme_syllables(self, word) {
             vec![s]
         } else {
@@ -48,8 +48,8 @@ impl PunStrategy for PerfectRhyme {
 
     fn get_possible_replacements(
         &self,
-        original_word: &PhoeneticsWord,
-        dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
+        original_word: &DictionaryWord,
+        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, original_word) {
             if let Some(theme_words) = dict.get(&key) {
@@ -63,7 +63,7 @@ impl PunStrategy for PerfectRhyme {
                     .map(|theme_word| {
                         let replacement_string =
                             if theme_word.syllables.len() == original_word.syllables.len() {
-                                theme_word.text.clone()
+                                theme_word.text.clone().into()
                             } else {
                                 original_word
                                     .syllables
@@ -71,14 +71,14 @@ impl PunStrategy for PerfectRhyme {
                                     .take(original_word.syllables.len() - key.len())
                                     .map(|x| x.get_spelling())
                                     .join("")
-                                    + &theme_word.text
+                                    + &theme_word.text.clone()
                             };
 
                         PunReplacement {
                             pun_type: PunType::PerfectRhyme,
                             replacement_string,
                             is_amalgam: false,
-                            pun_word: theme_word.text.clone(),
+                            pun_word: theme_word.text.clone().into(),
                         }
                     })
                     .collect_vec();

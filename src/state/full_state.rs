@@ -1,4 +1,4 @@
-use std::{convert::TryFrom, rc::Rc};
+use std::{convert::TryFrom, rc::Rc, str::FromStr};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
@@ -45,7 +45,7 @@ impl FullState {
                 .collect_vec()
         };
 
-        match PhoeneticsWord::try_from(self.text.clone()) {
+        match DictionaryWord::from_str(self.text.as_str()) {
             Ok(p_word) => {
                 let pun_words = vec![p_word];
 

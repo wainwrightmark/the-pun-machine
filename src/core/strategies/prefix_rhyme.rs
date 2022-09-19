@@ -6,7 +6,7 @@ use crate::core::prelude::*;
 pub struct PrefixRhyme {}
 
 impl PunStrategy for PrefixRhyme {
-    fn get_relevant_syllables(&self, word: &PhoeneticsWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
         if word.syllables.len() > 0 {
             if let Some(syllable) = word.syllables.get(word.syllables.len() - 1) {
                 if syllable.nucleus().is_stressed_vowel() {
@@ -21,8 +21,8 @@ impl PunStrategy for PrefixRhyme {
 
     fn get_possible_replacements(
         &self,
-        original_word: &PhoeneticsWord,
-        dict: &HashMap<Vec<Syllable>, Vec<PhoeneticsWord>>,
+        original_word: &DictionaryWord,
+        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(first_syllable) = original_word.syllables.first() {
             if original_word.syllables.len() > 1 {
@@ -53,7 +53,7 @@ impl PunStrategy for PrefixRhyme {
                             PunReplacement {
                                 pun_type: PunType::PrefixRhyme,
                                 is_amalgam: true,
-                                pun_word: theme_word.text.clone(),
+                                pun_word: theme_word.text.clone().into(),
                                 replacement_string,
                             }
                         })
