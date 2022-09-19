@@ -11,7 +11,7 @@ pub struct Phrase {
 }
 
 impl TryFrom<String> for Phrase {
-    type Error = &'static str;
+    type Error = anyhow::Error;
 
     fn try_from(value: String) -> Result<Self, Self::Error> {
         let words_result: Result<Vec<_>, _> = value

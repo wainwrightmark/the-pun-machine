@@ -12,7 +12,7 @@ use ntest::test_case;
 #[test_case("fish", "F IH1 SH")]
 #[test_case("HAPPY", "HH AE1 P IY0")]
 
-fn test_syllables(input: &str, expected: &str) -> Result<(), &'static str> {
+fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     let word = DictionaryWord::from_str(input)?;
 
     assert_eq!(word.text.to_ascii_lowercase(), input.to_ascii_lowercase());
@@ -50,7 +50,7 @@ fn test_pun_classification(
     original_word_str: &str,
     pun_type_str: &str,
     rep: &str,
-) -> Result<(), &'static str> {
+) -> Result<(), anyhow::Error> {
     let theme_word: DictionaryWord = DictionaryWord::from_str(theme_word_str)?;
     let phrase = Phrase::try_from(original_word_str.to_string())?;
 
@@ -95,7 +95,7 @@ fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), S
 #[test_case("amazed", "amazed")]
 #[test_case("fantastic", "fantastic")]
 #[test_case("deplorable", "deplaurable")]
-fn test_spelling(word: &str, expected: &str) -> Result<(), String> {
+fn test_spelling(word: &str, expected: &str) -> Result<(), anyhow::Error> {
     let word = DictionaryWord::from_str(word)?;
 
     let spelling = word

@@ -122,7 +122,7 @@ pub fn main() {
 
     let words: BTreeMap<_, _> = output_words
         .into_iter()
-        .map(|x| (x.spelling, (x.pronunciation, x.meanings)))
+        .map(|x| (x.spelling.to_lowercase(), (x.pronunciation, x.meanings)))
         .collect();
 
     let word_dictionary = WordDictionary { words, meanings };
@@ -178,7 +178,7 @@ pub struct OutputMeaning {
 }
 
 impl TryFrom<String> for OutputWord {
-    type Error = &'static str;
+    type Error = anyhow::Error;
 
     fn try_from(spelling: String) -> Result<Self, Self::Error> {
         let pw = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())?;

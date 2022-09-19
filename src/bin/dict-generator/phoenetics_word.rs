@@ -1,3 +1,4 @@
+use anyhow::anyhow;
 use itertools::Itertools;
 use regex::Regex;
 
@@ -15,7 +16,7 @@ pub struct PhoeneticsWord {
 }
 
 impl TryFrom<String> for PhoeneticsWord {
-    type Error = &'static str;
+    type Error = anyhow::Error;
 
     fn try_from(text: String) -> Result<Self, Self::Error> {
         let splits = text
@@ -50,7 +51,7 @@ impl TryFrom<String> for PhoeneticsWord {
 include_flate::flate!(pub static PRONOUNCIATIONS: str from "data/syllables/pronounciation.txt");
 
 impl PhoeneticsWord {
-    fn try_get_single(text: String) -> Result<Self, &'static str> {
+    fn try_get_single(text: String) -> Result<Self, anyhow::Error> {
         lazy_static::lazy_static! {
             static ref PRONOUNCIATIONS_MAP: BTreeMap<String, PhoeneticsWord> = PhoeneticsWord::create_words_map();
         }
@@ -66,7 +67,7 @@ impl PhoeneticsWord {
                 syllables: w.syllables.clone(),
             })
         } else {
-            Err("Word not found")
+            Err(anyhow!("Word not found {}", text))
         }
     }
 

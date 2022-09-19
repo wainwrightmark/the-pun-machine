@@ -21,6 +21,7 @@ smallvec = {version = "1.9.0", features=["serde", "union","const_generics", "con
 lazy_static = "1.0"
 auto_enums = {version = "0.7", features=["std"]}
 include-flate = "0.1.4"
+anyhow = "1"
 
 log = "0.4"
 yew = { git = "https://github.com/yewstack/yew.git", features = ["csr",] }

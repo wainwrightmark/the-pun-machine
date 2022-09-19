@@ -20,18 +20,18 @@ pub struct DictionaryWord {
 }
 
 impl FromStr for DictionaryWord {
-    type Err = &'static str;
+    type Err = anyhow::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         WORDDICTIONARY
             .words
-            .get(s)
+            .get(&s.to_lowercase())
             .map(|(syllables, meanings)| DictionaryWord {
                 text: s.to_string().into(),
                 syllables: syllables.clone(),
                 meanings: meanings.clone(),
             })
-            .ok_or("Could not find word")
+            .ok_or(anyhow::anyhow!("Could not find word '{}'", s))
     }
 }
 
