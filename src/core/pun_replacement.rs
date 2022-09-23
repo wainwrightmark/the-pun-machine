@@ -32,7 +32,7 @@ impl PunPhrase {
                 if i == self.index {
                     self.replacement.replacement_string.clone()
                 } else {
-                    w.spellings[0].clone()
+                    w.text.clone()
                 }
             })
             .join(" ")

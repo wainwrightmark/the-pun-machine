@@ -25,7 +25,7 @@ pub trait PunStrategy {
 
     fn get_possible_replacements(
         &self,
-        original_word: &DictionaryWord,
+        original_word: &PhraseWord,
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement>;
 }

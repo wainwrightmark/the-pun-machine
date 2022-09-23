@@ -21,47 +21,51 @@ impl PunStrategy for PrefixRhyme {
 
     fn get_possible_replacements(
         &self,
-        original_word: &DictionaryWord,
+        phrase_word: &PhraseWord,
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
-        if let Some(first_syllable) = original_word.syllables.first() {
-            if original_word.syllables.len() > 1 {
-                // && first_syllable.nucleus().is_stressed_vowel() {
-                let mut rhyme_syllable = first_syllable.get_rhymes_syllable();
-                if rhyme_syllable.coda().next().is_none() {
-                    rhyme_syllable = rhyme_syllable.add_next_offset(&original_word.syllables[1]);
-                }
-                let rhyme_word = vec![rhyme_syllable];
+        if let Some(original_word) = &phrase_word.word {
+            if let Some(first_syllable) = original_word.syllables.first() {
+                if original_word.syllables.len() > 1 {
+                    // && first_syllable.nucleus().is_stressed_vowel() {
+                    let mut rhyme_syllable = first_syllable.get_rhymes_syllable();
+                    if rhyme_syllable.coda().next().is_none() {
+                        rhyme_syllable =
+                            rhyme_syllable.add_next_offset(&original_word.syllables[1]);
+                    }
+                    let rhyme_word = vec![rhyme_syllable];
 
-                if let Some(theme_words) = dict.get(&rhyme_word) {
-                    return theme_words
-                        .iter()
-                        .filter(|x| {
-                            x.syllables.len() == 1
-                                || x.syllables.get(x.syllables.len() - 2) == Some(first_syllable)
-                        })
-                        .map(|theme_word| {
-                            let suffix = original_word
-                                .syllables
-                                .iter()
-                                .skip(1)
-                                .map(|x| x.get_spelling())
-                                .join("");
+                    if let Some(theme_words) = dict.get(&rhyme_word) {
+                        return theme_words
+                            .iter()
+                            .filter(|x| {
+                                x.syllables.len() == 1
+                                    || x.syllables.get(x.syllables.len() - 2)
+                                        == Some(first_syllable)
+                            })
+                            .map(|theme_word| {
+                                let suffix = original_word
+                                    .syllables
+                                    .iter()
+                                    .skip(1)
+                                    .map(|x| x.get_spelling())
+                                    .join("");
 
-                            let replacement_string = theme_word.spellings[0].clone() + suffix.as_str();
+                                let replacement_string =
+                                    theme_word.spellings[0].clone() + suffix.as_str();
 
-                            PunReplacement {
-                                pun_type: PunType::PrefixRhyme,
-                                is_amalgam: true,
-                                pun_word: theme_word.spellings[0].clone(),
-                                replacement_string,
-                            }
-                        })
-                        .collect_vec();
+                                PunReplacement {
+                                    pun_type: PunType::PrefixRhyme,
+                                    is_amalgam: true,
+                                    pun_word: theme_word.spellings[0].clone(),
+                                    replacement_string,
+                                }
+                            })
+                            .collect_vec();
+                    }
                 }
             }
         }
-
         vec![]
     }
 }

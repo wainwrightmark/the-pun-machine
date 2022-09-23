@@ -112,7 +112,7 @@ pub fn row(pun: &PunPhrase) -> Html {
         <td >
         {
             pun.phrase.words.iter().enumerate()
-        .map(|(i,w)| if i == pun.index{html!(<em> {pun.replacement.replacement_string.clone() + " "} </em>)} else {html!(<>{w.spellings[0].clone()+ " "} </>)})        
+        .map(|(i,w)| if i == pun.index{html!(<em> {pun.replacement.replacement_string.clone() + " "} </em>)} else {html!(<>{w.text.clone()+ " "} </>)})        
         .collect::<Html>()
         }
 

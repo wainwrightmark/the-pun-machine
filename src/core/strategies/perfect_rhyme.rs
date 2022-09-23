@@ -48,10 +48,12 @@ impl PunStrategy for PerfectRhyme {
 
     fn get_possible_replacements(
         &self,
-        original_word: &DictionaryWord,
+        phrase_word: &PhraseWord,
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
-        if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, original_word) {
+
+        if let Some(original_word) = &phrase_word.word{
+        if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, &original_word) {
             if let Some(theme_words) = dict.get(&key) {
                 return theme_words
                     .iter()
@@ -84,6 +86,7 @@ impl PunStrategy for PerfectRhyme {
                     .collect_vec();
             }
         };
+    }
 
         Vec::<PunReplacement>::default()
     }

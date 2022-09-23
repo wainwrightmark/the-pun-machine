@@ -1,28 +1,31 @@
 use crate::core::prelude::*;
-use std::{convert::TryFrom, str::FromStr};
+use std::{ str::FromStr};
 
 #[derive(
     Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
 )]
 pub struct Phrase {
     pub text : String,
-    pub words: Vec<DictionaryWord>,
+    pub words: Vec<PhraseWord>,
 }
 
-impl TryFrom<String> for Phrase {
-    type Error = anyhow::Error;
+#[derive(
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+)]
+pub struct PhraseWord{
+    pub text: String,
+    pub word: Option<DictionaryWord>
+}
 
-    fn try_from(value: String) -> Result<Self, Self::Error> {
-        let words_result: Result<Vec<_>, _> = value
+impl From<String> for Phrase{
+    fn from(value: String) -> Self {
+        let words: Vec<_> = value
             .split(' ')
             .map(|x| x.trim())
             .filter(|x| !x.is_empty())
-            .filter(|x| !STOPWORDS.contains(x.to_lowercase().as_str()))
-            .map(|x| DictionaryWord::from_str(x))
+            .map(|x| PhraseWord{text: x.to_string(), word: DictionaryWord::from_str(x).ok() })
             .collect();
 
-        let words = words_result?;
-
-        Ok(Phrase {text: value.clone(),  words })
+        Phrase {text: value.clone(),  words }
     }
 }

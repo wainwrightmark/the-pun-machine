@@ -31,14 +31,22 @@ impl PunFactory {
             .words
             .iter()
             .enumerate()
-            .filter(|x| {
-                !STOPWORDS.contains(&x.1.spellings[0].to_ascii_lowercase().as_str())
-                    && !x.1.syllables.is_empty()
+            .filter(|(_, phrase_word)| {
+
+                if let Some(word) = &phrase_word.word{
+                    if word.syllables.is_empty(){
+                        return false;
+                    }
+
+                    return ! STOPWORDS.contains(phrase_word.text .to_ascii_lowercase().as_str());
+                }
+                return false;
+                    
             })
-            .flat_map(|(index, word)| {
+            .flat_map(|(index, phrase_word)| {
                 factories
                     .iter()
-                    .flat_map(|f| f.get_possible_replacements(word))
+                    .flat_map(move |f| f.get_possible_replacements(&phrase_word))
                     .map(move |replacement| PunPhrase {
                         phrase: phrase.clone(),
                         replacement,
@@ -48,7 +56,7 @@ impl PunFactory {
             .collect_vec()
     }
 
-    fn get_possible_replacements(&self, original_word: &DictionaryWord) -> Vec<PunReplacement> {
+    fn get_possible_replacements(&self, original_word: &PhraseWord) -> Vec<PunReplacement> {
         self.strategy
             .get_possible_replacements(original_word, &self.dict)
     }

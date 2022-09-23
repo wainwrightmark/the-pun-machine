@@ -54,7 +54,7 @@ impl DictionaryWord {
         while let Some(meaning) = stack.pop_front() {
             //return all words that have this meaning (do not check their meanings or you will get synonyms)
             for word in WORDSBYMEANING[&meaning].iter(){
-                println!("{}", word.spellings[0]);
+                //println!("{}", word.spellings[0]);
                 result.insert(word.clone());
             }
             //add all child meanings we haven't seen yet to the stack

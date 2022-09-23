@@ -28,40 +28,42 @@ impl PunStrategy for Prefix {
 
     fn get_possible_replacements(
         &self,
-        original_word: &DictionaryWord,
+        phrase_word: &PhraseWord,
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
-        if let Some(words) = dict.get(&original_word.syllables) {
-            words
-                .iter()
-                .map(|word| {
-                    if word.spellings[0].starts_with(original_word.spellings[0].as_str()) {
-                        PunReplacement {
-                            pun_type: PunType::Prefix,
-                            pun_word: word.spellings[0].clone(),
-                            replacement_string: word.spellings[0].clone(),
-                            is_amalgam: false,
-                        }
-                    } else {
-                        let suffix = word
-                            .syllables
-                            .iter()
-                            .skip(1)
-                            .map(Syllable::get_spelling)
-                            .join("");
-                        let replacement_string = original_word.spellings[0].clone() + suffix.as_str();
+        if let Some(original_word) = &phrase_word.word {
+            if let Some(words) = dict.get(&original_word.syllables) {
+                return words
+                    .iter()
+                    .map(|word| {
+                        if word.spellings[0].starts_with(original_word.spellings[0].as_str()) {
+                            PunReplacement {
+                                pun_type: PunType::Prefix,
+                                pun_word: word.spellings[0].clone(),
+                                replacement_string: word.spellings[0].clone(),
+                                is_amalgam: false,
+                            }
+                        } else {
+                            let suffix = word
+                                .syllables
+                                .iter()
+                                .skip(1)
+                                .map(Syllable::get_spelling)
+                                .join("");
+                            let replacement_string =
+                                original_word.spellings[0].clone() + suffix.as_str();
 
-                        PunReplacement {
-                            pun_type: PunType::Prefix,
-                            pun_word: word.spellings[0].clone(),
-                            replacement_string,
-                            is_amalgam: true,
+                            PunReplacement {
+                                pun_type: PunType::Prefix,
+                                pun_word: word.spellings[0].clone(),
+                                replacement_string,
+                                is_amalgam: true,
+                            }
                         }
-                    }
-                })
-                .collect_vec()
-        } else {
-            vec![]
+                    })
+                    .collect_vec();
+            }
         }
+        vec![]
     }
 }
