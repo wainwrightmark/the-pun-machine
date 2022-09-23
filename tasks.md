@@ -4,5 +4,7 @@
 
 - [x] Correct capitalization
 - [ ] Unify spellings with pronounciations
-- [ ] Show category in table
+- [x] Show category in table
 - [ ] Let user choose which meaning to use
+- [ ] Performance pass
+- [ ] Serialize syllables more efficiently

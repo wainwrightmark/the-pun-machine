@@ -1,4 +1,4 @@
-use std::{convert::TryFrom, str::FromStr};
+use std::{str::FromStr};
 
 use itertools::Itertools;
 use the_pun_machine::core::prelude::*;
@@ -54,7 +54,7 @@ fn test_pun_classification(
     rep: &str,
 ) -> Result<(), anyhow::Error> {
     let theme_word: DictionaryWord = DictionaryWord::from_str(theme_word_str)?;
-    let phrase = Phrase::try_from(original_word_str.to_string())?;
+    let phrase = Phrase::new(original_word_str.to_string(), PunCategory::Idiom);
 
     let theme_words = vec![theme_word];
 
@@ -76,17 +76,15 @@ fn test_pun_classification(
     Ok(())
 }
 
-#[test_case("Idiom", "a bed of roses")]
+#[test_case("Idiom", "A bed of roses")]
 #[test_case("TVShows", "Doctor Who")]
 fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), String> {
     let category = PunCategory::from_str(category_text).map_err(|e| e.to_string())?;
 
-    let category_phrases: Vec<Phrase> = category
-        .get_words()
-        .filter_map(|t| Phrase::try_from(t.to_string()).ok())
+    let category_phrases: Vec<Phrase> = category.get_phrases()
         .collect_vec();
 
-    let expected_phrase = Phrase::try_from(expected_text.to_string()).unwrap();
+    let expected_phrase = Phrase::new(expected_text.to_string(), category);
 
     assert!(category_phrases.contains(&expected_phrase));
 
@@ -116,9 +114,7 @@ fn test_spelling(word: &str, expected: &str) -> Result<(), anyhow::Error> {
 fn test_puns(category_text: &str, text: &str) -> Result<(), anyhow::Error> {
     let category = PunCategory::from_str(category_text)?;
 
-    let phrases: Vec<Phrase> = category
-        .get_words()
-        .filter_map(|t| Phrase::try_from(t.to_string()).ok())
+    let phrases: Vec<Phrase> = category.get_phrases()
         .collect_vec();
 
     let p_word = DictionaryWord::from_str(text)?;

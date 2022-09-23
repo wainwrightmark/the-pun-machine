@@ -66,7 +66,9 @@ pub fn diplay_box() -> Html {
         .as_ref()
         .clone();
 
-    let rows = terms.iter().map(row).collect_vec();
+    let show_category = use_selector(|s: &FullState| s.category.is_none()).as_ref().clone();
+
+    let rows = terms.iter().map(|x| row(x, show_category)).collect_vec();
 
     html!(
         <table>
@@ -107,7 +109,7 @@ pub fn categories_dropdown() -> Html {
     )
 }
 
-pub fn row(pun: &PunPhrase) -> Html {
+pub fn row(pun: &PunPhrase, show_category: bool) -> Html {
     html!(<tr data-tooltip={pun.phrase.text.clone()}>
         <td >
         {
@@ -120,6 +122,11 @@ pub fn row(pun: &PunPhrase) -> Html {
         <td>
         {pun.replacement.pun_type}
         </td>
+        if show_category{
+            <td>
+        {pun.phrase.category}
+        </td>
+        }
 
     </tr>)
 }

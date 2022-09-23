@@ -1,4 +1,4 @@
-use std::{convert::TryFrom, rc::Rc, str::FromStr};
+use std::{rc::Rc, str::FromStr};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
@@ -35,14 +35,9 @@ impl FullState {
 
     fn update(&mut self) {
         let phrases: Vec<Phrase> = if let Some(category) = self.category {
-            category
-                .get_words()
-                .filter_map(|text| Phrase::try_from(text.to_string()).ok())
-                .collect_vec()
+            category.get_phrases().collect_vec()
         } else {
-            PunCategory::get_all_words()
-                .filter_map(|text| Phrase::try_from(text.to_string()).ok())
-                .collect_vec()
+            PunCategory::get_all_phrases().collect_vec()
         };
 
         match DictionaryWord::from_str(self.text.as_str()) {

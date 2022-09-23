@@ -4,21 +4,24 @@ use std::str::FromStr;
 #[derive(
     Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
 )]
-pub struct Phrase {
-    pub text: String,
-    pub words: Vec<PhraseWord>,
-}
-
-#[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
-)]
 pub struct PhraseWord {
     pub text: String,
     pub word: Option<DictionaryWord>,
 }
 
-impl From<String> for Phrase {
-    fn from(value: String) -> Self {
+#[derive(
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+)]
+pub struct Phrase {
+    pub text: String,
+    pub words: Vec<PhraseWord>,
+    pub category : PunCategory
+}
+
+
+
+impl Phrase{
+    pub fn new(value: String, category: PunCategory) -> Self {
         let words: Vec<_> = value
             .split(' ')
             .map(|x| x.trim())
@@ -32,6 +35,7 @@ impl From<String> for Phrase {
         Phrase {
             text: value,
             words,
+            category
         }
     }
 }

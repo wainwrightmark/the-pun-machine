@@ -1,6 +1,8 @@
 use include_flate::flate;
 use strum::*;
 
+use super::prelude::Phrase;
+
 impl core::fmt::Display for PunCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let text: &'static str = match self {
@@ -74,8 +76,15 @@ pub enum PunCategory {
 }
 
 impl PunCategory {
-    pub fn get_all_words() -> impl Iterator<Item = &'static str> {
-        PunCategory::iter().flat_map(|x| x.get_words())
+
+    pub fn get_phrases(self)-> impl Iterator<Item =  Phrase>{
+        self
+                .get_words()
+                .map(move |text| Phrase::new(text.to_string(), self))
+    }
+
+    pub fn get_all_phrases() -> impl Iterator<Item = Phrase> {
+        PunCategory::iter().flat_map(|x| x.get_phrases())
     }
 
     pub fn get_words(self) -> impl Iterator<Item = &'static str> {
