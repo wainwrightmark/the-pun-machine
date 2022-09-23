@@ -201,7 +201,7 @@ function makeMutClosure(arg0, arg1, dtor, f) {
     return real;
 }
 function __wbg_adapter_16(arg0, arg1, arg2) {
-    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__he07166ec34bbf316(arg0, arg1, addHeapObject(arg2));
+    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h7f742213c76c586f(arg0, arg1, addHeapObject(arg2));
 }
 
 let stack_pointer = 32;
@@ -213,7 +213,7 @@ function addBorrowedObject(obj) {
 }
 function __wbg_adapter_19(arg0, arg1, arg2) {
     try {
-        wasm._dyn_core__ops__function__FnMut___A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h5743a481f1d71d96(arg0, arg1, addBorrowedObject(arg2));
+        wasm._dyn_core__ops__function__FnMut___A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hdaeaccbea2e539c5(arg0, arg1, addBorrowedObject(arg2));
     } finally {
         heap[stack_pointer++] = undefined;
     }
@@ -578,12 +578,12 @@ function getImports() {
         const ret = getObject(arg0).sessionStorage;
         return isLikeNone(ret) ? 0 : addHeapObject(ret);
     }, arguments) };
-    imports.wbg.__wbindgen_closure_wrapper1484 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 88, __wbg_adapter_16);
+    imports.wbg.__wbindgen_closure_wrapper1250 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 65, __wbg_adapter_16);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper2242 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 88, __wbg_adapter_19);
+    imports.wbg.__wbindgen_closure_wrapper2007 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 65, __wbg_adapter_19);
         return addHeapObject(ret);
     };
 
@@ -618,7 +618,7 @@ function initSync(bytes) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('the-pun-machine-2f0665412d78451c_bg.wasm', import.meta.url);
+        input = new URL('the-pun-machine-a3e373c7f0658641_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
