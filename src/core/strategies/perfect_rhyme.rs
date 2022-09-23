@@ -65,7 +65,7 @@ impl PunStrategy for PerfectRhyme {
                     .map(|theme_word| {
                         let replacement_string =
                             if theme_word.syllables.len() == original_word.syllables.len() {
-                                Casing::unify_captialization(&theme_word.spellings[0], &phrase_word.text)
+                                Casing::unify_captialization(&theme_word.spelling, &phrase_word.text)
                             } else {
                                 Casing::unify_captialization(
                                 &original_word
@@ -74,14 +74,14 @@ impl PunStrategy for PerfectRhyme {
                                     .take(original_word.syllables.len() - key.len())
                                     .map(|x| x.get_spelling())
                                     .join(""), &phrase_word.text)
-                                    + &theme_word.spellings[0]
+                                    + &theme_word.spelling
                             };
 
                         PunReplacement {
                             pun_type: PunType::PerfectRhyme,
                             replacement_string,
                             is_amalgam: false,
-                            pun_word: theme_word.spellings[0].clone(),
+                            pun_word: theme_word.spelling.clone(),
                         }
                     })
                     .collect_vec();

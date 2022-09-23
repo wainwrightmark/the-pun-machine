@@ -52,12 +52,12 @@ impl PunStrategy for PrefixRhyme {
                                     .join("");
 
                                 let replacement_string =
-                                Casing::unify_captialization(&theme_word.spellings[0], &phrase_word.text) + suffix.as_str();
+                                Casing::unify_captialization(&theme_word.spelling, &phrase_word.text) + suffix.as_str();
 
                                 PunReplacement {
                                     pun_type: PunType::PrefixRhyme,
                                     is_amalgam: true,
-                                    pun_word: theme_word.spellings[0].clone(),
+                                    pun_word: theme_word.spelling.clone(),
                                     replacement_string,
                                 }
                             })

@@ -37,8 +37,8 @@ impl PunStrategy for SameConsonants {
                     .map(|theme_word| PunReplacement {
                         pun_type: PunType::SameConsonants,
                         is_amalgam: false,
-                        pun_word: theme_word.spellings[0].clone(),
-                        replacement_string: Casing::unify_captialization(&theme_word.spellings[0], &phrase_word.text),
+                        pun_word: theme_word.spelling.clone(),
+                        replacement_string: Casing::unify_captialization(&theme_word.spelling, &phrase_word.text),
                     })
                     .collect_vec();
             }

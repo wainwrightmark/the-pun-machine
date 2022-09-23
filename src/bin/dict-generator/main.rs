@@ -23,26 +23,28 @@ pub fn main() {
         .into_iter()
         .filter(|x| x.lemma.is_dictionary_word())
         .flat_map(|entry| {
-
-            let spellings = entry.get_written_forms();
             let meanings = entry
                 .senses
                 .iter()
                 .map(|x| synset_to_id(&x.synset))
                 .collect_vec();
 
-            let words =
+            let words = entry
+                .get_written_forms()
+                .iter()
+                .flat_map(move |spelling| {
+                    let word = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())
+                        .ok()
+                        .map(|x| DictionaryWord {
+                            syllables: x.syllables,
+                            meanings: meanings.clone(),
+                            spelling: spelling.clone(),
+                        });
+                    word
+                })
+                .collect_vec();
 
-            entry.get_written_forms()
-            .iter().flat_map(move |x| {
-                let word = phoenetics_word::PhoeneticsWord::try_from(x.clone()).ok().map(
-                    |x| DictionaryWord{syllables: x.syllables, meanings: meanings.clone(), spellings: spellings.clone()
-
-                });
-                word
-            }).collect_vec();
-
-            return  words;
+            return words;
         })
         .collect_vec();
 
@@ -162,41 +164,11 @@ lazy_static::lazy_static! {
 
 include_flate::flate!(pub static PRONOUNCIATIONS: str from "data/syllables/pronounciation.txt");
 
-// #[derive(Clone, Debug, Default, PartialEq)]
-// pub struct OutputWord {
-//     pub spelling: String,
-//     pub pronunciation: Vec<Syllable>,
-//     pub meanings: Vec<u32>,
-// }
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct OutputMeaning {
     pub id: u32,
     pub children: Vec<u32>,
 }
-
-// impl Into<DictionaryWord> for OutputWord {
-//     fn into(self) -> DictionaryWord {
-//         DictionaryWord {
-//             spellings: vec![self.spelling],
-//             syllables: self.pronunciation,
-//             meanings: self.meanings,
-//         }
-//     }
-// }
-
-// impl TryFrom<String> for OutputWord {
-//     type Error = anyhow::Error;
-
-//     fn try_from(spelling: String) -> Result<Self, Self::Error> {
-//         let pw = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())?;
-
-//         Ok(OutputWord {
-//             spelling: spelling.clone(),
-//             pronunciation: pw.syllables,
-//             ..Default::default()
-//         })
-//     }
-// }
 
 #[derive(Clone, Debug, Default, PartialEq, Deserialize)]
 pub struct LexicalResource {

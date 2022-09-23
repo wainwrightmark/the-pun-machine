@@ -15,7 +15,7 @@ use ntest::test_case;
 fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     let word = DictionaryWord::from_str(input)?;
 
-    assert_eq!(word.spellings[0].to_ascii_lowercase(), input.to_ascii_lowercase());
+    assert_eq!(word.spelling.to_ascii_lowercase(), input.to_ascii_lowercase());
     //assert_eq!(word.variant, 1);
     //assert_eq!(word.is_compound, false);
 
@@ -139,7 +139,7 @@ fn test_children(parent: &str, expected_child: &str) -> Result<(),  anyhow::Erro
 
     let word = DictionaryWord::from_str(parent)?;
 
-    let all = word.self_and_children().iter().map(|x|x.spellings[0].clone()).collect_vec();
+    let all = word.self_and_children().iter().map(|x|x.spelling.clone()).collect_vec();
 
     for s in all.iter(){
         println!("{:?}", s);

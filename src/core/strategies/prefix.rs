@@ -36,13 +36,13 @@ impl PunStrategy for Prefix {
                 return theme_words
                     .iter()
                     .map(|theme_word| {
-                        if theme_word.spellings[0].starts_with(original_word.spellings[0].as_str())
+                        if theme_word.spelling.starts_with(original_word.spelling.as_str())
                         {
                             PunReplacement {
                                 pun_type: PunType::Prefix,
-                                pun_word: theme_word.spellings[0].clone(),
+                                pun_word: theme_word.spelling.clone(),
                                 replacement_string: Casing::unify_captialization(
-                                    &theme_word.spellings[0],
+                                    &theme_word.spelling,
                                     &phrase_word.text,
                                 ),
                                 is_amalgam: false,
@@ -55,11 +55,11 @@ impl PunStrategy for Prefix {
                                 .map(Syllable::get_spelling)
                                 .join("");
                             let replacement_string =
-                                original_word.spellings[0].clone() + suffix.as_str();
+                                original_word.spelling.clone() + suffix.as_str();
 
                             PunReplacement {
                                 pun_type: PunType::Prefix,
-                                pun_word: theme_word.spellings[0].clone(),
+                                pun_word: theme_word.spelling.clone(),
                                 replacement_string,
                                 is_amalgam: true,
                             }
