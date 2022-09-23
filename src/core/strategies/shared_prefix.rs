@@ -29,13 +29,13 @@ impl PunStrategy for SharedPrefix {
             if let Some(theme_words) = dict.get(&first_two_syllables) {
                 return theme_words
                     .iter()
-                    .filter(|theme_word| !theme_word.text.eq_ignore_ascii_case(&original_word.text))
+                    .filter(|theme_word| !theme_word.eq(&original_word))
                     .filter(|theme_word| !theme_word.syllables.is_empty())
                     .map(|theme_word| PunReplacement {
                         pun_type: PunType::SharedPrefix,
                         is_amalgam: false,
-                        pun_word: theme_word.text.clone(),
-                        replacement_string: theme_word.text.clone(),
+                        pun_word: theme_word.spellings[0].clone(),
+                        replacement_string: theme_word.spellings[0].clone(),
                     })
                     .collect_vec();
             }

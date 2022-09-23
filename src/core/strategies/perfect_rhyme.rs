@@ -57,13 +57,13 @@ impl PunStrategy for PerfectRhyme {
                     .iter()
                     .filter(|theme_word| {
                         theme_word.syllables.len() <= original_word.syllables.len()
-                            && !theme_word.text.eq_ignore_ascii_case(&original_word.text)
+                            && !theme_word.eq(&original_word)
                             && !theme_word.syllables.eq(&original_word.syllables)
                     })
                     .map(|theme_word| {
                         let replacement_string =
                             if theme_word.syllables.len() == original_word.syllables.len() {
-                                theme_word.text.clone().into()
+                                theme_word.spellings[0].clone()
                             } else {
                                 original_word
                                     .syllables
@@ -71,14 +71,14 @@ impl PunStrategy for PerfectRhyme {
                                     .take(original_word.syllables.len() - key.len())
                                     .map(|x| x.get_spelling())
                                     .join("")
-                                    + &theme_word.text.clone()
+                                    + &theme_word.spellings[0]
                             };
 
                         PunReplacement {
                             pun_type: PunType::PerfectRhyme,
                             replacement_string,
                             is_amalgam: false,
-                            pun_word: theme_word.text.clone().into(),
+                            pun_word: theme_word.spellings[0].clone(),
                         }
                     })
                     .collect_vec();

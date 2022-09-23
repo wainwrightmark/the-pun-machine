@@ -15,7 +15,7 @@ use ntest::test_case;
 fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     let word = DictionaryWord::from_str(input)?;
 
-    assert_eq!(word.text.to_ascii_lowercase(), input.to_ascii_lowercase());
+    assert_eq!(word.spellings[0].to_ascii_lowercase(), input.to_ascii_lowercase());
     //assert_eq!(word.variant, 1);
     //assert_eq!(word.is_compound, false);
 
@@ -30,6 +30,8 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     Ok(())
 }
 
+#[test_case("pisces", "pieces", "SameConsonants", "pisces")]
+#[test_case("pieces", "pisces", "SameConsonants", "pieces")]
 #[test_case("pick", "Lichtenstein", "PrefixRhyme", "Picktonstein")]
 #[test_case("pick", "Picasso", "PrefixRhyme", "Pickcoso")]
 #[test_case("far", "carnage", "PrefixRhyme", "farnage")]
@@ -42,9 +44,6 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
 #[test_case("cinema", "sin", "Prefix", "sinnama")]
 #[test_case("butterscotch", "butterfield", "SharedPrefix", "butterscotch")]
 #[test_case("butterfield", "butterscotch", "SharedPrefix", "butterfield")]
-#[test_case("pisces", "pieces", "SameConsonants", "pisces")]
-#[test_case("pieces", "pisces", "SameConsonants", "pieces")]
-
 fn test_pun_classification(
     theme_word_str: &str,
     original_word_str: &str,
@@ -111,15 +110,15 @@ fn test_spelling(word: &str, expected: &str) -> Result<(), anyhow::Error> {
 
 #[test_case("Idiom", "cake")]
 #[test_case("TVShows", "meat")]
-fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
-    let category = PunCategory::from_str(category_text).map_err(|e| e.to_string())?;
+fn test_puns(category_text: &str, text: &str) -> Result<(),  anyhow::Error> {
+    let category = PunCategory::from_str(category_text)?;
 
     let phrases: Vec<Phrase> = category
         .get_words()
         .filter_map(|t| Phrase::try_from(t.to_string()).ok())
         .collect_vec();
 
-    let p_word = DictionaryWord::from_str(text).map_err(|e| e.to_string())?;
+    let p_word = DictionaryWord::from_str(text)?;
 
     let pun_words = vec![p_word];
 
@@ -130,12 +129,25 @@ fn test_puns(category_text: &str, text: &str) -> Result<(), String> {
         .flat_map(|x| PunFactory::solve(&factories, &x))
         .collect_vec();
 
-    // println!("Solution Count: {:?}", solutions.len());
 
     assert!(!solutions.is_empty());
+    Ok(())
+}
 
-    // for s in solutions {
-    //     println!("{:?}", s.replacement_text());
-    // }
+#[test_case("furniture", "chair")]
+fn test_children(parent: &str, expected_child: &str) -> Result<(),  anyhow::Error>{
+
+    let word = DictionaryWord::from_str(parent)?;
+
+    let all = word.self_and_children().iter().map(|x|x.spellings[0].clone()).collect_vec();
+
+    for s in all.iter(){
+        println!("{:?}", s);
+    }
+
+    assert!(all.contains(&expected_child.to_string()));
+
+
+
     Ok(())
 }

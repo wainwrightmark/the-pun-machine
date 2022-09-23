@@ -108,11 +108,11 @@ pub fn categories_dropdown() -> Html {
 }
 
 pub fn row(pun: &PunPhrase) -> Html {
-    html!(<tr data-tooltip={pun.phrase.full_text()}>
+    html!(<tr data-tooltip={pun.phrase.text.clone()}>
         <td >
         {
             pun.phrase.words.iter().enumerate()
-        .map(|(i,w)| if i == pun.index{html!(<em> {pun.replacement.replacement_string.clone() + " "} </em>)} else {html!(<>{w.text.clone()+ " "} </>)})        
+        .map(|(i,w)| if i == pun.index{html!(<em> {pun.replacement.replacement_string.clone() + " "} </em>)} else {html!(<>{w.spellings[0].clone()+ " "} </>)})        
         .collect::<Html>()
         }
 

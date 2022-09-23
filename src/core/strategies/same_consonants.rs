@@ -30,14 +30,14 @@ impl PunStrategy for SameConsonants {
             return theme_words
                 .iter()
                 .filter(|theme_word| {
-                    !theme_word.text.eq_ignore_ascii_case(&original_word.text)
+                    !theme_word.eq(&original_word)
                         && !theme_word.syllables.eq(&original_word.syllables)
                 })
                 .map(|theme_word| PunReplacement {
                     pun_type: PunType::SameConsonants,
                     is_amalgam: false,
-                    pun_word: theme_word.text.clone(),
-                    replacement_string: theme_word.text.clone(),
+                    pun_word: theme_word.spellings[0].clone(),
+                    replacement_string: theme_word.spellings[0].clone(),
                 })
                 .collect_vec();
         }

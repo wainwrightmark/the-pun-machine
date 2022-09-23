@@ -17,36 +17,32 @@ pub fn main() {
         .expect("Could not read English Wordnet file. You may need to download this");
     let resource: LexicalResource = from_reader(reader.into_inner()).unwrap();
 
-    // let synset_dic: HashMap<_, _> = resource
-    //     .lexicon
-    //     .synsets
-    //     .iter()
-    //     .map(|s| (s.id.clone(), s))
-    //     .collect();
-
-    // let words_path = "data/generated/words.tsv";
-    // let mut words_output = File::create(words_path).expect("Could not open file for writing");
-
-    // let meanings_path = "data/generated/meanings.tsv";
-    // let mut meanings_output = File::create(meanings_path).expect("Could not open file for writing");
-
     let output_words = resource
         .lexicon
         .lexical_entries
         .into_iter()
         .filter(|x| x.lemma.is_dictionary_word())
         .flat_map(|entry| {
-            let mut word = OutputWord::try_from(entry.lemma.written_form).ok()?;
 
+            let spellings = entry.get_written_forms();
             let meanings = entry
                 .senses
                 .iter()
                 .map(|x| synset_to_id(&x.synset))
                 .collect_vec();
 
-            word.meanings = meanings;
+            let words =
 
-            Some(word)
+            entry.get_written_forms()
+            .iter().flat_map(move |x| {
+                let word = phoenetics_word::PhoeneticsWord::try_from(x.clone()).ok().map(
+                    |x| DictionaryWord{syllables: x.syllables, meanings: meanings.clone(), spellings: spellings.clone()
+
+                });
+                word
+            }).collect_vec();
+
+            return  words;
         })
         .collect_vec();
 
@@ -120,9 +116,10 @@ pub fn main() {
         })
         .collect();
 
-    let words: BTreeMap<_, _> = output_words
+    let words: Vec<DictionaryWord> = output_words
         .into_iter()
-        .map(|x| (x.spelling.to_lowercase(), (x.pronunciation, x.meanings)))
+        .map(|x| x.into())
+        //.map(|x : DictionaryWord|x.into())
         .collect();
 
     let word_dictionary = WordDictionary { words, meanings };
@@ -165,31 +162,41 @@ lazy_static::lazy_static! {
 
 include_flate::flate!(pub static PRONOUNCIATIONS: str from "data/syllables/pronounciation.txt");
 
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct OutputWord {
-    pub spelling: String,
-    pub pronunciation: Vec<Syllable>,
-    pub meanings: Vec<u32>,
-}
+// #[derive(Clone, Debug, Default, PartialEq)]
+// pub struct OutputWord {
+//     pub spelling: String,
+//     pub pronunciation: Vec<Syllable>,
+//     pub meanings: Vec<u32>,
+// }
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct OutputMeaning {
     pub id: u32,
     pub children: Vec<u32>,
 }
 
-impl TryFrom<String> for OutputWord {
-    type Error = anyhow::Error;
+// impl Into<DictionaryWord> for OutputWord {
+//     fn into(self) -> DictionaryWord {
+//         DictionaryWord {
+//             spellings: vec![self.spelling],
+//             syllables: self.pronunciation,
+//             meanings: self.meanings,
+//         }
+//     }
+// }
 
-    fn try_from(spelling: String) -> Result<Self, Self::Error> {
-        let pw = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())?;
+// impl TryFrom<String> for OutputWord {
+//     type Error = anyhow::Error;
 
-        Ok(OutputWord {
-            spelling: spelling.clone(),
-            pronunciation: pw.syllables,
-            ..Default::default()
-        })
-    }
-}
+//     fn try_from(spelling: String) -> Result<Self, Self::Error> {
+//         let pw = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())?;
+
+//         Ok(OutputWord {
+//             spelling: spelling.clone(),
+//             pronunciation: pw.syllables,
+//             ..Default::default()
+//         })
+//     }
+// }
 
 #[derive(Clone, Debug, Default, PartialEq, Deserialize)]
 pub struct LexicalResource {
@@ -225,6 +232,22 @@ pub struct LexicalEntry {
     pub lemma: Lemma,
     #[serde(rename = "Sense", default)]
     pub senses: Vec<Sense>,
+    #[serde(rename = "Form", default)]
+    pub forms: Vec<Form>,
+}
+
+impl LexicalEntry {
+    pub fn get_written_forms(&self) -> Vec<String> {
+        let mut r = vec![self.lemma.written_form.clone()];
+        for f in self.forms.iter() {
+            r.push(f.written_form.clone());
+        }
+
+        if self.forms.is_empty() && self.lemma.part_of_speech == PartOfSpeech::Noun {
+            r.push(self.lemma.written_form.clone() + "s");
+        }
+        r
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize)]
@@ -237,18 +260,25 @@ pub struct Lemma {
     pub pronunciations: Vec<Pronunciation>,
 }
 
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+pub struct Form {
+    #[serde(rename = "writtenForm")]
+    pub written_form: String,
+}
+
 impl Lemma {
     pub fn is_dictionary_word(&self) -> bool {
-        if self.written_form.len() <= 2 {
-            return false;
-        }
+        return true;
+        //     if self.written_form.len() <= 2 {
+        //         return false;
+        //     }
 
-        if self.written_form.chars().all(
-            |c| c.is_ascii_alphabetic(), //&& c.is_ascii_lowercase()
-        ) {
-            return true;
-        }
-        return false;
+        //     if self.written_form.chars().all(
+        //         |c| c.is_ascii_alphabetic(), //&& c.is_ascii_lowercase()
+        //     ) {
+        //         return true;
+        //     }
+        //     return false;
     }
 }
 

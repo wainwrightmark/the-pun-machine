@@ -19,7 +19,7 @@ impl PunStrategy for Homophone {
             return theme_words
                 .iter()
                 .map(|theme_word| {
-                    let pun_type = if original_word.text.eq_ignore_ascii_case(&theme_word.text) {
+                    let pun_type = if original_word.eq(theme_word) {
                         PunType::Identity
                     } else {
                         PunType::SameWord
@@ -27,8 +27,8 @@ impl PunStrategy for Homophone {
 
                     PunReplacement {
                         pun_type,
-                        pun_word: theme_word.text.clone().into(),
-                        replacement_string: theme_word.text.clone().into(),
+                        pun_word: theme_word.spellings[0].clone().into(),
+                        replacement_string: theme_word.spellings[0].clone().into(),
                         is_amalgam: false,
                     }
                 })

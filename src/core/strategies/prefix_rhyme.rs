@@ -48,12 +48,12 @@ impl PunStrategy for PrefixRhyme {
                                 .map(|x| x.get_spelling())
                                 .join("");
 
-                            let replacement_string = theme_word.text.clone() + suffix.as_str();
+                            let replacement_string = theme_word.spellings[0].clone() + suffix.as_str();
 
                             PunReplacement {
                                 pun_type: PunType::PrefixRhyme,
                                 is_amalgam: true,
-                                pun_word: theme_word.text.clone().into(),
+                                pun_word: theme_word.spellings[0].clone(),
                                 replacement_string,
                             }
                         })

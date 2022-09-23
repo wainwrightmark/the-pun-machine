@@ -47,7 +47,7 @@ impl FullState {
 
         match DictionaryWord::from_str(self.text.as_str()) {
             Ok(p_word) => {
-                let pun_words = vec![p_word];
+                let pun_words =p_word.self_and_children().into_iter().collect_vec();
 
                 let factories = PunFactory::build_all(&pun_words);
 

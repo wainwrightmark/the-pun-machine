@@ -13,7 +13,7 @@ pub struct PunFactory {
 include_flate::flate!(pub static COMMONWORDSTEXT: str from "data/other/CommonWords.txt");
 
 lazy_static! {
-    static ref STOPWORDS: HashSet<&'static str> = {
+    pub static ref STOPWORDS: HashSet<&'static str> = {
         let set: HashSet<_> = COMMONWORDSTEXT.lines().collect();
         set
     };
@@ -32,7 +32,7 @@ impl PunFactory {
             .iter()
             .enumerate()
             .filter(|x| {
-                !STOPWORDS.contains(&x.1.text.to_ascii_lowercase().as_str())
+                !STOPWORDS.contains(&x.1.spellings[0].to_ascii_lowercase().as_str())
                     && !x.1.syllables.is_empty()
             })
             .flat_map(|(index, word)| {

@@ -53,7 +53,7 @@ impl PunStrategy for InfixRhyme {
                     .take(index)
                     .map(|x| x.get_spelling())
                     .join("")
-                    + &theme_word.text
+                    + &theme_word.spellings[0]
                     + &original_word
                         .syllables
                         .iter()
@@ -63,7 +63,7 @@ impl PunStrategy for InfixRhyme {
                 PunReplacement {
                     pun_type: PunType::Infix,
                     is_amalgam: true,
-                    pun_word: theme_word.text.clone().into(),
+                    pun_word: theme_word.spellings[0].clone(),
                     replacement_string,
                 }
             })
