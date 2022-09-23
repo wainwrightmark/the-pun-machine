@@ -32,19 +32,23 @@ impl PunStrategy for Prefix {
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
-            if let Some(words) = dict.get(&original_word.syllables) {
-                return words
+            if let Some(theme_words) = dict.get(&original_word.syllables) {
+                return theme_words
                     .iter()
-                    .map(|word| {
-                        if word.spellings[0].starts_with(original_word.spellings[0].as_str()) {
+                    .map(|theme_word| {
+                        if theme_word.spellings[0].starts_with(original_word.spellings[0].as_str())
+                        {
                             PunReplacement {
                                 pun_type: PunType::Prefix,
-                                pun_word: word.spellings[0].clone(),
-                                replacement_string: word.spellings[0].clone(),
+                                pun_word: theme_word.spellings[0].clone(),
+                                replacement_string: Casing::unify_captialization(
+                                    &theme_word.spellings[0],
+                                    &phrase_word.text,
+                                ),
                                 is_amalgam: false,
                             }
                         } else {
-                            let suffix = word
+                            let suffix = theme_word
                                 .syllables
                                 .iter()
                                 .skip(1)
@@ -55,7 +59,7 @@ impl PunStrategy for Prefix {
 
                             PunReplacement {
                                 pun_type: PunType::Prefix,
-                                pun_word: word.spellings[0].clone(),
+                                pun_word: theme_word.spellings[0].clone(),
                                 replacement_string,
                                 is_amalgam: true,
                             }

@@ -30,7 +30,7 @@ impl PunStrategy for Homophone {
                         PunReplacement {
                             pun_type,
                             pun_word: theme_word.spellings[0].clone().into(),
-                            replacement_string: theme_word.spellings[0].clone().into(),
+                            replacement_string: Casing::unify_captialization(&theme_word.spellings[0], &phrase_word.text),
                             is_amalgam: false,
                         }
                     })

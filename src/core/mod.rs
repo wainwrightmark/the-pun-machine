@@ -10,6 +10,7 @@ mod related_word;
 mod strategies;
 mod theme_suggestion;
 mod word_dictionary;
+mod helpers;
 
 pub mod prelude {
 
@@ -25,4 +26,5 @@ pub mod prelude {
     pub use crate::core::strategies::prelude::*;
     pub use crate::core::theme_suggestion::*;
     pub use crate::core::word_dictionary::*;
+    pub use crate::core::helpers::*;
 }

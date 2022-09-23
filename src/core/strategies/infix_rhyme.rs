@@ -46,12 +46,12 @@ impl PunStrategy for InfixRhyme {
                     theme_word.syllables.len() == 1 && &&theme_word.syllables[0] != syllable
                 })
                 .map(|(index, _, theme_word)| {
-                    let replacement_string = original_word
+                    let replacement_string = Casing::unify_captialization(&original_word
                         .syllables
                         .iter()
                         .take(index)
                         .map(|x| x.get_spelling())
-                        .join("")
+                        .join(""), &phrase_word.text)
                         + &theme_word.spellings[0]
                         + &original_word
                             .syllables

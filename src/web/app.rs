@@ -120,5 +120,6 @@ pub fn row(pun: &PunPhrase) -> Html {
         <td>
         {pun.replacement.pun_type}
         </td>
+
     </tr>)
 }

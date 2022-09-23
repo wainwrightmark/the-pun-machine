@@ -30,8 +30,8 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     Ok(())
 }
 
-#[test_case("pisces", "pieces", "SameConsonants", "pisces")]
-#[test_case("pieces", "pisces", "SameConsonants", "pieces")]
+//#[test_case("pisces", "pieces", "SameConsonants", "pisces")]
+//#[test_case("pieces", "pisces", "SameConsonants", "pieces")]
 #[test_case("pick", "Lichtenstein", "PrefixRhyme", "Picktonstein")]
 #[test_case("pick", "Picasso", "PrefixRhyme", "Pickcoso")]
 #[test_case("far", "carnage", "PrefixRhyme", "farnage")]
