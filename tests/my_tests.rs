@@ -54,7 +54,7 @@ fn test_pun_classification(
     rep: &str,
 ) -> Result<(), anyhow::Error> {
     let theme_word: DictionaryWord = DictionaryWord::from_str(theme_word_str)?;
-    let phrase = Phrase::new(original_word_str.to_string(), PunCategory::Idiom);
+    let phrase = Phrase::new(original_word_str.to_string(), Category::Idiom);
 
     let theme_words = vec![theme_word];
 
@@ -79,7 +79,7 @@ fn test_pun_classification(
 #[test_case("Idiom", "A bed of roses")]
 #[test_case("TVShows", "Doctor Who")]
 fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), String> {
-    let category = PunCategory::from_str(category_text).map_err(|e| e.to_string())?;
+    let category = Category::from_str(category_text).map_err(|e| e.to_string())?;
 
     let category_phrases: Vec<Phrase> = category.get_phrases()
         .collect_vec();
@@ -112,7 +112,7 @@ fn test_spelling(word: &str, expected: &str) -> Result<(), anyhow::Error> {
 #[test_case("Idiom", "cake")]
 #[test_case("TVShows", "meat")]
 fn test_puns(category_text: &str, text: &str) -> Result<(), anyhow::Error> {
-    let category = PunCategory::from_str(category_text)?;
+    let category = Category::from_str(category_text)?;
 
     let phrases: Vec<Phrase> = category.get_phrases()
         .collect_vec();

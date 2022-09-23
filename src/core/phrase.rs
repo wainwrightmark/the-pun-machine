@@ -15,13 +15,13 @@ pub struct PhraseWord {
 pub struct Phrase {
     pub text: String,
     pub words: Vec<PhraseWord>,
-    pub category : PunCategory
+    pub category : Category
 }
 
 
 
 impl Phrase{
-    pub fn new(value: String, category: PunCategory) -> Self {
+    pub fn new(value: String, category: Category) -> Self {
         let words: Vec<_> = value
             .split(' ')
             .map(|x| x.trim())

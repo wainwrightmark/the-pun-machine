@@ -85,13 +85,13 @@ pub fn categories_dropdown() -> Html {
         let input: HtmlSelectElement = e.target_unchecked_into();
         let value = input.value();
 
-        let category = PunCategory::from_str(value.as_str()).ok();
+        let category = Category::from_str(value.as_str()).ok();
         s.change_category(category);
     });
 
     let current_category = use_selector::<FullState, _, _>(|x| x.category);
 
-    let options = PunCategory::iter()
+    let options = Category::iter()
         .map(|category| {
             let text: &'static str = category.into();
             let selected = Some(category) == *current_category;
@@ -119,9 +119,9 @@ pub fn row(pun: &PunPhrase, show_category: bool) -> Html {
         }
 
         </td>
-        <td>
-        {pun.replacement.pun_type}
-        </td>
+        // <td>
+        // {pun.replacement.pun_type}
+        // </td>
         if show_category{
             <td>
         {pun.phrase.category}

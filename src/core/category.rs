@@ -3,24 +3,24 @@ use strum::*;
 
 use super::prelude::Phrase;
 
-impl core::fmt::Display for PunCategory {
+impl core::fmt::Display for Category {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let text: &'static str = match self {
-            PunCategory::Artists => "Artists",
-            PunCategory::Idiom => "Idiom",
-            PunCategory::Books => "Books",
-            PunCategory::Movies => "Movies",
-            PunCategory::Musicals => "Musicals",
-            PunCategory::Songs => "Songs",
-            PunCategory::Bands => "Bands",
-            PunCategory::Wedding => "Wedding",
-            PunCategory::MovieQuotes => "Movie Quotes",
-            PunCategory::Brands => "Artists",
-            PunCategory::Celebs => "Celebs",
-            PunCategory::Countries => "Countries",
-            PunCategory::TVShows => "TV Shows",
-            PunCategory::CountrySongs => "Country Songs",
-            PunCategory::ChristmasSongs => "Christmas Songs",
+            Category::Artists => "Artists",
+            Category::Idiom => "Idiom",
+            Category::Books => "Books",
+            Category::Movies => "Movies",
+            Category::Musicals => "Musicals",
+            Category::Songs => "Songs",
+            Category::Bands => "Bands",
+            Category::Wedding => "Wedding",
+            Category::MovieQuotes => "Movie Quotes",
+            Category::Brands => "Artists",
+            Category::Celebs => "Celebs",
+            Category::Countries => "Countries",
+            Category::TVShows => "TV Shows",
+            Category::CountrySongs => "Country Songs",
+            Category::ChristmasSongs => "Christmas Songs",
         };
 
         write!(f, "{}", text)
@@ -42,23 +42,24 @@ impl core::fmt::Display for PunCategory {
     serde::Serialize,
     serde::Deserialize,
 )]
-pub enum PunCategory {
-    Artists,
+pub enum Category {
+    //Note the ordering of this really matters
     Idiom,
-    Books,
-
     Movies,
-    Musicals,
-    Songs,
     Bands,
+    Books,
+    Songs,
+    Artists,
+    Countries,
+    TVShows,
+
+    Musicals,
 
     Wedding,
     MovieQuotes,
 
     Brands,
     Celebs,
-    Countries,
-    TVShows,
 
     CountrySongs,
     ChristmasSongs,
@@ -75,35 +76,33 @@ pub enum PunCategory {
     //Major cities
 }
 
-impl PunCategory {
-
-    pub fn get_phrases(self)-> impl Iterator<Item =  Phrase>{
-        self
-                .get_words()
-                .map(move |text| Phrase::new(text.to_string(), self))
+impl Category {
+    pub fn get_phrases(self) -> impl Iterator<Item = Phrase> {
+        self.get_words()
+            .map(move |text| Phrase::new(text.to_string(), self))
     }
 
     pub fn get_all_phrases() -> impl Iterator<Item = Phrase> {
-        PunCategory::iter().flat_map(|x| x.get_phrases())
+        Category::iter().flat_map(|x| x.get_phrases())
     }
 
     pub fn get_words(self) -> impl Iterator<Item = &'static str> {
         match self {
-            PunCategory::Artists => ARTISTS.lines(),
-            PunCategory::Idiom => IDIOMS.lines(),
-            PunCategory::Books => BOOKS.lines(),
-            PunCategory::Movies => MOVIES.lines(),
-            PunCategory::Musicals => MUSICALS.lines(),
-            PunCategory::Songs => SONGS.lines(),
-            PunCategory::Bands => BANDS.lines(),
-            PunCategory::Wedding => WEDDING.lines(),
-            PunCategory::MovieQuotes => MOVIEQUOTES.lines(),
-            PunCategory::Brands => BRANDS.lines(),
-            PunCategory::Celebs => CELEBS.lines(),
-            PunCategory::Countries => COUNTRIES.lines(),
-            PunCategory::TVShows => TVSHOWS.lines(),
-            PunCategory::CountrySongs => COUNTRYSONGS.lines(),
-            PunCategory::ChristmasSongs => CHRISTMASSONGS.lines(),
+            Category::Artists => ARTISTS.lines(),
+            Category::Idiom => IDIOMS.lines(),
+            Category::Books => BOOKS.lines(),
+            Category::Movies => MOVIES.lines(),
+            Category::Musicals => MUSICALS.lines(),
+            Category::Songs => SONGS.lines(),
+            Category::Bands => BANDS.lines(),
+            Category::Wedding => WEDDING.lines(),
+            Category::MovieQuotes => MOVIEQUOTES.lines(),
+            Category::Brands => BRANDS.lines(),
+            Category::Celebs => CELEBS.lines(),
+            Category::Countries => COUNTRIES.lines(),
+            Category::TVShows => TVSHOWS.lines(),
+            Category::CountrySongs => COUNTRYSONGS.lines(),
+            Category::ChristmasSongs => CHRISTMASSONGS.lines(),
         }
     }
 }

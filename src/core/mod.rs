@@ -3,7 +3,7 @@ mod helpers;
 mod phrase;
 mod pronounciation;
 mod pun;
-mod pun_category;
+mod category;
 mod pun_replacement;
 mod pun_strategy;
 mod pun_type;
@@ -19,7 +19,7 @@ pub mod prelude {
     pub use crate::core::phrase::*;
     pub use crate::core::pronounciation::prelude::*;
     pub use crate::core::pun::*;
-    pub use crate::core::pun_category::*;
+    pub use crate::core::category::*;
     pub use crate::core::pun_replacement::*;
     pub use crate::core::pun_strategy::*;
     pub use crate::core::pun_type::*;

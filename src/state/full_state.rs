@@ -5,13 +5,12 @@ use itertools::Itertools;
 
 use serde::*;
 
-use yewdux::prelude::*;
+use yewdux::{prelude::*, storage::{self, StorageListener}};
 
-#[derive(PartialEq, Eq, Store, Clone, Serialize, Deserialize)]
-#[store(storage = "local")] // can also be "session"
+#[derive(PartialEq, Eq,  Clone, Serialize, Deserialize)]
 pub struct FullState {
     pub text: String,
-    pub category: Option<PunCategory>,
+    pub category: Option<Category>,
     #[serde(skip)]
     pub data: Rc<Vec<PunPhrase>>,
     pub warning: Option<String>,
@@ -19,25 +18,43 @@ pub struct FullState {
 
 impl Default for FullState {
     fn default() -> Self {
-        Self {
-            text: "".to_string(),
+        let mut state = Self {
+            text: "potato".to_string(),
             category: None,
             data: Default::default(),
             warning: Default::default(),
-        }
+        };
+        state.update();
+        state
+    }
+}
+
+impl Store for FullState {
+    fn new() -> Self {
+        init_listener(StorageListener::<Self>::new(storage::Area::Local));
+
+        let mut result: FullState =
+        storage::load(storage::Area::Local)
+            .expect("Unable to load state")
+            .unwrap_or_default();
+        result.update();
+
+        result
+    }
+
+    fn should_notify(&self, other: &Self) -> bool {
+        self != other
     }
 }
 
 impl FullState {
-    pub fn load_more(&mut self) {
-        self.update();
-    }
+    
 
     fn update(&mut self) {
         let phrases: Vec<Phrase> = if let Some(category) = self.category {
             category.get_phrases().collect_vec()
         } else {
-            PunCategory::get_all_phrases().collect_vec()
+            Category::get_all_phrases().collect_vec()
         };
 
         match DictionaryWord::from_str(self.text.as_str()) {
@@ -70,7 +87,7 @@ impl FullState {
         }
     }
 
-    pub fn change_category(&mut self, pc: Option<PunCategory>) {
+    pub fn change_category(&mut self, pc: Option<Category>) {
         if self.category != pc {
             self.category = pc;
 
