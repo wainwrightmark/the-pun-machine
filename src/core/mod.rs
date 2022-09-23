@@ -1,4 +1,5 @@
 mod casing;
+mod helpers;
 mod phrase;
 mod pronounciation;
 mod pun;
@@ -10,11 +11,11 @@ mod related_word;
 mod strategies;
 mod theme_suggestion;
 mod word_dictionary;
-mod helpers;
 
 pub mod prelude {
 
     pub use crate::core::casing::*;
+    pub use crate::core::helpers::*;
     pub use crate::core::phrase::*;
     pub use crate::core::pronounciation::prelude::*;
     pub use crate::core::pun::*;
@@ -26,5 +27,4 @@ pub mod prelude {
     pub use crate::core::strategies::prelude::*;
     pub use crate::core::theme_suggestion::*;
     pub use crate::core::word_dictionary::*;
-    pub use crate::core::helpers::*;
 }

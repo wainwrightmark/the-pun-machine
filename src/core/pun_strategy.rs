@@ -32,16 +32,14 @@ impl PunFactory {
             .iter()
             .enumerate()
             .filter(|(_, phrase_word)| {
-
-                if let Some(word) = &phrase_word.word{
-                    if word.syllables.is_empty(){
+                if let Some(word) = &phrase_word.word {
+                    if word.syllables.is_empty() {
                         return false;
                     }
 
-                    return ! STOPWORDS.contains(phrase_word.text .to_ascii_lowercase().as_str());
+                    return !STOPWORDS.contains(phrase_word.text.to_ascii_lowercase().as_str());
                 }
                 return false;
-                    
             })
             .flat_map(|(index, phrase_word)| {
                 factories

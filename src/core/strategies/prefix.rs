@@ -36,7 +36,9 @@ impl PunStrategy for Prefix {
                 return theme_words
                     .iter()
                     .map(|theme_word| {
-                        if theme_word.spelling.starts_with(original_word.spelling.as_str())
+                        if theme_word
+                            .spelling
+                            .starts_with(original_word.spelling.as_str())
                         {
                             PunReplacement {
                                 pun_type: PunType::Prefix,

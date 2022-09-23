@@ -15,7 +15,10 @@ use ntest::test_case;
 fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     let word = DictionaryWord::from_str(input)?;
 
-    assert_eq!(word.spelling.to_ascii_lowercase(), input.to_ascii_lowercase());
+    assert_eq!(
+        word.spelling.to_ascii_lowercase(),
+        input.to_ascii_lowercase()
+    );
     //assert_eq!(word.variant, 1);
     //assert_eq!(word.is_compound, false);
 
@@ -110,7 +113,7 @@ fn test_spelling(word: &str, expected: &str) -> Result<(), anyhow::Error> {
 
 #[test_case("Idiom", "cake")]
 #[test_case("TVShows", "meat")]
-fn test_puns(category_text: &str, text: &str) -> Result<(),  anyhow::Error> {
+fn test_puns(category_text: &str, text: &str) -> Result<(), anyhow::Error> {
     let category = PunCategory::from_str(category_text)?;
 
     let phrases: Vec<Phrase> = category
@@ -129,25 +132,25 @@ fn test_puns(category_text: &str, text: &str) -> Result<(),  anyhow::Error> {
         .flat_map(|x| PunFactory::solve(&factories, &x))
         .collect_vec();
 
-
     assert!(!solutions.is_empty());
     Ok(())
 }
 
 #[test_case("furniture", "chair")]
-fn test_children(parent: &str, expected_child: &str) -> Result<(),  anyhow::Error>{
-
+fn test_children(parent: &str, expected_child: &str) -> Result<(), anyhow::Error> {
     let word = DictionaryWord::from_str(parent)?;
 
-    let all = word.self_and_children().iter().map(|x|x.spelling.clone()).collect_vec();
+    let all = word
+        .self_and_children()
+        .iter()
+        .map(|x| x.spelling.clone())
+        .collect_vec();
 
-    for s in all.iter(){
+    for s in all.iter() {
         println!("{:?}", s);
     }
 
     assert!(all.contains(&expected_child.to_string()));
-
-
 
     Ok(())
 }

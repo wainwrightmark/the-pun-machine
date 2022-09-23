@@ -51,8 +51,10 @@ impl PunStrategy for PrefixRhyme {
                                     .map(|x| x.get_spelling())
                                     .join("");
 
-                                let replacement_string =
-                                Casing::unify_captialization(&theme_word.spelling, &phrase_word.text) + suffix.as_str();
+                                let replacement_string = Casing::unify_captialization(
+                                    &theme_word.spelling,
+                                    &phrase_word.text,
+                                ) + suffix.as_str();
 
                                 PunReplacement {
                                     pun_type: PunType::PrefixRhyme,

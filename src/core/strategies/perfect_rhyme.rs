@@ -51,43 +51,46 @@ impl PunStrategy for PerfectRhyme {
         phrase_word: &PhraseWord,
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
+        if let Some(original_word) = &phrase_word.word {
+            if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, &original_word) {
+                if let Some(theme_words) = dict.get(&key) {
+                    return theme_words
+                        .iter()
+                        .filter(|theme_word| {
+                            theme_word.syllables.len() <= original_word.syllables.len()
+                                && !theme_word.eq(&original_word)
+                                && !theme_word.syllables.eq(&original_word.syllables)
+                        })
+                        .map(|theme_word| {
+                            let replacement_string =
+                                if theme_word.syllables.len() == original_word.syllables.len() {
+                                    Casing::unify_captialization(
+                                        &theme_word.spelling,
+                                        &phrase_word.text,
+                                    )
+                                } else {
+                                    Casing::unify_captialization(
+                                        &original_word
+                                            .syllables
+                                            .iter()
+                                            .take(original_word.syllables.len() - key.len())
+                                            .map(|x| x.get_spelling())
+                                            .join(""),
+                                        &phrase_word.text,
+                                    ) + &theme_word.spelling
+                                };
 
-        if let Some(original_word) = &phrase_word.word{
-        if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, &original_word) {
-            if let Some(theme_words) = dict.get(&key) {
-                return theme_words
-                    .iter()
-                    .filter(|theme_word| {
-                        theme_word.syllables.len() <= original_word.syllables.len()
-                            && !theme_word.eq(&original_word)
-                            && !theme_word.syllables.eq(&original_word.syllables)
-                    })
-                    .map(|theme_word| {
-                        let replacement_string =
-                            if theme_word.syllables.len() == original_word.syllables.len() {
-                                Casing::unify_captialization(&theme_word.spelling, &phrase_word.text)
-                            } else {
-                                Casing::unify_captialization(
-                                &original_word
-                                    .syllables
-                                    .iter()
-                                    .take(original_word.syllables.len() - key.len())
-                                    .map(|x| x.get_spelling())
-                                    .join(""), &phrase_word.text)
-                                    + &theme_word.spelling
-                            };
-
-                        PunReplacement {
-                            pun_type: PunType::PerfectRhyme,
-                            replacement_string,
-                            is_amalgam: false,
-                            pun_word: theme_word.spelling.clone(),
-                        }
-                    })
-                    .collect_vec();
-            }
-        };
-    }
+                            PunReplacement {
+                                pun_type: PunType::PerfectRhyme,
+                                replacement_string,
+                                is_amalgam: false,
+                                pun_word: theme_word.spelling.clone(),
+                            }
+                        })
+                        .collect_vec();
+                }
+            };
+        }
 
         Vec::<PunReplacement>::default()
     }

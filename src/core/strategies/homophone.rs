@@ -15,8 +15,7 @@ impl PunStrategy for Homophone {
         phrase_word: &PhraseWord,
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
-
-        if let Some(original_word) = &phrase_word.word{
+        if let Some(original_word) = &phrase_word.word {
             if let Some(theme_words) = dict.get(&original_word.syllables) {
                 return theme_words
                     .iter()
@@ -26,19 +25,20 @@ impl PunStrategy for Homophone {
                         } else {
                             PunType::SameWord
                         };
-    
+
                         PunReplacement {
                             pun_type,
                             pun_word: theme_word.spelling.clone().into(),
-                            replacement_string: Casing::unify_captialization(&theme_word.spelling, &phrase_word.text),
+                            replacement_string: Casing::unify_captialization(
+                                &theme_word.spelling,
+                                &phrase_word.text,
+                            ),
                             is_amalgam: false,
                         }
                     })
                     .collect_vec();
             }
         }
-
-        
 
         Vec::<PunReplacement>::default()
     }
