@@ -25,7 +25,7 @@ impl PunStrategy for SameConsonants {
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
-            let sw = self.get_consonant_syllables(&original_word);
+            let sw = self.get_consonant_syllables(original_word);
 
             if let Some(theme_words) = dict.get(&sw) {
                 return theme_words

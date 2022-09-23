@@ -7,8 +7,8 @@ pub struct PrefixRhyme {}
 
 impl PunStrategy for PrefixRhyme {
     fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
-        if word.syllables.len() > 0 {
-            if let Some(syllable) = word.syllables.get(word.syllables.len() - 1) {
+        if !word.syllables.is_empty() {
+            if let Some(syllable) = word.syllables.last() {
                 if syllable.nucleus().is_stressed_vowel() {
                     let rhyme_syllable = syllable.get_rhymes_syllable();
                     return vec![vec![rhyme_syllable]];

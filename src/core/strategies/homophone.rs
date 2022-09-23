@@ -28,7 +28,7 @@ impl PunStrategy for Homophone {
 
                         PunReplacement {
                             pun_type,
-                            pun_word: theme_word.spelling.clone().into(),
+                            pun_word: theme_word.spelling.clone(),
                             replacement_string: Casing::unify_captialization(
                                 &theme_word.spelling,
                                 &phrase_word.text,

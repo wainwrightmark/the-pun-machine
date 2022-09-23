@@ -8,10 +8,10 @@ pub enum Casing {
 impl Casing {
     pub fn unify_captialization(text: &String, original_word: &String) -> String {
         let original_casing = Casing::identify(original_word);
-        if Casing::identify(&text) == original_casing {
+        if Casing::identify(text) == original_casing {
             return text.clone();
         }
-        return original_casing.convert(text);
+        original_casing.convert(text)
     }
 
     ///Identify the casing of a string
@@ -26,7 +26,7 @@ impl Casing {
             }
         }
 
-        return Casing::Title;
+        Casing::Title
     }
 
     ///Converts a string to this casing

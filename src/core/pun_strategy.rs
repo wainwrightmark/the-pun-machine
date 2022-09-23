@@ -39,12 +39,12 @@ impl PunFactory {
 
                     return !STOPWORDS.contains(phrase_word.text.to_ascii_lowercase().as_str());
                 }
-                return false;
+                false
             })
             .flat_map(|(index, phrase_word)| {
                 factories
                     .iter()
-                    .flat_map(move |f| f.get_possible_replacements(&phrase_word))
+                    .flat_map(move |f| f.get_possible_replacements(phrase_word))
                     .map(move |replacement| PunPhrase {
                         phrase: phrase.clone(),
                         replacement,

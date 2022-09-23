@@ -33,18 +33,18 @@ pub fn main() {
                 .get_written_forms()
                 .iter()
                 .flat_map(move |spelling| {
-                    let word = phoenetics_word::PhoeneticsWord::try_from(spelling.clone())
+                    
+                    phoenetics_word::PhoeneticsWord::try_from(spelling.clone())
                         .ok()
                         .map(|x| DictionaryWord {
                             syllables: x.syllables,
                             meanings: meanings.clone(),
                             spelling: spelling.clone(),
-                        });
-                    word
+                        })
                 })
                 .collect_vec();
 
-            return words;
+            words
         })
         .collect_vec();
 
@@ -88,17 +88,15 @@ pub fn main() {
                     set.remove(s);
                     if let Some(meaning) = all_meanings.get(s) {
                         for new_child in meaning.children.iter() {
-                            if good_synsets.contains(&new_child) {
-                                if set.insert(*new_child) {
-                                    cont = true;
-                                }
+                            if good_synsets.contains(new_child) && set.insert(*new_child) {
+                                cont = true;
                             }
                         }
                     }
                 }
             }
         }
-        return set;
+        set
     }
 
     let meanings: BTreeMap<_, _> = all_meanings
@@ -120,7 +118,6 @@ pub fn main() {
 
     let words: Vec<DictionaryWord> = output_words
         .into_iter()
-        .map(|x| x.into())
         //.map(|x : DictionaryWord|x.into())
         .collect();
 
@@ -141,7 +138,7 @@ pub fn main() {
 
 fn synset_to_id(synset: &String) -> u32 {
     if let Ok(r) = u32::from_str_radix(&synset[5..13], 10) {
-        return r;
+        r
     } else {
         panic!(
             "Could not read '{synset}' ({}) as synset id",
@@ -164,7 +161,7 @@ lazy_static::lazy_static! {
 
 include_flate::flate!(pub static PRONOUNCIATIONS: str from "data/syllables/pronounciation.txt");
 
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct OutputMeaning {
     pub id: u32,
     pub children: Vec<u32>,
@@ -197,7 +194,7 @@ pub struct Lexicon {
     #[serde(rename = "SyntacticBehaviour", default)]
     pub behaviours: Vec<SyntacticBehaviour>,
 }
-#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 pub struct LexicalEntry {
     pub id: String,
     #[serde(rename = "Lemma")]
@@ -222,7 +219,7 @@ impl LexicalEntry {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 pub struct Lemma {
     #[serde(rename = "writtenForm")]
     pub written_form: String,
@@ -232,7 +229,7 @@ pub struct Lemma {
     pub pronunciations: Vec<Pronunciation>,
 }
 
-#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 pub struct Form {
     #[serde(rename = "writtenForm")]
     pub written_form: String,
@@ -240,7 +237,7 @@ pub struct Form {
 
 impl Lemma {
     pub fn is_dictionary_word(&self) -> bool {
-        return true;
+        true
         //     if self.written_form.len() <= 2 {
         //         return false;
         //     }
@@ -254,7 +251,7 @@ impl Lemma {
     }
 }
 
-#[derive(Clone, Debug, Default, PartialEq, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize)]
 pub struct Pronunciation {
     #[serde(rename = "variety", default)]
     pub variety: Option<String>,
@@ -262,7 +259,7 @@ pub struct Pronunciation {
     pub text: String,
 }
 
-#[derive(Clone, Debug, Default, PartialEq, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize)]
 pub struct Sense {
     pub id: String,
     pub synset: String,
@@ -270,14 +267,14 @@ pub struct Sense {
     pub sense_relations: Vec<Relation>,
 }
 
-#[derive(Clone, Debug, Default, PartialEq, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize)]
 pub struct Relation {
     #[serde(rename = "relType")]
     pub rel_type: String,
     pub target: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 pub struct Synset {
     pub id: String,
     pub ili: String,
@@ -294,10 +291,10 @@ pub struct Synset {
     pub synset_relations: Vec<Relation>,
 }
 
-#[derive(Clone, Debug, Default, PartialEq, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize)]
 pub struct SyntacticBehaviour {}
 
-#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 pub enum PartOfSpeech {
     #[serde(rename = "n")]
     Noun,

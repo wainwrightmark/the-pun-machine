@@ -52,7 +52,7 @@ impl PunStrategy for PerfectRhyme {
         dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
-            if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, &original_word) {
+            if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, original_word) {
                 if let Some(theme_words) = dict.get(&key) {
                     return theme_words
                         .iter()

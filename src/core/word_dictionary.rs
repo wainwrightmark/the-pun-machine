@@ -43,8 +43,8 @@ impl DictionaryWord {
         let mut stack = VecDeque::<u32>::default();
         let mut used_meanings = HashSet::<u32>::default();
         for self_meaning in self.meanings.iter() {
-            if used_meanings.insert(self_meaning.clone()) {
-                stack.push_back(self_meaning.clone());
+            if used_meanings.insert(*self_meaning) {
+                stack.push_back(*self_meaning);
             }
         }
 
@@ -56,8 +56,8 @@ impl DictionaryWord {
             }
             //add all child meanings we haven't seen yet to the stack
             for child in WORDDICTIONARY.meanings[&meaning].iter() {
-                if used_meanings.insert(child.clone()) {
-                    stack.push_back(child.clone());
+                if used_meanings.insert(*child) {
+                    stack.push_back(*child);
                 }
             }
         }
@@ -66,7 +66,7 @@ impl DictionaryWord {
     }
 }
 
-#[derive(Clone, Debug, Default, PartialEq, serde:: Deserialize, serde::Serialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, serde:: Deserialize, serde::Serialize)]
 pub struct WordDictionary {
     pub words: Vec<DictionaryWord>,
     pub meanings: BTreeMap<u32, Vec<u32>>,
@@ -76,7 +76,7 @@ lazy_static::lazy_static! {
     static ref WORDSBYMEANING : BTreeMap<u32, Vec<DictionaryWord>> = WORDDICTIONARY.words.iter()
     .flat_map(|entry|
         {
-            entry.meanings.iter().map(move |x|(x.clone(), entry.clone()))
+            entry.meanings.iter().map(move |x|(*x, entry.clone()))
         }
 
 ).sorted_by_key(|x|x.0) .group_by(|x|x.0).into_iter().map(|x|(x.0,x.1.map(|y|y.1) .collect_vec())) .collect();

@@ -30,7 +30,7 @@ impl From<String> for Phrase {
             .collect();
 
         Phrase {
-            text: value.clone(),
+            text: value,
             words,
         }
     }

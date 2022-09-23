@@ -70,6 +70,6 @@ impl PunStrategy for InfixRhyme {
                 })
                 .collect_vec();
         }
-        return vec![];
+        vec![]
     }
 }
