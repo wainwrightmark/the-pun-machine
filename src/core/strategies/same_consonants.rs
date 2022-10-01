@@ -11,7 +11,7 @@ impl SameConsonants {
     fn get_consonant_syllables(&self, word: &DictionaryWord<'static>) -> SmallVec<[Syllable; 4]> {
         word.syllables
             .iter()
-            .map(|x| x.clone().with_no_consonant())
+            .map(|x| (*x).with_no_consonant())
             .collect()
     }
 }

@@ -26,8 +26,8 @@ impl FromIterator<Symbol> for SymbolArr {
         let mut c: u64 = 0;
         let mut m = 0;
         for x in iter {
-            c = c | ((x as u64) << m);
-            m = m + 8;
+            c |= (x as u64) << m;
+            m += 8;
         }
         Self(c)
     }
@@ -40,7 +40,7 @@ impl Iterator for SymbolArrIter {
 
     fn next(&mut self) -> Option<Self::Item> {
         let n = self.0 & 0x000000ff;
-        self.0 = self.0 >> 8;
+        self.0 >>= 8;
 
         Symbol::from_repr(n as u8)
     }

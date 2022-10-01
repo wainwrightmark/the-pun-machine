@@ -28,7 +28,7 @@ impl PerfectRhyme {
                     if i == 0 {
                         x.get_rhymes_syllable()
                     } else {
-                        x.clone()
+                        *x
                     }
                 })
                 .collect();
