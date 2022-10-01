@@ -59,7 +59,7 @@ impl PunStrategy for InfixRhyme {
                             .map(|x| x.get_spelling())
                             .join(""),
                         &phrase_word.text,
-                    ) + &theme_word.spelling
+                    ) + theme_word.spelling
                         + &original_word
                             .syllables
                             .iter()

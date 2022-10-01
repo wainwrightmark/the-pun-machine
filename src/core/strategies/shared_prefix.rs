@@ -35,7 +35,7 @@ impl PunStrategy for SharedPrefix {
                             is_amalgam: false,
                             pun_word: theme_word.spelling.clone(),
                             replacement_string: Casing::unify_captialization(
-                                &theme_word.spelling,
+                                theme_word.spelling,
                                 &phrase_word.text,
                             ),
                         })

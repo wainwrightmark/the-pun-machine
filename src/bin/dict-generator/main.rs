@@ -28,22 +28,22 @@ pub fn main() {
                 .map(|x| synset_to_id(&x.synset))
                 .collect();
 
-            let words = entry
+            
+
+            entry
                 .get_written_forms()
                 .into_iter()
-                .map(|s| string_to_static_str(s))
+                .map(string_to_static_str)
                 .flat_map(|spelling| {
                     phoenetics_word::PhoeneticsWord::try_from(spelling.to_string())
                         .ok()
                         .map(|x| DictionaryWord {
                             syllables: x.syllables,
                             meanings: meanings.clone(),
-                            spelling: spelling,
+                            spelling,
                         })
                 })
-                .collect_vec();
-
-            words
+                .collect_vec()
         })
         .collect_vec();
 

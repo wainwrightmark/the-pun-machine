@@ -30,12 +30,9 @@ impl Syllable {
     }
 
     pub fn nucleus(&self) -> Symbol {
-        self.symbols
-            .iter()
-            .filter(|&x| x.is_vowel())
-            .next()
+        *self.symbols
+            .iter().find(|&x| x.is_vowel())
             .unwrap()
-            .clone()
     }
 
     pub fn coda<'l>(&'l self) -> impl Iterator<Item = &'l Symbol> {

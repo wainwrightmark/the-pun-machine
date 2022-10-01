@@ -57,7 +57,7 @@ impl PunStrategy for PrefixRhyme {
                                     .join("");
 
                                 let replacement_string = Casing::unify_captialization(
-                                    &theme_word.spelling,
+                                    theme_word.spelling,
                                     &phrase_word.text,
                                 ) + suffix.as_str();
 

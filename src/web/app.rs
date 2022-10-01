@@ -148,7 +148,7 @@ pub fn row_group(properties: &RowGroupProperties) -> Html {
         let colspan = if show_category { "3" } else { "2" };
 
         let onclick = Dispatch::<FullState>::new().reduce_mut_callback_with(move |s, _| {
-            s.toggle_group_visibility(&row_key);
+            s.toggle_group_visibility(row_key);
         });
 
         html!(
