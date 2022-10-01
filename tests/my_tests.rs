@@ -78,7 +78,7 @@ fn test_pun_classification(
 
 #[test_case("Idiom", "A bed of roses")]
 #[test_case("TVShows", "Doctor Who")]
-fn test_cateogry_words(category_text: &str, expected_text: &str) -> Result<(), String> {
+fn test_category_words(category_text: &str, expected_text: &str) -> Result<(), String> {
     let category = Category::from_str(category_text).map_err(|e| e.to_string())?;
 
     let category_phrases: Vec<Phrase> = category.get_phrases()

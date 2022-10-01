@@ -36,6 +36,30 @@ impl FromStr for DictionaryWord {
     }
 }
 
+impl DictionaryWord{
+    pub fn find_all_puns(&self, category_option: &Option<Category>)-> Vec<PunPhrase>{
+        let phrases: Vec<Phrase> = if let Some(category) = category_option {
+            category.get_phrases().collect_vec()
+        } else {
+            Category::get_all_phrases().collect_vec()
+        };
+        let pun_words = self
+        .self_and_children()
+        .into_iter()
+        .unique_by(|x|x.syllables.clone()) //removes duplicates like mold / mould
+        .collect_vec();
+
+        let factories = PunFactory::build_all(&pun_words);
+
+        let solutions = phrases
+            .into_iter()
+            .flat_map(|x| PunFactory::solve(&factories, &x))
+            .collect_vec();
+
+        solutions
+    }
+}
+
 impl DictionaryWord {
     pub fn self_and_children(&self) -> HashSet<DictionaryWord> {
         let mut result = HashSet::<DictionaryWord>::default();

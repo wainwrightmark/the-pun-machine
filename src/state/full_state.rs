@@ -60,26 +60,14 @@ impl FullState {
     }
 
     fn update(&mut self) {
-        let phrases: Vec<Phrase> = if let Some(category) = self.category {
-            category.get_phrases().collect_vec()
-        } else {
-            Category::get_all_phrases().collect_vec()
-        };
+        
 
         match DictionaryWord::from_str(self.text.as_str()) {
+
+            
             Ok(p_word) => {
-                let pun_words = p_word
-                .self_and_children()
-                .into_iter()
-                .unique_by(|x|x.syllables.clone()) //removes duplicates like mold / mould
-                .collect_vec();
 
-                let factories = PunFactory::build_all(&pun_words);
-
-                let solutions = phrases
-                    .into_iter()
-                    .flat_map(|x| PunFactory::solve(&factories, &x))
-                    .collect_vec();
+                let solutions = p_word.find_all_puns(&self.category);
 
                 self.warning = None;
                 self.data = solutions.into();
