@@ -92,20 +92,27 @@ pub fn error_box() -> Html {
 
 #[function_component(DisplayBox)]
 pub fn diplay_box() -> Html {
-    let terms = use_selector(|s: &FullState| {
-        s.data
-            .iter()
-            .map(|x| &x.replacement.pun_word)
-            .unique()
-            .cloned()
-            .collect_vec()
+    let data = use_selector(|s: &FullState| {
+        s.data.clone()
     });
+
+    let terms = 
+
+    data
+    .iter()
+    .sorted_by_key(|x|x.replacement.pun_word.clone())
+    .group_by(|x|x.replacement.pun_word.clone())
+    .into_iter()
+    .map(|x|(x.0, x.1.cloned().collect_vec()))
+    .sorted_by_key(|x| -( x.1.len() as isize))
+    
+    .collect_vec();
 
     //.collect_vec();
 
     let rows = terms
         .iter()
-        .map(|key| html!(<RowGroup row_key={key.clone()}/>))
+        .map(|(row_key,phrases)| html!(<RowGroup key={row_key.clone()} row_key={row_key.clone()} phrases={phrases.clone()}/>))
         .collect_vec();
 
     html!(
@@ -118,36 +125,29 @@ pub fn diplay_box() -> Html {
 #[derive(PartialEq, Eq, Properties)]
 pub struct RowGroupProperties {
     pub row_key: String,
+    pub phrases: Vec<PunPhrase>
 }
 
 #[function_component(RowGroup)]
 pub fn row_group(properties: &RowGroupProperties) -> Html {
-    let key = properties.row_key.clone();
     let show_category = use_selector(|s: &FullState| s.category.is_none())
         .as_ref()
         .clone();
-    let phrases = use_selector(move |s: &FullState| {
-        s.data
-            .iter()
-            .filter(|x| x.replacement.pun_word == key)
-            .cloned()
-            .collect_vec()
-    });
 
     let key2 = properties.row_key.clone();
     let hidden = !use_selector(move |s: &FullState| s.visible_groups.contains(&key2))
         .as_ref()
         .clone();
 
-    if phrases.len() == 1 {
+    if properties.phrases.len() == 1 {
         html!(
             <tbody>
-                {row(&phrases[0], show_category)}
+                {row(&properties.phrases[0], show_category)}
             </tbody>
         )
     } else {
-        let label = format!("{} ({})", properties.row_key, phrases.len());
-        let rows = phrases.iter().map(|x| row(x, show_category)).collect_vec();
+        let label = format!("{} ({})", properties.row_key, properties.phrases.len());
+        let rows = properties.phrases.iter().map(|x| row(x, show_category)).collect_vec();
         let key3 = properties.row_key.clone();
 
         let colspan = if show_category{"3"} else{"2"};
