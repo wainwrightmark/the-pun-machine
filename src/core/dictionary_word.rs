@@ -48,6 +48,7 @@ impl DictionaryWord<'static> {
         let pun_words = self
             .self_and_children()
             .into_iter()
+            .filter(|z|z.spelling.len() > 1)
             .unique_by(|x| x.syllables.clone()) //removes duplicates like mold / mould
             .collect_vec();
 

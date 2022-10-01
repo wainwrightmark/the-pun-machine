@@ -6,5 +6,7 @@
 - [ ] Unify spellings with pronounciations
 - [x] Show category in table
 - [x] Let user choose which meaning to use
-- [ ] Performance pass
+- [x] Performance pass
 - [x] Serialize syllables more efficiently
+- [ ] Come up with a way to handle words that are similar to their plurals
+- [ ] Improve spelling of created words
