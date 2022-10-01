@@ -148,3 +148,20 @@ fn test_children(parent: &str, expected_child: &str) -> Result<(), anyhow::Error
 
     Ok(())
 }
+
+#[test]
+fn test_maxes(){
+    let max_meanings = WORDDICTIONARY.words.iter().max_by_key(|x|x.meanings.len()).unwrap();
+    println!("{} has {} meanings", max_meanings.spelling, max_meanings.meanings.len());
+    
+    
+    let max_syllables = WORDDICTIONARY.words.iter().max_by_key(|x|x.syllables.len()).unwrap();
+    println!("{} has {} syllables", max_syllables.spelling, max_syllables.syllables.len());
+    
+    
+    let max_spelling = WORDDICTIONARY.words.iter().max_by_key(|x|x.spelling.len()).unwrap();
+    println!("{} has {} letters", max_spelling.spelling, max_spelling.spelling.len());
+    
+    let max_symbols = WORDDICTIONARY.words.iter().max_by_key(|x|x.syllables.iter().max_by_key(|x|x.symbols.len()).unwrap()).unwrap();
+    println!("{} has {:?} symbols", max_symbols.spelling, max_symbols.syllables.iter().max_by_key(|x|x.symbols.len()).unwrap());
+}

@@ -2,13 +2,13 @@ use std::{collections::BTreeMap, str::FromStr};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
-use arrayvec::ArrayVec;
+use smallvec::*;
 
 #[derive(
     Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
 )]
 pub struct Syllable {
-    pub symbols: ArrayVec<Symbol,8>,
+    pub symbols: SmallVec<[Symbol; 4]>,
 }
 
 impl Syllable {
