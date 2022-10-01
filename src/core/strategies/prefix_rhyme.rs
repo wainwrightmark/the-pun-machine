@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use smallvec::SmallVec;
 use std::{collections::HashMap, vec};
 
 use crate::core::prelude::*;
@@ -6,12 +7,12 @@ use crate::core::prelude::*;
 pub struct PrefixRhyme {}
 
 impl PunStrategy for PrefixRhyme {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable;4]>> {
         if !word.syllables.is_empty() {
             if let Some(syllable) = word.syllables.last() {
                 if syllable.nucleus().is_stressed_vowel() {
                     let rhyme_syllable = syllable.get_rhymes_syllable();
-                    return vec![vec![rhyme_syllable]];
+                    return vec![smallvec::smallvec![rhyme_syllable]];
                 }
             }
         }
@@ -22,7 +23,7 @@ impl PunStrategy for PrefixRhyme {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(first_syllable) = original_word.syllables.first() {
@@ -33,7 +34,7 @@ impl PunStrategy for PrefixRhyme {
                         rhyme_syllable =
                             rhyme_syllable.add_next_offset(&original_word.syllables[1]);
                     }
-                    let rhyme_word = vec![rhyme_syllable];
+                    let rhyme_word = smallvec::smallvec![rhyme_syllable];
 
                     if let Some(theme_words) = dict.get(&rhyme_word) {
                         return theme_words

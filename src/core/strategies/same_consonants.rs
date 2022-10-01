@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use smallvec::SmallVec;
 use std::{collections::HashMap, vec};
 
 use crate::core::prelude::*;
@@ -6,23 +7,23 @@ use crate::core::prelude::*;
 pub struct SameConsonants {}
 
 impl SameConsonants {
-    fn get_consonant_syllables(&self, word: &DictionaryWord) -> Vec<Syllable> {
+    fn get_consonant_syllables(&self, word: &DictionaryWord) -> SmallVec<[Syllable;4]> {
         word.syllables
             .iter()
             .map(|x| x.clone().with_no_consonant())
-            .collect_vec()
+            .collect()
     }
 }
 
 impl PunStrategy for SameConsonants {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable;4]>> {
         vec![self.get_consonant_syllables(word)]
     }
 
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             let sw = self.get_consonant_syllables(original_word);

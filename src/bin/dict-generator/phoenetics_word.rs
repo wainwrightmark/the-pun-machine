@@ -1,6 +1,7 @@
 use anyhow::anyhow;
 use itertools::Itertools;
 use regex::Regex;
+use smallvec::SmallVec;
 
 use std::{collections::BTreeMap, convert::TryFrom, str::FromStr};
 use the_pun_machine::core::prelude::*;
@@ -12,7 +13,7 @@ pub struct PhoeneticsWord {
     pub text: String,
     pub variant: u8,
     pub is_compound: bool,
-    pub syllables: Vec<Syllable>,
+    pub syllables: SmallVec<[Syllable;4]>,
 }
 
 impl TryFrom<String> for PhoeneticsWord {
@@ -36,7 +37,7 @@ impl TryFrom<String> for PhoeneticsWord {
                 .into_iter()
                 .map(|x| Self::try_get_single(x.to_string()))
                 .try_collect()?;
-            let syllables = words.into_iter().flat_map(|z| z.syllables).collect_vec();
+            let syllables = words.into_iter().flat_map(|z| z.syllables).collect();
 
             Ok(PhoeneticsWord {
                 syllables,
@@ -97,7 +98,7 @@ impl PhoeneticsWord {
                     (t1, 1)
                 };
 
-                let mut syllables = Vec::<Syllable>::new();
+                let mut syllables = SmallVec::<[Syllable;4]>::new();
                 let mut symbols = Vec::<Symbol>::new();
 
                 for symbol_string in terms.into_iter().skip(1) {

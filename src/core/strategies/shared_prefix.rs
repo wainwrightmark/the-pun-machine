@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use smallvec::SmallVec;
 use std::{collections::HashMap, vec};
 
 use crate::core::prelude::*;
@@ -6,9 +7,9 @@ use crate::core::prelude::*;
 pub struct SharedPrefix {}
 
 impl PunStrategy for SharedPrefix {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable;4]>> {
         if word.syllables.len() > 2 {
-            return vec![word.syllables.iter().take(2).cloned().collect_vec()];
+            return vec![word.syllables.iter().take(2).cloned().collect()];
         }
         vec![]
     }
@@ -16,16 +17,16 @@ impl PunStrategy for SharedPrefix {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if original_word.syllables.len() > 2 {
-                let first_two_syllables = original_word
+                let first_two_syllables : SmallVec<_> = original_word
                     .syllables
                     .iter()
                     .take(2)
                     .cloned()
-                    .collect_vec();
+                    .collect();
 
                 if let Some(theme_words) = dict.get(&first_two_syllables) {
                     return theme_words

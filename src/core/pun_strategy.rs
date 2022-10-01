@@ -1,13 +1,14 @@
 use super::prelude::*;
 use itertools::Itertools;
 use lazy_static::*;
+use smallvec::SmallVec;
 use std::collections::{HashMap, HashSet};
 use strum::IntoEnumIterator;
 
 #[derive(Debug)]
 pub struct PunFactory {
     pub strategy: PunStrategyEnum,
-    pub dict: HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+    pub dict: HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
 }
 
 include_flate::flate!(pub static COMMONWORDSTEXT: str from "data/other/CommonWords.txt");

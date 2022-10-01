@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use enum_dispatch::enum_dispatch;
+use smallvec::SmallVec;
 use strum::EnumIter;
 
 use crate::core::prelude::*;
@@ -21,11 +22,11 @@ pub enum PunStrategyEnum {
 
 #[enum_dispatch(PunStrategyEnum)]
 pub trait PunStrategy {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>>;
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable; 4]>>;
 
     fn get_possible_replacements(
         &self,
         original_word: &PhraseWord,
-        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement>;
 }

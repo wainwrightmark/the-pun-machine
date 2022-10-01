@@ -23,11 +23,11 @@ pub fn main() {
         .into_iter()
         .filter(|x| x.lemma.is_dictionary_word())
         .flat_map(|entry| {
-            let meanings = entry
+            let meanings : smallvec::SmallVec<_> = entry
                 .senses
                 .iter()
                 .map(|x| synset_to_id(&x.synset))
-                .collect_vec();
+                .collect();
 
             let words = entry
                 .get_written_forms()

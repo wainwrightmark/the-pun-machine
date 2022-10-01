@@ -1,5 +1,6 @@
 use itertools::Itertools;
 use lazy_static::__Deref;
+use smallvec::SmallVec;
 
 use crate::core::prelude::*;
 use std::{
@@ -21,8 +22,8 @@ use std::{
 )]
 pub struct DictionaryWord {
     pub spelling: String,
-    pub syllables: Vec<Syllable>,
-    pub meanings: Vec<u32>,
+    pub syllables: SmallVec<[Syllable; 4]>,
+    pub meanings: SmallVec<[u32; 4]>,
 }
 
 impl FromStr for DictionaryWord {

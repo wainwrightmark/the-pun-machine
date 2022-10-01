@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use smallvec::SmallVec;
 use std::collections::HashMap;
 
 use crate::core::prelude::*;
@@ -6,13 +7,13 @@ use crate::core::prelude::*;
 pub struct InfixRhyme {}
 
 impl PunStrategy for InfixRhyme {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable;4]>> {
         if word.syllables.len() == 1 {
             return vec![word
                 .syllables
                 .iter()
                 .map(|x| x.get_rhymes_syllable())
-                .collect_vec()];
+                .collect()];
         }
 
         vec![]
@@ -21,7 +22,7 @@ impl PunStrategy for InfixRhyme {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if original_word.syllables.len() <= 1 {}
@@ -34,7 +35,7 @@ impl PunStrategy for InfixRhyme {
                 .skip(1)
                 .filter(|(_, syllable)| syllable.nucleus().is_stressed_vowel())
                 .filter_map(|(index, syllable)| {
-                    dict.get(&vec![syllable.get_rhymes_syllable()])
+                    dict.get(&smallvec::smallvec![syllable.get_rhymes_syllable()])
                         .map(|theme_words| (index, syllable, theme_words))
                 })
                 .flat_map(|(index, syllable, theme_words)| {

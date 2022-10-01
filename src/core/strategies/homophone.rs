@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use smallvec::SmallVec;
 use std::collections::HashMap;
 
 use crate::core::prelude::*;
@@ -6,14 +7,14 @@ use crate::core::prelude::*;
 pub struct Homophone {}
 
 impl PunStrategy for Homophone {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<Vec<Syllable>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable; 4]>> {
         vec![word.syllables.clone()]
     }
 
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<Vec<Syllable>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(theme_words) = dict.get(&original_word.syllables) {
