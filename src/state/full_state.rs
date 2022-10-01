@@ -1,4 +1,4 @@
-use std::{rc::Rc, str::FromStr};
+use std::{rc::Rc, str::FromStr, collections::HashSet};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
@@ -14,6 +14,9 @@ pub struct FullState {
     #[serde(skip)]
     pub data: Rc<Vec<PunPhrase>>,
     pub warning: Option<String>,
+
+    #[serde(skip)]
+    pub visible_groups : HashSet<String>
 }
 
 impl Default for FullState {
@@ -23,6 +26,7 @@ impl Default for FullState {
             category: None,
             data: Default::default(),
             warning: Default::default(),
+            visible_groups: Default::default()
         };
         state.update();
         state
@@ -49,6 +53,11 @@ impl Store for FullState {
 
 impl FullState {
     
+    pub fn toggle_group_visibility(&mut self, key: &String){
+        if !self.visible_groups.remove(key){
+            self.visible_groups.insert(key.clone());
+        }
+    }
 
     fn update(&mut self) {
         let phrases: Vec<Phrase> = if let Some(category) = self.category {
@@ -80,6 +89,7 @@ impl FullState {
                 self.warning = Some(format!("{}: '{}'", err, self.text));
             }
         }
+        self.visible_groups = Default::default();
     }
 
     pub fn change_text(&mut self, s: String) {
