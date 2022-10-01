@@ -1,8 +1,7 @@
 use std::collections::HashMap;
 
 use itertools::Itertools;
-use smallvec::SmallVec;
-use smallvec::smallvec;
+use smallvec::{smallvec, SmallVec};
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
@@ -47,7 +46,7 @@ impl PunStrategy for PerfectRhyme {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>; 2]> {
         if let Some(s) = PerfectRhyme::get_rhyme_syllables(self, word) {
             smallvec![s]
         } else {
@@ -71,23 +70,21 @@ impl PunStrategy for PerfectRhyme {
                                 && !theme_word.syllables.eq(&original_word.syllables)
                         })
                         .map(|theme_word| {
-                            let replacement_string =
-                                if theme_word.syllables.len() == original_word.syllables.len() {
-                                    Casing::unify_captialization(
-                                        theme_word.spelling,
-                                        &phrase_word.text,
-                                    )
-                                } else {
-                                    Casing::unify_captialization(
-                                        &original_word
-                                            .syllables
-                                            .iter()
-                                            .take(original_word.syllables.len() - key.len())
-                                            .map(|x| x.get_spelling())
-                                            .join(""),
-                                        &phrase_word.text,
-                                    ) + theme_word.spelling
-                                };
+                            let replacement_string = if theme_word.syllables.len()
+                                == original_word.syllables.len()
+                            {
+                                Casing::unify_captialization(theme_word.spelling, &phrase_word.text)
+                            } else {
+                                Casing::unify_captialization(
+                                    &original_word
+                                        .syllables
+                                        .iter()
+                                        .take(original_word.syllables.len() - key.len())
+                                        .map(|x| x.get_spelling())
+                                        .join(""),
+                                    &phrase_word.text,
+                                ) + theme_word.spelling
+                            };
 
                             PunReplacement {
                                 pun_type: PunType::PerfectRhyme,

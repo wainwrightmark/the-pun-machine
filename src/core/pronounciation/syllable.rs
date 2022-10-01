@@ -1,22 +1,21 @@
 use std::{collections::BTreeMap, str::FromStr};
 
 use itertools::Itertools;
-use smallvec::*;
 
 use crate::core::prelude::*;
 
 #[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy, serde::Serialize, serde::Deserialize,
 )]
 pub struct Syllable {
-    pub symbols: SmallVec<[Symbol; 4]>,
+    pub symbols: SymbolArr,
 }
 
 impl Syllable {
     ///Add this syllable to the offset of the next syllable
     pub fn add_next_offset(&self, other: &Self) -> Self {
         Self {
-            symbols: self.symbols.iter().chain(other.onset()).cloned().collect(),
+            symbols: self.symbols.into_iter().chain(other.onset()).collect(),
         }
     }
 
@@ -25,18 +24,19 @@ impl Syllable {
         Self { symbols }
     }
 
-    pub fn onset(& self) -> impl Iterator<Item = & Symbol> {
-        self.symbols.iter().take_while(|&x| !x.is_vowel())
+    pub fn onset(&self) -> impl Iterator<Item = Symbol> {
+        self.symbols.into_iter().take_while(|&x| !x.is_vowel())
     }
 
     pub fn nucleus(&self) -> Symbol {
-        *self.symbols
-            .iter().find(|&x| x.is_vowel())
-            .unwrap()
+        self.symbols.into_iter().find(|&x| x.is_vowel()).unwrap()
     }
 
-    pub fn coda(&self) -> impl Iterator<Item = &Symbol> {
-        self.symbols.iter().skip_while(|x| !x.is_vowel()).skip(1)
+    pub fn coda(&self) -> impl Iterator<Item = Symbol> {
+        self.symbols
+            .into_iter()
+            .skip_while(|x| !x.is_vowel())
+            .skip(1)
     }
 
     pub fn rhymes_with(&self, other: &Self) -> bool {
@@ -47,7 +47,7 @@ impl Syllable {
     pub fn get_rhymes_syllable(&self) -> Syllable {
         let symbols = self
             .symbols
-            .iter()
+            .into_iter()
             .skip_while(|x| !x.is_vowel())
             .map(|x| x.normalize_vowel())
             .collect();
@@ -55,14 +55,14 @@ impl Syllable {
     }
 
     ///Get this syllable with the nucleus replaced by 'AA'
-    pub fn with_no_consonant(mut self) -> Syllable {
-        for s in self.symbols.iter_mut() {
-            if s.is_vowel() {
-                *s = Symbol::AA;
-                return self;
-            }
+    pub fn with_no_consonant(self) -> Syllable {
+        Syllable {
+            symbols: self
+                .symbols
+                .into_iter()
+                .map(|x| if x.is_vowel() { Symbol::AA } else { x })
+                .collect(),
         }
-        self
     }
 }
 
@@ -80,7 +80,7 @@ impl Syllable {
             string.clone()
         } else {
             self.symbols
-                .iter()
+                .into_iter()
                 .map(|x| {
                     x.to_string()
                         .replace(['0', '1', '2'], "")

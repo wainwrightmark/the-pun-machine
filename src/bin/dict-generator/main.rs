@@ -28,8 +28,6 @@ pub fn main() {
                 .map(|x| synset_to_id(&x.synset))
                 .collect();
 
-            
-
             entry
                 .get_written_forms()
                 .into_iter()

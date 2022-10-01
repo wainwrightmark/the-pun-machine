@@ -24,7 +24,7 @@ fn test_syllables(input: &str, expected: &str) -> Result<(), anyhow::Error> {
     let s_text = word
         .syllables
         .iter()
-        .flat_map(|x| x.symbols.iter())
+        .flat_map(|x| x.symbols.into_iter())
         .join(" ");
 
     assert_eq!(s_text, expected);
@@ -149,6 +149,17 @@ fn test_children(parent: &str, expected_child: &str) -> Result<(), anyhow::Error
 }
 
 #[test]
+fn test_sizes() {
+    let symbol = std::mem::size_of::<Symbol>();
+    let syllable = std::mem::size_of::<Syllable>();
+    let dictionary_word = std::mem::size_of::<DictionaryWord>();
+
+    println!("Size of symbol: {symbol}");
+    println!("Size of syllable: {syllable}");
+    println!("Size of dictionary_word: {dictionary_word}");
+}
+
+#[test]
 fn test_maxes() {
     let max_meanings = WORDDICTIONARY
         .words
@@ -186,7 +197,12 @@ fn test_maxes() {
     let max_symbols = WORDDICTIONARY
         .words
         .iter()
-        .max_by_key(|x| x.syllables.iter().max_by_key(|x| x.symbols.len()).unwrap())
+        .max_by_key(|x| {
+            x.syllables
+                .iter()
+                .max_by_key(|x| x.symbols.into_iter().count())
+                .unwrap()
+        })
         .unwrap();
     println!(
         "{} has {:?} symbols",
@@ -194,7 +210,7 @@ fn test_maxes() {
         max_symbols
             .syllables
             .iter()
-            .max_by_key(|x| x.symbols.len())
+            .max_by_key(|x| x.symbols.into_iter().count())
             .unwrap()
     );
 }
