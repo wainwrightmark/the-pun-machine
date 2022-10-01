@@ -2,33 +2,30 @@ use std::{collections::BTreeMap, str::FromStr};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
+use arrayvec::ArrayVec;
 
 #[derive(
     Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
 )]
 pub struct Syllable {
-    //onset_len: usize,
-    pub symbols: Vec<Symbol>,
+    pub symbols: ArrayVec<Symbol,8>,
 }
 
 impl Syllable {
     ///Add this syllable to the offset of the next syllable
     pub fn add_next_offset(&self, other: &Self) -> Self {
         Self {
-            //onset_len: self.onset_len,
             symbols: self
                 .symbols
                 .iter()
                 .chain(other.onset())
                 .cloned()
-                .collect_vec(),
+                .collect(),
         }
     }
 
     pub fn new<T: IntoIterator<Item = Symbol>>(collection: T) -> Self {
-        let symbols = collection.into_iter().collect_vec();
-        //let onset_len = symbols.iter().take_while(|&x| !x.is_vowel()).count();
-
+        let symbols = collection.into_iter().collect();
         Self {  symbols }
     }
 
@@ -55,7 +52,7 @@ impl Syllable {
                 .iter()
                 .skip_while(|x|!x.is_vowel())
                 .map(|x| x.normalize_vowel())
-                .collect_vec();
+                .collect();
             Self {
                 symbols,
             }
