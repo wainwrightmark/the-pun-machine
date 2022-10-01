@@ -1,9 +1,9 @@
+use std::{collections::BTreeMap, convert::TryFrom, str::FromStr};
+
 use anyhow::anyhow;
 use itertools::Itertools;
 use regex::Regex;
 use smallvec::SmallVec;
-
-use std::{collections::BTreeMap, convert::TryFrom, str::FromStr};
 use the_pun_machine::core::prelude::*;
 
 #[derive(
@@ -13,7 +13,7 @@ pub struct PhoeneticsWord {
     pub text: String,
     pub variant: u8,
     pub is_compound: bool,
-    pub syllables: SmallVec<[Syllable;4]>,
+    pub syllables: SmallVec<[Syllable; 4]>,
 }
 
 impl TryFrom<String> for PhoeneticsWord {
@@ -98,7 +98,7 @@ impl PhoeneticsWord {
                     (t1, 1)
                 };
 
-                let mut syllables = SmallVec::<[Syllable;4]>::new();
+                let mut syllables = SmallVec::<[Syllable; 4]>::new();
                 let mut symbols = Vec::<Symbol>::new();
 
                 for symbol_string in terms.into_iter().skip(1) {

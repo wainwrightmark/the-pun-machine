@@ -1,7 +1,6 @@
+use std::collections::BTreeMap;
+
 use crate::core::prelude::*;
-use std::{
-    collections::{BTreeMap},
-};
 
 #[derive(Clone, Debug, Default, PartialEq, Eq, serde:: Deserialize, serde::Serialize)]
 #[serde(bound(deserialize = "'de: 'a"))]

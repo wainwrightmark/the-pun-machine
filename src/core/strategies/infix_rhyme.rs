@@ -1,13 +1,17 @@
+use std::collections::HashMap;
+
 use itertools::Itertools;
 use smallvec::SmallVec;
-use std::collections::HashMap;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
 pub struct InfixRhyme {}
 
 impl PunStrategy for InfixRhyme {
-    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable;4]>> {
+    fn get_relevant_syllables(
+        &self,
+        word: &DictionaryWord<'static>,
+    ) -> Vec<SmallVec<[Syllable; 4]>> {
         if word.syllables.len() == 1 {
             return vec![word
                 .syllables
@@ -22,7 +26,7 @@ impl PunStrategy for InfixRhyme {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
+        dict: &HashMap<SmallVec<[Syllable; 4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if original_word.syllables.len() <= 1 {}

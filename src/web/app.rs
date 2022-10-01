@@ -1,11 +1,12 @@
 use std::{convert::*, str::*};
 
-use crate::{core::prelude::*, state::prelude::*};
 use itertools::Itertools;
 use strum::IntoEnumIterator;
 use web_sys::{HtmlSelectElement, HtmlTextAreaElement};
 use yew::prelude::*;
 use yewdux::prelude::*;
+
+use crate::{core::prelude::*, state::prelude::*};
 
 #[function_component(App)]
 pub fn app() -> Html {

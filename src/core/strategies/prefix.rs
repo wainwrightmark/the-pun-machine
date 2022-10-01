@@ -1,13 +1,17 @@
+use std::{collections::HashMap, vec};
+
 use itertools::Itertools;
 use smallvec::SmallVec;
-use std::{collections::HashMap, vec};
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
 pub struct Prefix {}
 
 impl PunStrategy for Prefix {
-    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable;4]>> {
+    fn get_relevant_syllables(
+        &self,
+        word: &DictionaryWord<'static>,
+    ) -> Vec<SmallVec<[Syllable; 4]>> {
         if word.syllables.len() <= 1 {
             return vec![];
         }
@@ -30,17 +34,14 @@ impl PunStrategy for Prefix {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
+        dict: &HashMap<SmallVec<[Syllable; 4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(theme_words) = dict.get(&original_word.syllables) {
                 return theme_words
                     .iter()
                     .map(|theme_word| {
-                        if theme_word
-                            .spelling
-                            .starts_with(original_word.spelling)
-                        {
+                        if theme_word.spelling.starts_with(original_word.spelling) {
                             PunReplacement {
                                 pun_type: PunType::Prefix,
                                 pun_word: theme_word.spelling.clone(),

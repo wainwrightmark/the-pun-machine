@@ -1,12 +1,13 @@
+use std::{
+    collections::{BTreeMap, HashSet, VecDeque},
+    str::FromStr,
+};
+
 use itertools::Itertools;
 use lazy_static::__Deref;
 use smallvec::SmallVec;
 
 use crate::core::prelude::*;
-use std::{
-    collections::{BTreeMap, HashSet, VecDeque},
-    str::FromStr,
-};
 
 #[derive(
     Clone,
@@ -51,8 +52,6 @@ impl DictionaryWord<'static> {
             .collect_vec();
 
         let factories = PunFactory::build_all(&pun_words);
-
-        
 
         phrases
             .into_iter()
@@ -111,6 +110,3 @@ lazy_static::lazy_static! {
 
 ).sorted_by_key(|x|x.0) .group_by(|x|x.0).into_iter().map(|x|(x.0,x.1.map(|y|y.1) .collect_vec())) .collect();
 }
-
-
-

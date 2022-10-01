@@ -1,15 +1,14 @@
 mod phoenetics_word;
 
+use std::{
+    collections::{BTreeMap, HashSet},
+    convert::TryFrom,
+    fs::File,
+};
+
 use itertools::Itertools;
 use quick_xml::de::from_reader;
-
-use serde::Deserialize;
-use serde::Serialize;
-use std::collections::BTreeMap;
-use std::collections::HashSet;
-use std::convert::TryFrom;
-use std::fs::File;
-
+use serde::{Deserialize, Serialize};
 use the_pun_machine::core::prelude::*;
 
 pub fn main() {
@@ -23,7 +22,7 @@ pub fn main() {
         .into_iter()
         .filter(|x| x.lemma.is_dictionary_word())
         .flat_map(|entry| {
-            let meanings : smallvec::SmallVec<_> = entry
+            let meanings: smallvec::SmallVec<_> = entry
                 .senses
                 .iter()
                 .map(|x| synset_to_id(&x.synset))
@@ -33,7 +32,7 @@ pub fn main() {
                 .get_written_forms()
                 .into_iter()
                 .map(|s| string_to_static_str(s))
-                .flat_map( |spelling| {
+                .flat_map(|spelling| {
                     phoenetics_word::PhoeneticsWord::try_from(spelling.to_string())
                         .ok()
                         .map(|x| DictionaryWord {
@@ -150,7 +149,6 @@ fn synset_to_id(synset: &String) -> u32 {
 fn string_to_static_str(s: String) -> &'static str {
     Box::leak(s.into_boxed_str())
 }
-
 
 lazy_static::lazy_static! {
     static ref PARENTCHILDRELATIONS: HashSet<&'static str> = {

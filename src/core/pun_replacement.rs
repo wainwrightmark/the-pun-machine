@@ -13,9 +13,7 @@ pub struct PunReplacement {
     pub is_amalgam: bool,
 }
 
-#[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone,
-)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone)]
 pub struct PunPhrase {
     pub phrase: Phrase,
     pub replacement: PunReplacement,

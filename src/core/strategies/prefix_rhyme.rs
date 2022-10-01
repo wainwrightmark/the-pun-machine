@@ -1,13 +1,17 @@
+use std::{collections::HashMap, vec};
+
 use itertools::Itertools;
 use smallvec::SmallVec;
-use std::{collections::HashMap, vec};
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
 pub struct PrefixRhyme {}
 
 impl PunStrategy for PrefixRhyme {
-    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable;4]>> {
+    fn get_relevant_syllables(
+        &self,
+        word: &DictionaryWord<'static>,
+    ) -> Vec<SmallVec<[Syllable; 4]>> {
         if !word.syllables.is_empty() {
             if let Some(syllable) = word.syllables.last() {
                 if syllable.nucleus().is_stressed_vowel() {
@@ -23,7 +27,7 @@ impl PunStrategy for PrefixRhyme {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
+        dict: &HashMap<SmallVec<[Syllable; 4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(first_syllable) = original_word.syllables.first() {

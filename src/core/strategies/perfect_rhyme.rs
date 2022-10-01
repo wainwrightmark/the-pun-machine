@@ -1,13 +1,17 @@
+use std::collections::HashMap;
+
 use itertools::Itertools;
 use smallvec::SmallVec;
-use std::collections::HashMap;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
 pub struct PerfectRhyme {}
 
 impl PerfectRhyme {
-    fn get_rhyme_syllables(&self, word: &DictionaryWord<'static>) -> Option<SmallVec<[Syllable;4]>> {
+    fn get_rhyme_syllables(
+        &self,
+        word: &DictionaryWord<'static>,
+    ) -> Option<SmallVec<[Syllable; 4]>> {
         if let Some(last_index_position) = word
             .syllables
             .iter()
@@ -15,7 +19,7 @@ impl PerfectRhyme {
             .find_position(|x| x.nucleus().is_stressed_vowel())
             .map(|x| (word.syllables.len() - 1) - x.0)
         {
-            let vec : SmallVec<_> = word
+            let vec: SmallVec<_> = word
                 .syllables
                 .iter()
                 .skip(last_index_position)
@@ -39,7 +43,10 @@ impl PerfectRhyme {
 }
 
 impl PunStrategy for PerfectRhyme {
-    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable;4]>> {
+    fn get_relevant_syllables(
+        &self,
+        word: &DictionaryWord<'static>,
+    ) -> Vec<SmallVec<[Syllable; 4]>> {
         if let Some(s) = PerfectRhyme::get_rhyme_syllables(self, word) {
             vec![s]
         } else {
@@ -50,7 +57,7 @@ impl PunStrategy for PerfectRhyme {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
+        dict: &HashMap<SmallVec<[Syllable; 4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, original_word) {

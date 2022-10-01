@@ -6,7 +6,10 @@ pub enum Casing {
 }
 
 impl Casing {
-    pub fn unify_captialization<S: AsRef<str> + Copy, O: AsRef<str>>(text: S, original_word: O) -> String {
+    pub fn unify_captialization<S: AsRef<str> + Copy, O: AsRef<str>>(
+        text: S,
+        original_word: O,
+    ) -> String {
         let original_casing = Casing::identify(original_word);
         if Casing::identify(text) == original_casing {
             return text.as_ref().to_string();
@@ -34,7 +37,7 @@ impl Casing {
         match self {
             Casing::Lower => s.as_ref().to_ascii_lowercase(),
             Casing::Title => s
-            .as_ref()
+                .as_ref()
                 .char_indices()
                 .map(|(i, c)| {
                     if i == 0 {

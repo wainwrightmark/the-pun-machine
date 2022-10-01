@@ -1,17 +1,14 @@
-use crate::core::prelude::*;
 use std::str::FromStr;
 
-#[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, 
-)]
+use crate::core::prelude::*;
+
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone)]
 pub struct PhraseWord {
     pub text: String,
     pub word: Option<DictionaryWord<'static>>,
 }
 
-#[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone,
-)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone)]
 pub struct Phrase {
     pub text: String,
     pub words: Vec<PhraseWord>,

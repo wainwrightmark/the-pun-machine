@@ -5,8 +5,7 @@ mod symbol_type;
 
 pub mod prelude {
 
-    pub use crate::core::pronounciation::syllable::*;
-    pub use crate::core::pronounciation::symbol::*;
-    pub use crate::core::pronounciation::symbol_helper::*;
-    pub use crate::core::pronounciation::symbol_type::*;
+    pub use crate::core::pronounciation::{
+        syllable::*, symbol::*, symbol_helper::*, symbol_type::*,
+    };
 }

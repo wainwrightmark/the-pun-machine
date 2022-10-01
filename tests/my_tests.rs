@@ -1,9 +1,8 @@
 use std::str::FromStr;
 
 use itertools::Itertools;
-use the_pun_machine::core::prelude::*;
-
 use ntest::test_case;
+use the_pun_machine::core::prelude::*;
 
 #[test_case("Lichtenstein", "L IH1 K T AH0 N S T AY2 N")]
 #[test_case("Picasso", "P IH0 K AA1 S OW0")]
@@ -150,18 +149,52 @@ fn test_children(parent: &str, expected_child: &str) -> Result<(), anyhow::Error
 }
 
 #[test]
-fn test_maxes(){
-    let max_meanings = WORDDICTIONARY.words.iter().max_by_key(|x|x.meanings.len()).unwrap();
-    println!("{} has {} meanings", max_meanings.spelling, max_meanings.meanings.len());
-    
-    
-    let max_syllables = WORDDICTIONARY.words.iter().max_by_key(|x|x.syllables.len()).unwrap();
-    println!("{} has {} syllables", max_syllables.spelling, max_syllables.syllables.len());
-    
-    
-    let max_spelling = WORDDICTIONARY.words.iter().max_by_key(|x|x.spelling.len()).unwrap();
-    println!("{} has {} letters", max_spelling.spelling, max_spelling.spelling.len());
-    
-    let max_symbols = WORDDICTIONARY.words.iter().max_by_key(|x|x.syllables.iter().max_by_key(|x|x.symbols.len()).unwrap()).unwrap();
-    println!("{} has {:?} symbols", max_symbols.spelling, max_symbols.syllables.iter().max_by_key(|x|x.symbols.len()).unwrap());
+fn test_maxes() {
+    let max_meanings = WORDDICTIONARY
+        .words
+        .iter()
+        .max_by_key(|x| x.meanings.len())
+        .unwrap();
+    println!(
+        "{} has {} meanings",
+        max_meanings.spelling,
+        max_meanings.meanings.len()
+    );
+
+    let max_syllables = WORDDICTIONARY
+        .words
+        .iter()
+        .max_by_key(|x| x.syllables.len())
+        .unwrap();
+    println!(
+        "{} has {} syllables",
+        max_syllables.spelling,
+        max_syllables.syllables.len()
+    );
+
+    let max_spelling = WORDDICTIONARY
+        .words
+        .iter()
+        .max_by_key(|x| x.spelling.len())
+        .unwrap();
+    println!(
+        "{} has {} letters",
+        max_spelling.spelling,
+        max_spelling.spelling.len()
+    );
+
+    let max_symbols = WORDDICTIONARY
+        .words
+        .iter()
+        .max_by_key(|x| x.syllables.iter().max_by_key(|x| x.symbols.len()).unwrap())
+        .unwrap();
+    println!(
+        "{} has {:?} symbols",
+        max_symbols.spelling,
+        max_symbols
+            .syllables
+            .iter()
+            .max_by_key(|x| x.symbols.len())
+            .unwrap()
+    );
 }

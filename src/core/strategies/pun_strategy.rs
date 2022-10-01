@@ -4,9 +4,7 @@ use enum_dispatch::enum_dispatch;
 use smallvec::SmallVec;
 use strum::EnumIter;
 
-use crate::core::prelude::*;
-
-use crate::core::strategies::prelude::*;
+use crate::core::{prelude::*, strategies::prelude::*};
 
 #[enum_dispatch]
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, EnumIter)]
@@ -22,11 +20,14 @@ pub enum PunStrategyEnum {
 
 #[enum_dispatch(PunStrategyEnum)]
 pub trait PunStrategy {
-    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable; 4]>>;
+    fn get_relevant_syllables(
+        &self,
+        word: &DictionaryWord<'static>,
+    ) -> Vec<SmallVec<[Syllable; 4]>>;
 
     fn get_possible_replacements(
         &self,
         original_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
+        dict: &HashMap<SmallVec<[Syllable; 4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement>;
 }
