@@ -1,7 +1,6 @@
 use std::{collections::HashSet, rc::Rc, str::FromStr};
 
 use crate::core::prelude::*;
-use itertools::Itertools;
 
 use serde::*;
 

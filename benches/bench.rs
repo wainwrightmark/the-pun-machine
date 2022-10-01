@@ -1,11 +1,11 @@
-use std::str::FromStr;
+use std::{str::FromStr, time::Duration};
 
 use criterion::{criterion_group, criterion_main, Criterion};
 use the_pun_machine::core::prelude::{Category, DictionaryWord};
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().sample_size(100).measurement_time(instant::Duration::new(5, 0));
+    config = Criterion::default().sample_size(100).measurement_time(Duration::new(5, 0));
 
     targets= bench_solver,
 
