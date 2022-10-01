@@ -80,8 +80,7 @@ pub fn input_box() -> Html {
 pub fn error_box() -> Html {
     let err = use_selector(|s: &FullState| s.warning.clone())
         .as_ref()
-        .clone()
-        .unwrap_or_else(|| "".to_string());
+        .clone().unwrap_or_default();
 
     if err.is_empty() {
         html!(<> </>)
@@ -125,14 +124,12 @@ pub struct RowGroupProperties {
 
 #[function_component(RowGroup)]
 pub fn row_group(properties: &RowGroupProperties) -> Html {
-    let show_category = use_selector(|s: &FullState| s.category.is_none())
-        .as_ref()
-        .clone();
+    let show_category = *use_selector(|s: &FullState| s.category.is_none())
+        .as_ref();
 
     let key2 = properties.row_key.clone();
-    let hidden = !use_selector(move |s: &FullState| s.visible_groups.contains(&key2))
-        .as_ref()
-        .clone();
+    let hidden = !*use_selector(move |s: &FullState| s.visible_groups.contains(&key2))
+        .as_ref();
 
     if properties.phrases.len() == 1 {
         html!(

@@ -51,12 +51,12 @@ impl DictionaryWord {
 
         let factories = PunFactory::build_all(&pun_words);
 
-        let solutions = phrases
+        
+
+        phrases
             .into_iter()
             .flat_map(|x| PunFactory::solve(&factories, &x))
-            .collect_vec();
-
-        solutions
+            .collect_vec()
     }
 }
 

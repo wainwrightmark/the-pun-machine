@@ -166,12 +166,12 @@ pub struct OutputMeaning {
     pub children: Vec<u32>,
 }
 
-#[derive(Clone, Debug, Default, PartialEq, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize)]
 pub struct LexicalResource {
     #[serde(rename = "Lexicon", default)]
     pub lexicon: Lexicon,
 }
-#[derive(Clone, Debug, Default, PartialEq, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize)]
 #[serde(rename_all = "lowercase")]
 
 pub struct Lexicon {
