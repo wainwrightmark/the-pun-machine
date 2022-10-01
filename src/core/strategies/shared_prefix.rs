@@ -2,17 +2,18 @@ use std::{collections::HashMap, vec};
 
 use itertools::Itertools;
 use smallvec::SmallVec;
+use smallvec::smallvec;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
 pub struct SharedPrefix {}
 
 impl PunStrategy for SharedPrefix {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable; 4]>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
         if word.syllables.len() > 2 {
-            return vec![word.syllables.iter().take(2).cloned().collect()];
+            return smallvec![word.syllables.iter().take(2).cloned().collect()];
         }
-        vec![]
+        smallvec![]
     }
 
     fn get_possible_replacements(

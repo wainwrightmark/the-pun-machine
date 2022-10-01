@@ -23,7 +23,7 @@ pub trait PunStrategy {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> Vec<SmallVec<[Syllable; 4]>>;
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]>;
 
     fn get_possible_replacements(
         &self,

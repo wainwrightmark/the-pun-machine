@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use itertools::Itertools;
 use smallvec::SmallVec;
+use smallvec::smallvec;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
@@ -11,16 +12,16 @@ impl PunStrategy for InfixRhyme {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> Vec<SmallVec<[Syllable; 4]>> {
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
         if word.syllables.len() == 1 {
-            return vec![word
+            return smallvec![word
                 .syllables
                 .iter()
                 .map(|x| x.get_rhymes_syllable())
                 .collect()];
         }
 
-        vec![]
+        smallvec![]
     }
 
     fn get_possible_replacements(

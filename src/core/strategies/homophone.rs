@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use itertools::Itertools;
 use smallvec::SmallVec;
+use smallvec::smallvec;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
@@ -11,8 +12,8 @@ impl PunStrategy for Homophone {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> Vec<SmallVec<[Syllable; 4]>> {
-        vec![word.syllables.clone()]
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
+        smallvec![word.syllables.clone()]
     }
 
     fn get_possible_replacements(

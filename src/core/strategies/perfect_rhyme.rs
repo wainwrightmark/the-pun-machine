@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use itertools::Itertools;
 use smallvec::SmallVec;
+use smallvec::smallvec;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
@@ -46,11 +47,11 @@ impl PunStrategy for PerfectRhyme {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> Vec<SmallVec<[Syllable; 4]>> {
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
         if let Some(s) = PerfectRhyme::get_rhyme_syllables(self, word) {
-            vec![s]
+            smallvec![s]
         } else {
-            vec![]
+            smallvec![]
         }
     }
 

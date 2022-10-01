@@ -2,6 +2,7 @@ use std::{collections::HashMap, vec};
 
 use itertools::Itertools;
 use smallvec::SmallVec;
+use smallvec::smallvec;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
@@ -20,8 +21,8 @@ impl PunStrategy for SameConsonants {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> Vec<SmallVec<[Syllable; 4]>> {
-        vec![self.get_consonant_syllables(word)]
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
+        smallvec![self.get_consonant_syllables(word)]
     }
 
     fn get_possible_replacements(

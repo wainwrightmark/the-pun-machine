@@ -2,6 +2,7 @@ use std::{collections::HashMap, vec};
 
 use itertools::Itertools;
 use smallvec::SmallVec;
+use smallvec::smallvec;
 
 use crate::core::prelude::*;
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Copy, Clone, Default)]
@@ -11,9 +12,9 @@ impl PunStrategy for Prefix {
     fn get_relevant_syllables(
         &self,
         word: &DictionaryWord<'static>,
-    ) -> Vec<SmallVec<[Syllable; 4]>> {
+    ) -> SmallVec<[SmallVec<[Syllable; 4]>;2]> {
         if word.syllables.len() <= 1 {
-            return vec![];
+            return smallvec![];
         }
 
         (1..word.syllables.len() - 1)
@@ -28,7 +29,7 @@ impl PunStrategy for Prefix {
                     ))
                     .collect()
             }))
-            .collect_vec()
+            .collect()
     }
 
     fn get_possible_replacements(
