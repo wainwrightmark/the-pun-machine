@@ -20,13 +20,13 @@ use std::{
     serde:: Deserialize,
     serde::Serialize,
 )]
-pub struct DictionaryWord {
-    pub spelling: String,
+pub struct DictionaryWord<'a> {
+    pub spelling: &'a str,
     pub syllables: SmallVec<[Syllable; 4]>,
     pub meanings: SmallVec<[u32; 4]>,
 }
 
-impl FromStr for DictionaryWord {
+impl FromStr for DictionaryWord<'static> {
     type Err = anyhow::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -37,7 +37,7 @@ impl FromStr for DictionaryWord {
     }
 }
 
-impl DictionaryWord {
+impl DictionaryWord<'static> {
     pub fn find_all_puns(&self, category_option: &Option<Category>) -> Vec<PunPhrase> {
         let phrases: Vec<Phrase> = if let Some(category) = category_option {
             category.get_phrases().collect_vec()
@@ -61,9 +61,9 @@ impl DictionaryWord {
     }
 }
 
-impl DictionaryWord {
-    pub fn self_and_children(&self) -> HashSet<DictionaryWord> {
-        let mut result = HashSet::<DictionaryWord>::default();
+impl DictionaryWord<'static> {
+    pub fn self_and_children(&self) -> HashSet<Self> {
+        let mut result = HashSet::<Self>::default();
         result.insert(self.clone());
         let mut stack = VecDeque::<u32>::default();
         let mut used_meanings = HashSet::<u32>::default();
@@ -92,7 +92,7 @@ impl DictionaryWord {
 }
 
 lazy_static::lazy_static! {
-    static ref WORDSBYSPELLING : BTreeMap<String, Vec<DictionaryWord>> = WORDDICTIONARY.words.iter()
+    static ref WORDSBYSPELLING : BTreeMap<String, Vec<DictionaryWord<'static>>> = WORDDICTIONARY.words.iter()
     .map(|entry|
 
             (entry.spelling.to_ascii_lowercase(), entry.clone())
@@ -103,7 +103,7 @@ lazy_static::lazy_static! {
 }
 
 lazy_static::lazy_static! {
-    static ref WORDSBYMEANING : BTreeMap<u32, Vec<DictionaryWord>> = WORDDICTIONARY.words.iter()
+    static ref WORDSBYMEANING : BTreeMap<u32, Vec<DictionaryWord<'static>>> = WORDDICTIONARY.words.iter()
     .flat_map(|entry|
         {
             entry.meanings.iter().map(move |x|(*x, entry.clone()))

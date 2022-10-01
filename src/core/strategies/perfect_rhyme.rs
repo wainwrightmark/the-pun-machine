@@ -7,7 +7,7 @@ use crate::core::prelude::*;
 pub struct PerfectRhyme {}
 
 impl PerfectRhyme {
-    fn get_rhyme_syllables(&self, word: &DictionaryWord) -> Option<SmallVec<[Syllable;4]>> {
+    fn get_rhyme_syllables(&self, word: &DictionaryWord<'static>) -> Option<SmallVec<[Syllable;4]>> {
         if let Some(last_index_position) = word
             .syllables
             .iter()
@@ -39,7 +39,7 @@ impl PerfectRhyme {
 }
 
 impl PunStrategy for PerfectRhyme {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable;4]>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable;4]>> {
         if let Some(s) = PerfectRhyme::get_rhyme_syllables(self, word) {
             vec![s]
         } else {
@@ -50,7 +50,7 @@ impl PunStrategy for PerfectRhyme {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(key) = PerfectRhyme::get_rhyme_syllables(self, original_word) {

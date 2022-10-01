@@ -31,14 +31,15 @@ pub fn main() {
 
             let words = entry
                 .get_written_forms()
-                .iter()
-                .flat_map(move |spelling| {
-                    phoenetics_word::PhoeneticsWord::try_from(spelling.clone())
+                .into_iter()
+                .map(|s| string_to_static_str(s))
+                .flat_map( |spelling| {
+                    phoenetics_word::PhoeneticsWord::try_from(spelling.to_string())
                         .ok()
                         .map(|x| DictionaryWord {
                             syllables: x.syllables,
                             meanings: meanings.clone(),
-                            spelling: spelling.clone(),
+                            spelling: spelling,
                         })
                 })
                 .collect_vec();
@@ -145,6 +146,11 @@ fn synset_to_id(synset: &String) -> u32 {
         )
     }
 }
+
+fn string_to_static_str(s: String) -> &'static str {
+    Box::leak(s.into_boxed_str())
+}
+
 
 lazy_static::lazy_static! {
     static ref PARENTCHILDRELATIONS: HashSet<&'static str> = {

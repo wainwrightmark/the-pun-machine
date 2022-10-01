@@ -2,15 +2,15 @@ use crate::core::prelude::*;
 use std::str::FromStr;
 
 #[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, 
 )]
 pub struct PhraseWord {
     pub text: String,
-    pub word: Option<DictionaryWord>,
+    pub word: Option<DictionaryWord<'static>>,
 }
 
 #[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone,
 )]
 pub struct Phrase {
     pub text: String,

@@ -8,7 +8,7 @@ use strum::IntoEnumIterator;
 #[derive(Debug)]
 pub struct PunFactory {
     pub strategy: PunStrategyEnum,
-    pub dict: HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
+    pub dict: HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
 }
 
 include_flate::flate!(pub static COMMONWORDSTEXT: str from "data/other/CommonWords.txt");
@@ -21,7 +21,7 @@ lazy_static! {
 }
 
 impl PunFactory {
-    pub fn build_all(words: &Vec<DictionaryWord>) -> Vec<PunFactory> {
+    pub fn build_all(words: &Vec<DictionaryWord<'static> >) -> Vec<PunFactory> {
         PunStrategyEnum::iter()
             .map(|strategy| PunFactory::create(strategy, words))
             .collect_vec()
@@ -60,7 +60,7 @@ impl PunFactory {
             .get_possible_replacements(original_word, &self.dict)
     }
 
-    pub fn create(strategy: PunStrategyEnum, words: &Vec<DictionaryWord>) -> Self {
+    pub fn create(strategy: PunStrategyEnum, words: &Vec<DictionaryWord<'static>>) -> Self {
         let dict: HashMap<_, _> = words
             .iter()
             .cloned()

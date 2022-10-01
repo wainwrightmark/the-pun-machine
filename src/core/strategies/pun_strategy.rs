@@ -22,11 +22,11 @@ pub enum PunStrategyEnum {
 
 #[enum_dispatch(PunStrategyEnum)]
 pub trait PunStrategy {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable; 4]>>;
+    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable; 4]>>;
 
     fn get_possible_replacements(
         &self,
         original_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement>;
 }

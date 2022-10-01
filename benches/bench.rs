@@ -24,6 +24,6 @@ fn bench_solver(c: &mut Criterion) {
     group.finish()
 }
 
-fn count_solutions(theme_word: DictionaryWord, category: Option<Category>) -> usize {
+fn count_solutions(theme_word: DictionaryWord<'static>, category: Option<Category>) -> usize {
     theme_word.find_all_puns(&category).len()
 }

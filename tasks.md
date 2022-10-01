@@ -5,6 +5,6 @@
 - [x] Correct capitalization
 - [ ] Unify spellings with pronounciations
 - [x] Show category in table
-- [ ] Let user choose which meaning to use
+- [x] Let user choose which meaning to use
 - [ ] Performance pass
-- [ ] Serialize syllables more efficiently
+- [x] Serialize syllables more efficiently

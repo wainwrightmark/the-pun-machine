@@ -18,7 +18,7 @@ pub struct FullState {
     pub warning: Option<String>,
 
     #[serde(skip)]
-    pub visible_groups: HashSet<String>,
+    pub visible_groups: HashSet<&'static str>,
 }
 
 impl Default for FullState {
@@ -53,7 +53,7 @@ impl Store for FullState {
 }
 
 impl FullState {
-    pub fn toggle_group_visibility(&mut self, key: &String) {
+    pub fn toggle_group_visibility(&mut self, key: &'static str) {
         if !self.visible_groups.remove(key) {
             self.visible_groups.insert(key.clone());
         }

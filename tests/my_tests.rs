@@ -144,7 +144,7 @@ fn test_children(parent: &str, expected_child: &str) -> Result<(), anyhow::Error
         println!("{:?}", s);
     }
 
-    assert!(all.contains(&expected_child.to_string()));
+    assert!(all.contains(&expected_child));
 
     Ok(())
 }

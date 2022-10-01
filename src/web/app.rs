@@ -1,7 +1,6 @@
 use std::{convert::*, str::*};
 
-use crate::core::prelude::*;
-use crate::state::prelude::*;
+use crate::{core::prelude::*, state::prelude::*};
 use itertools::Itertools;
 use strum::IntoEnumIterator;
 use web_sys::{HtmlSelectElement, HtmlTextAreaElement};
@@ -80,7 +79,8 @@ pub fn input_box() -> Html {
 pub fn error_box() -> Html {
     let err = use_selector(|s: &FullState| s.warning.clone())
         .as_ref()
-        .clone().unwrap_or_default();
+        .clone()
+        .unwrap_or_default();
 
     if err.is_empty() {
         html!(<> </>)
@@ -118,18 +118,17 @@ pub fn diplay_box() -> Html {
 
 #[derive(PartialEq, Eq, Properties)]
 pub struct RowGroupProperties {
-    pub row_key: String,
+    pub row_key: &'static str,
     pub phrases: Vec<PunPhrase>,
 }
 
 #[function_component(RowGroup)]
 pub fn row_group(properties: &RowGroupProperties) -> Html {
-    let show_category = *use_selector(|s: &FullState| s.category.is_none())
-        .as_ref();
+    let show_category = *use_selector(|s: &FullState| s.category.is_none()).as_ref();
 
-    let key2 = properties.row_key.clone();
-    let hidden = !*use_selector(move |s: &FullState| s.visible_groups.contains(&key2))
-        .as_ref();
+    let row_key = properties.row_key;
+
+    let hidden = !*use_selector(|s: &FullState| s.visible_groups.contains(row_key)).as_ref();
 
     if properties.phrases.len() == 1 {
         html!(
@@ -144,12 +143,11 @@ pub fn row_group(properties: &RowGroupProperties) -> Html {
             .iter()
             .map(|x| row(x, show_category))
             .collect_vec();
-        let key3 = properties.row_key.clone();
 
         let colspan = if show_category { "3" } else { "2" };
 
         let onclick = Dispatch::<FullState>::new().reduce_mut_callback_with(move |s, _| {
-            s.toggle_group_visibility(&key3);
+            s.toggle_group_visibility(&row_key);
         });
 
         html!(

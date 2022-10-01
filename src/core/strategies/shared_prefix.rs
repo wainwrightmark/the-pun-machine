@@ -17,7 +17,7 @@ impl PunStrategy for SharedPrefix {
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if original_word.syllables.len() > 2 {

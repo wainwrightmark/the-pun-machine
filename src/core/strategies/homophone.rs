@@ -7,14 +7,14 @@ use crate::core::prelude::*;
 pub struct Homophone {}
 
 impl PunStrategy for Homophone {
-    fn get_relevant_syllables(&self, word: &DictionaryWord) -> Vec<SmallVec<[Syllable; 4]>> {
+    fn get_relevant_syllables(&self, word: &DictionaryWord<'static>) -> Vec<SmallVec<[Syllable; 4]>> {
         vec![word.syllables.clone()]
     }
 
     fn get_possible_replacements(
         &self,
         phrase_word: &PhraseWord,
-        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord>>,
+        dict: &HashMap<SmallVec<[Syllable;4]>, Vec<DictionaryWord<'static>>>,
     ) -> Vec<PunReplacement> {
         if let Some(original_word) = &phrase_word.word {
             if let Some(theme_words) = dict.get(&original_word.syllables) {
@@ -29,7 +29,7 @@ impl PunStrategy for Homophone {
 
                         PunReplacement {
                             pun_type,
-                            pun_word: theme_word.spelling.clone(),
+                            pun_word: theme_word.spelling,
                             replacement_string: Casing::unify_captialization(
                                 &theme_word.spelling,
                                 &phrase_word.text,

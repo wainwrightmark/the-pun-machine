@@ -8,13 +8,13 @@ use crate::core::prelude::*;
 pub struct PunReplacement {
     pub pun_type: PunType,
 
-    pub pun_word: String,
+    pub pun_word: &'static str,
     pub replacement_string: String,
     pub is_amalgam: bool,
 }
 
 #[derive(
-    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, serde::Serialize, serde::Deserialize,
+    Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone,
 )]
 pub struct PunPhrase {
     pub phrase: Phrase,
