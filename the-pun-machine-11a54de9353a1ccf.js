@@ -618,7 +618,7 @@ function initSync(bytes) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('the-pun-machine-ef701b6b0c00276f_bg.wasm', import.meta.url);
+        input = new URL('the-pun-machine-11a54de9353a1ccf_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
