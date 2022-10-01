@@ -34,7 +34,7 @@ impl FromStr for DictionaryWord<'static> {
         WORDSBYSPELLING
             .get(s.to_ascii_lowercase().as_str())
             .map(|x| x.first().unwrap().deref().clone())
-            .ok_or(anyhow::anyhow!("Could not find word '{}'", s))
+            .ok_or_else(|| anyhow::anyhow!("Could not find word '{}'", s))
     }
 }
 

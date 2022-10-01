@@ -92,7 +92,7 @@ impl PhoeneticsWord {
                 let (text, variant) = if let Some(captures) = RE.captures(t1) {
                     (
                         captures.get(1).unwrap().as_str(),
-                        u8::from_str_radix(captures.get(2).unwrap().as_str(), 10).unwrap(),
+                        captures.get(2).unwrap().as_str().parse::<u8>().unwrap(),
                     )
                 } else {
                     (t1, 1)

@@ -64,7 +64,7 @@ impl PunStrategy for PrefixRhyme {
                                 PunReplacement {
                                     pun_type: PunType::PrefixRhyme,
                                     is_amalgam: true,
-                                    pun_word: theme_word.spelling.clone(),
+                                    pun_word: theme_word.spelling,
                                     replacement_string,
                                 }
                             })

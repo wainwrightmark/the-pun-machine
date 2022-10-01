@@ -44,7 +44,7 @@ impl PunStrategy for Prefix {
                         if theme_word.spelling.starts_with(original_word.spelling) {
                             PunReplacement {
                                 pun_type: PunType::Prefix,
-                                pun_word: theme_word.spelling.clone(),
+                                pun_word: theme_word.spelling,
                                 replacement_string: Casing::unify_captialization(
                                     theme_word.spelling,
                                     &phrase_word.text,
@@ -63,7 +63,7 @@ impl PunStrategy for Prefix {
 
                             PunReplacement {
                                 pun_type: PunType::Prefix,
-                                pun_word: theme_word.spelling.clone(),
+                                pun_word: theme_word.spelling,
                                 replacement_string,
                                 is_amalgam: true,
                             }

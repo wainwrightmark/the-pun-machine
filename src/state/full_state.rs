@@ -54,7 +54,7 @@ impl Store for FullState {
 impl FullState {
     pub fn toggle_group_visibility(&mut self, key: &'static str) {
         if !self.visible_groups.remove(key) {
-            self.visible_groups.insert(key.clone());
+            self.visible_groups.insert(key);
         }
     }
 

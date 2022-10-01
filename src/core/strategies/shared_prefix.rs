@@ -33,7 +33,7 @@ impl PunStrategy for SharedPrefix {
                         .map(|theme_word| PunReplacement {
                             pun_type: PunType::SharedPrefix,
                             is_amalgam: false,
-                            pun_word: theme_word.spelling.clone(),
+                            pun_word: theme_word.spelling,
                             replacement_string: Casing::unify_captialization(
                                 theme_word.spelling,
                                 &phrase_word.text,

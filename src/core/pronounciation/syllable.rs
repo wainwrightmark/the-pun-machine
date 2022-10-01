@@ -25,7 +25,7 @@ impl Syllable {
         Self { symbols }
     }
 
-    pub fn onset<'l>(&'l self) -> impl Iterator<Item = &'l Symbol> {
+    pub fn onset(& self) -> impl Iterator<Item = & Symbol> {
         self.symbols.iter().take_while(|&x| !x.is_vowel())
     }
 
@@ -35,7 +35,7 @@ impl Syllable {
             .unwrap()
     }
 
-    pub fn coda<'l>(&'l self) -> impl Iterator<Item = &'l Symbol> {
+    pub fn coda(&self) -> impl Iterator<Item = &Symbol> {
         self.symbols.iter().skip_while(|x| !x.is_vowel()).skip(1)
     }
 

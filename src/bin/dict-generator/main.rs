@@ -136,7 +136,7 @@ pub fn main() {
 }
 
 fn synset_to_id(synset: &String) -> u32 {
-    if let Ok(r) = u32::from_str_radix(&synset[5..13], 10) {
+    if let Ok(r) = (synset[5..13]).parse::<u32>() {
         r
     } else {
         panic!(

@@ -69,7 +69,7 @@ impl PunStrategy for InfixRhyme {
                     PunReplacement {
                         pun_type: PunType::Infix,
                         is_amalgam: true,
-                        pun_word: theme_word.spelling.clone(),
+                        pun_word: theme_word.spelling,
                         replacement_string,
                     }
                 })

@@ -23,13 +23,13 @@ lazy_static! {
 }
 
 impl PunFactory {
-    pub fn build_all(words: &Vec<DictionaryWord<'static>>) -> Vec<PunFactory> {
+    pub fn build_all(words: &[DictionaryWord<'static>]) -> Vec<PunFactory> {
         PunStrategyEnum::iter()
             .map(|strategy| PunFactory::create(strategy, words))
             .collect_vec()
     }
 
-    pub fn solve(factories: &Vec<PunFactory>, phrase: &Phrase) -> Vec<PunPhrase> {
+    pub fn solve(factories: &[PunFactory], phrase: &Phrase) -> Vec<PunPhrase> {
         phrase
             .words
             .iter()
@@ -62,7 +62,7 @@ impl PunFactory {
             .get_possible_replacements(original_word, &self.dict)
     }
 
-    pub fn create(strategy: PunStrategyEnum, words: &Vec<DictionaryWord<'static>>) -> Self {
+    pub fn create(strategy: PunStrategyEnum, words: &[DictionaryWord<'static>]) -> Self {
         let dict: HashMap<_, _> = words
             .iter()
             .cloned()

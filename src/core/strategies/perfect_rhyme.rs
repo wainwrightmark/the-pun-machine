@@ -92,7 +92,7 @@ impl PunStrategy for PerfectRhyme {
                                 pun_type: PunType::PerfectRhyme,
                                 replacement_string,
                                 is_amalgam: false,
-                                pun_word: theme_word.spelling.clone(),
+                                pun_word: theme_word.spelling,
                             }
                         })
                         .collect_vec();

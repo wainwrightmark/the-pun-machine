@@ -96,8 +96,8 @@ pub fn diplay_box() -> Html {
 
     let terms = data
         .iter()
-        .sorted_by_key(|x| x.replacement.pun_word.clone())
-        .group_by(|x| x.replacement.pun_word.clone())
+        .sorted_by_key(|x| x.replacement.pun_word)
+        .group_by(|x| x.replacement.pun_word)
         .into_iter()
         .map(|x| (x.0, x.1.cloned().collect_vec()))
         .sorted_by_key(|x| -(x.1.len() as isize))
@@ -106,8 +106,8 @@ pub fn diplay_box() -> Html {
     //.collect_vec();
 
     let rows = terms
-        .iter()
-        .map(|(row_key,phrases)| html!(<RowGroup key={row_key.clone()} row_key={row_key.clone()} phrases={phrases.clone()}/>))
+        .into_iter()
+        .map(|(row_key,phrases)| html!(<RowGroup key={row_key} row_key={row_key} phrases={phrases}/>))
         .collect_vec();
 
     html!(

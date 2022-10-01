@@ -13,11 +13,6 @@ pub enum SymbolType {
 
 impl SymbolType {
     pub fn is_vowel(self) -> bool {
-        match self {
-            SymbolType::UnstressedVowel => true,
-            SymbolType::StressedVowel => true,
-            SymbolType::Semivowel => true,
-            _ => false,
-        }
+        matches!(self, SymbolType::UnstressedVowel | SymbolType::StressedVowel | SymbolType::Semivowel)
     }
 }
