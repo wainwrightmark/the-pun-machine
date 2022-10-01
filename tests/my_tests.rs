@@ -1,4 +1,4 @@
-use std::{str::FromStr};
+use std::str::FromStr;
 
 use itertools::Itertools;
 use the_pun_machine::core::prelude::*;
@@ -81,8 +81,7 @@ fn test_pun_classification(
 fn test_category_words(category_text: &str, expected_text: &str) -> Result<(), String> {
     let category = Category::from_str(category_text).map_err(|e| e.to_string())?;
 
-    let category_phrases: Vec<Phrase> = category.get_phrases()
-        .collect_vec();
+    let category_phrases: Vec<Phrase> = category.get_phrases().collect_vec();
 
     let expected_phrase = Phrase::new(expected_text.to_string(), category);
 
@@ -114,8 +113,7 @@ fn test_spelling(word: &str, expected: &str) -> Result<(), anyhow::Error> {
 fn test_puns(category_text: &str, text: &str) -> Result<(), anyhow::Error> {
     let category = Category::from_str(category_text)?;
 
-    let phrases: Vec<Phrase> = category.get_phrases()
-        .collect_vec();
+    let phrases: Vec<Phrase> = category.get_phrases().collect_vec();
 
     let p_word = DictionaryWord::from_str(text)?;
 

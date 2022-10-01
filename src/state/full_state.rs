@@ -1,13 +1,16 @@
-use std::{rc::Rc, str::FromStr, collections::HashSet};
+use std::{collections::HashSet, rc::Rc, str::FromStr};
 
 use crate::core::prelude::*;
 use itertools::Itertools;
 
 use serde::*;
 
-use yewdux::{prelude::*, storage::{self, StorageListener}};
+use yewdux::{
+    prelude::*,
+    storage::{self, StorageListener},
+};
 
-#[derive(PartialEq, Eq,  Clone, Serialize, Deserialize)]
+#[derive(PartialEq, Eq, Clone, Serialize, Deserialize)]
 pub struct FullState {
     pub text: String,
     pub category: Option<Category>,
@@ -16,7 +19,7 @@ pub struct FullState {
     pub warning: Option<String>,
 
     #[serde(skip)]
-    pub visible_groups : HashSet<String>
+    pub visible_groups: HashSet<String>,
 }
 
 impl Default for FullState {
@@ -26,7 +29,7 @@ impl Default for FullState {
             category: None,
             data: Default::default(),
             warning: Default::default(),
-            visible_groups: Default::default()
+            visible_groups: Default::default(),
         };
         state.update();
         state
@@ -37,8 +40,7 @@ impl Store for FullState {
     fn new() -> Self {
         init_listener(StorageListener::<Self>::new(storage::Area::Local));
 
-        let mut result: FullState =
-        storage::load(storage::Area::Local)
+        let mut result: FullState = storage::load(storage::Area::Local)
             .expect("Unable to load state")
             .unwrap_or_default();
         result.update();
@@ -52,21 +54,15 @@ impl Store for FullState {
 }
 
 impl FullState {
-    
-    pub fn toggle_group_visibility(&mut self, key: &String){
-        if !self.visible_groups.remove(key){
+    pub fn toggle_group_visibility(&mut self, key: &String) {
+        if !self.visible_groups.remove(key) {
             self.visible_groups.insert(key.clone());
         }
     }
 
     fn update(&mut self) {
-        
-
         match DictionaryWord::from_str(self.text.as_str()) {
-
-            
             Ok(p_word) => {
-
                 let solutions = p_word.find_all_puns(&self.category);
 
                 self.warning = None;

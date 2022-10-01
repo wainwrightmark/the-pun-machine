@@ -92,21 +92,16 @@ pub fn error_box() -> Html {
 
 #[function_component(DisplayBox)]
 pub fn diplay_box() -> Html {
-    let data = use_selector(|s: &FullState| {
-        s.data.clone()
-    });
+    let data = use_selector(|s: &FullState| s.data.clone());
 
-    let terms = 
-
-    data
-    .iter()
-    .sorted_by_key(|x|x.replacement.pun_word.clone())
-    .group_by(|x|x.replacement.pun_word.clone())
-    .into_iter()
-    .map(|x|(x.0, x.1.cloned().collect_vec()))
-    .sorted_by_key(|x| -( x.1.len() as isize))
-    
-    .collect_vec();
+    let terms = data
+        .iter()
+        .sorted_by_key(|x| x.replacement.pun_word.clone())
+        .group_by(|x| x.replacement.pun_word.clone())
+        .into_iter()
+        .map(|x| (x.0, x.1.cloned().collect_vec()))
+        .sorted_by_key(|x| -(x.1.len() as isize))
+        .collect_vec();
 
     //.collect_vec();
 
@@ -125,7 +120,7 @@ pub fn diplay_box() -> Html {
 #[derive(PartialEq, Eq, Properties)]
 pub struct RowGroupProperties {
     pub row_key: String,
-    pub phrases: Vec<PunPhrase>
+    pub phrases: Vec<PunPhrase>,
 }
 
 #[function_component(RowGroup)]
@@ -147,10 +142,14 @@ pub fn row_group(properties: &RowGroupProperties) -> Html {
         )
     } else {
         let label = format!("{} ({})", properties.row_key, properties.phrases.len());
-        let rows = properties.phrases.iter().map(|x| row(x, show_category)).collect_vec();
+        let rows = properties
+            .phrases
+            .iter()
+            .map(|x| row(x, show_category))
+            .collect_vec();
         let key3 = properties.row_key.clone();
 
-        let colspan = if show_category{"3"} else{"2"};
+        let colspan = if show_category { "3" } else { "2" };
 
         let onclick = Dispatch::<FullState>::new().reduce_mut_callback_with(move |s, _| {
             s.toggle_group_visibility(&key3);

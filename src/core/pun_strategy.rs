@@ -20,7 +20,6 @@ lazy_static! {
 }
 
 impl PunFactory {
-
     pub fn build_all(words: &Vec<DictionaryWord>) -> Vec<PunFactory> {
         PunStrategyEnum::iter()
             .map(|strategy| PunFactory::create(strategy, words))

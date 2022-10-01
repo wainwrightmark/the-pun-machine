@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use criterion::{criterion_group, criterion_main, Criterion};
-use the_pun_machine::core::prelude::{Category, DictionaryWord, PunFactory};
+use the_pun_machine::core::prelude::{Category, DictionaryWord};
 
 criterion_group!(
     name = benches;

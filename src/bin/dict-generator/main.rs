@@ -33,7 +33,6 @@ pub fn main() {
                 .get_written_forms()
                 .iter()
                 .flat_map(move |spelling| {
-                    
                     phoenetics_word::PhoeneticsWord::try_from(spelling.clone())
                         .ok()
                         .map(|x| DictionaryWord {

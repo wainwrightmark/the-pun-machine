@@ -15,12 +15,10 @@ pub struct PhraseWord {
 pub struct Phrase {
     pub text: String,
     pub words: Vec<PhraseWord>,
-    pub category : Category
+    pub category: Category,
 }
 
-
-
-impl Phrase{
+impl Phrase {
     pub fn new(value: String, category: Category) -> Self {
         let words: Vec<_> = value
             .split(' ')
@@ -35,7 +33,7 @@ impl Phrase{
         Phrase {
             text: value,
             words,
-            category
+            category,
         }
     }
 }
